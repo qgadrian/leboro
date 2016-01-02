@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Leb Oro</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+  <!--Nav header-->
+  <string name="navigation_header_title">Liga LEB Oro</string>
+  <string name="navigation_header_subtitle">Unofficial app</string>
+
+  <!--Menu-->
+  <string name="navigation_drawer_classification">Classification</string>
+  <string name="navigation_drawer_live_games">Live games</string>
+  <string name="navigation_drawer_games">Games</string>
+  <string name="navigation_menu_social_group">Social</string>
+  <string name="navigation_menu_social_item_share">Share</string>
+
+  <!--Classification list-->
+  <string name="classification_list_header_position">P</string>
+  <string name="classification_list_header_team">TEAM</string>
+  <string name="classification_list_header_games_won">W</string>
+  <string name="classification_list_header_games_lost">L</string>
+  <string name="classification_list_header_points">PTS</string>
+
+  <!--Games list-->
+  <string name="game_list_bar_title">Game day</string>
+</resources>

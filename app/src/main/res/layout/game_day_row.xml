@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:minHeight="84dp"
+  android:orientation="vertical"
+  android:gravity="center"
+  >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="center"
+      >
+
+      <TextView
+        android:id="@+id/gamedayRowDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+      </LinearLayout>
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    >
+      <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/gameDayRowHomeLogo"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:padding="@dimen/classification_logo_padding"
+        />
+
+      <TextView
+        android:id="@+id/gameDayHomeScore"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:text="90"
+        />
+
+      <Space
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        />
+
+      <TextView
+        android:id="@+id/gameDayAwayScore"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:text="90"
+        />
+
+      <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/gameDayRowAwayLogo"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:padding="@dimen/classification_logo_padding"
+        />
+  </LinearLayout>
+</LinearLayout>

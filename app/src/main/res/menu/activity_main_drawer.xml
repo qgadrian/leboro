@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+          android:id="@+id/nav_live_games"
+          android:icon="@drawable/ic_whatshot_black_24dp"
+          android:title="@string/navigation_drawer_live_games" />
+        <item
+          android:id="@+id/nav_games"
+          android:icon="@drawable/ic_toll_black_24dp"
+          android:title="@string/navigation_drawer_games" />
+        <item
+          android:id="@+id/nav_classification"
+          android:icon="@drawable/ic_line_weight_black_24dp"
+          android:title="@string/navigation_drawer_classification" />
+    </group>
+
+    <item android:title="@string/navigation_menu_social_group">
+        <menu>
+            <item
+              android:id="@+id/nav_share"
+              android:icon="@drawable/ic_menu_share"
+              android:title="@string/navigation_menu_social_item_share" />
+        </menu>
+    </item>
+
+  </menu>

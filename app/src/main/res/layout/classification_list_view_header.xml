@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:minHeight="24dp"
+  android:orientation="horizontal"
+  >
+
+    <TextView
+      android:id="@+id/classificationListPosition"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="center"
+      android:layout_weight="1.55"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:text="@string/classification_list_header_position"
+      />
+
+    <TextView
+      android:id="@+id/classificationListLogo"
+      android:layout_width="64dp"
+      android:layout_height="fill_parent"
+      android:textStyle="bold"
+      />
+
+    <TextView
+      android:id="@+id/classificationListTeamName"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="center"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:padding="@dimen/classification_team_name_padding"
+      android:text="@string/classification_list_header_team"
+      android:textStyle="bold"
+      />
+
+    <TextView
+      android:id="@+id/classificationListGamesWon"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="center"
+      android:layout_weight="1.5"
+      android:gravity="center"
+      android:text="@string/classification_list_header_games_won"
+      android:textStyle="bold"
+      />
+
+    <TextView
+      android:id="@+id/classificationListGamesLost"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_gravity="center"
+      android:layout_weight="1.5"
+      android:gravity="center"
+      android:text="@string/classification_list_header_games_lost"
+      android:textStyle="bold"
+      />
+
+     <TextView
+       android:id="@+id/classificationListPoints"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:layout_gravity="center"
+       android:gravity="center"
+       android:layout_weight="1.5"
+       android:text="@string/classification_list_header_points"
+       android:textStyle="bold"
+       />
+
+</LinearLayout>
