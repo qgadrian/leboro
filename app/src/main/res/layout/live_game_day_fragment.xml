@@ -6,18 +6,27 @@
   android:orientation="vertical"
   >
 
-      <include
-        layout="@layout/game_day_list_view_header"
-        android:id="@+id/include"
-        />
+  <include
+    layout="@layout/game_day_list_view_header"
+    android:id="@+id/include"
+    />
+
+  <android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/liveGameDaySwipeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="@dimen/games_list_margin_top"
+    android:minHeight="64dp"
+    >
 
     <ListView
       android:id="@+id/gameDayListView"
-      android:layout_marginTop="@dimen/games_list_margin_top"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:divider="@drawable/game_day_list_divider"
       android:dividerHeight="1dp"
       />
+
+  </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

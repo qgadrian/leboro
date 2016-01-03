@@ -17,6 +17,8 @@ public class Constants {
 
     public final static String URL_LIVE_GAMES_OVERVIEW_PROP = "aplication.live_games.overview.url";
 
+    public final static String DEFAULT_REFRESH_TIME_PROP = "application.live_games.default_refresh_time_in_millis";
+
     public final static String COMPETITION_DIRECT_ASCEND_TEAMS_PROP = "business.competition.league.number_direct_ascend_teams";
 
     public final static String COMPETITION_PLAYOFF_TEAMS_PROP = "business.competition.league.number_ascend_playoff_teams";

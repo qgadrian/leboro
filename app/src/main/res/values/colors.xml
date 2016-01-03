@@ -3,4 +3,6 @@
     <color name="colorPrimary">#F44336</color>
     <color name="colorPrimaryDark">#F44336</color>
     <color name="colorAccent">#3F51B5</color>
+    <color name="gameScore">#424242</color>
+    <color name="gameDayListDividerSeparator">#CFD8DC</color>
 </resources>

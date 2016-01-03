@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.model.game.GameResult;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.calendar.CalendarUtils;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +62,7 @@ public class GameDayListAdapter extends ArrayAdapter<GameResult> {
         NetworkImageView awayTeamLogo = (NetworkImageView) view.findViewById(R.id.gameDayRowAwayLogo);
         TextView homeTeamScore = (TextView) view.findViewById(R.id.gameDayHomeScore);
         TextView awayTeamScore = (TextView) view.findViewById(R.id.gameDayAwayScore);
-        TextView gameDate = (TextView) view.findViewById(R.id.gamedayRowDate);
+        TextView gameStatus = (TextView) view.findViewById(R.id.gameDayRowStatus);
 
         GameResult gameResult = gameResults.get(position);
 
@@ -68,7 +70,15 @@ public class GameDayListAdapter extends ArrayAdapter<GameResult> {
         awayTeamLogo.setImageUrl(gameResult.getAwayTeam().getLogoUrl(), imageLoader);
         homeTeamScore.setText(String.valueOf(gameResult.getHomeScore()));
         awayTeamScore.setText(String.valueOf(gameResult.getAwayScore()));
-        gameDate.setText(CalendarUtils.toString(gameResult.getStartDate()));
+
+        if (gameResult.getStartDate().isBeforeNow() && gameResult.getHomeScore() != 0
+                && gameResult.getAwayScore() != 0) {
+            gameStatus.setText(MainActivity.context.getString(R.string.game_attr_status_finished));
+            gameStatus.setTypeface(Typeface.DEFAULT_BOLD);
+        } else {
+            gameStatus.setText(CalendarUtils.toString(gameResult.getStartDate()));
+            gameStatus.setTypeface(Typeface.DEFAULT);
+        }
 
         return view;
     }

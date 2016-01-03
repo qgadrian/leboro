@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.leboro.util.exception.JSONFormatException;
 
 public class JSONUtils {
@@ -16,6 +17,7 @@ public class JSONUtils {
 
     static {
         mapper = new ObjectMapper();
+        mapper.registerModule(new JodaModule());
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 

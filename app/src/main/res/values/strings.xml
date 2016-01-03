@@ -24,6 +24,17 @@
   <string name="classification_list_header_games_lost">L</string>
   <string name="classification_list_header_points">PTS</string>
 
+  <!--Game attrs-->
+  <string name="game_attr_status_finished">Finished</string>
+  <string name="game_attr_quarter">Quarter</string>
+  <string name="game_attr_quarter_res">Q</string>
+  <string name="game_attr_overtime">Overtime</string>
+  <string name="game_attr_overtime_res">OT</string>
+
   <!--Games list-->
   <string name="game_list_bar_title">Game day</string>
+
+  <!--Live game overview-->
+  <string name="live_game_overview_current_status">{quarter} {timeLeft}</string>
+  <string name="live_game_overview_current_status_finished">Finished</string>
 </resources>

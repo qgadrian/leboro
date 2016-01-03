@@ -2,9 +2,13 @@ package com.leboro.view.fragment.games;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.model.game.GameDay;
+import com.leboro.model.game.GameDayInfo;
+import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
+import com.leboro.util.cache.GameDayCacheManager;
 import com.leboro.view.adapters.games.GameDayListAdapter;
 
 import android.os.Bundle;
@@ -41,15 +45,29 @@ public class GameDayFragment extends Fragment {
         gameDay = getArguments().getParcelable(Constants.BUNDLE_ARG_GAME_DAY);
         int position = getArguments().getInt(ARG_SECTION_NUMBER);
 
+        initializeGameDayData(position);
         initializeViews();
         updateListHeader(position);
 
         return mView;
     }
 
+    private void initializeGameDayData(int position) {
+        GameDayInfo gameDayInfo = GameDayCacheManager.getGameDayInfo();
+        GameDay gameDay = gameDayInfo.getGameDays().get(position);
+        if (CollectionUtils.isEmpty(gameDay.getGames())) {
+            ApplicationServiceProvider.getStatisticsService()
+                    .refreshGameInfo(gameDay.getId(), gameDayInfo.getKind(), gameDayInfo.getSeason());
+        }
+    }
+
     private void updateListHeader(int position) {
+        String gameDay = getContext().getString(R.string.game_list_bar_title) + " " + position;
         TextView headerTitle = (TextView) mView.findViewById(R.id.gameDayListHeaderTitle);
-        headerTitle.setText(getContext().getString(R.string.game_list_bar_title) + " " + position);
+        headerTitle.setVisibility(View.GONE);
+        //        headerTitle.setText(getContext().getString(R.string.game_list_bar_title) + " " + position);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.setActionBarTitle(mainActivity.getActionBarTitle() + " - " + gameDay);
     }
 
     private void initializeViews() {

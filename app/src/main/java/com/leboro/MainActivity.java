@@ -2,7 +2,6 @@ package com.leboro;
 
 import java.util.Properties;
 
-import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
 import com.leboro.util.properties.PropertiesHelper;
 import com.leboro.view.fragment.FragmentDisplayableActivity;
@@ -33,6 +32,20 @@ public class MainActivity extends FragmentDisplayableActivity
         DEBUG_APP = properties.getProperty(Constants.DEBUG_APP_PROP);
     }
 
+    public void setActionBarTitle(String title) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
+    }
+
+    public String getActionBarTitle() {
+        if (getSupportActionBar() != null) {
+            return String.valueOf(getSupportActionBar().getTitle());
+        }
+
+        return "";
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +73,6 @@ public class MainActivity extends FragmentDisplayableActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //        displayView(R.id.nav_manage);
-        ApplicationServiceProvider.getStatisticsService().getLiveData();
     }
 
     @Override
