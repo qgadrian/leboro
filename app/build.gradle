@@ -56,4 +56,7 @@ dependencies {
     compile 'com.google.guava:guava-collections:r03'
     compile "cz.msebera.android:httpclient:4.4.1.1"
 
+    // progress bar
+    compile 'com.pnikosis:materialish-progress:1.7'
+
 }

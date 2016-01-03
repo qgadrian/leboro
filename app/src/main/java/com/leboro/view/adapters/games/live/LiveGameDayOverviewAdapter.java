@@ -35,8 +35,9 @@ public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveOverview> {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void updateData(List<LiveOverview> liveOverviews) {
+    public void updateDataAndNotifify(List<LiveOverview> liveOverviews) {
         this.liveOverViews = liveOverviews;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -77,8 +78,8 @@ public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveOverview> {
         if ((liveOverview.getHomeScore() == 0 && liveOverview.getAwayScore() == 0 && liveOverview.getStartDate()
                 .isBeforeNow()) || liveOverview.getStartDate().isAfterNow()) {
             gameDate.setText(CalendarUtils.toString(liveOverview.getStartDate()));
-        } else if (!liveOverview.getHomeScore().equals(liveOverview.getAwayScore()) && liveOverview.getTimeLeft()
-                .equals("00:00")) {
+        } else if (!liveOverview.getHomeScore().equals(liveOverview.getAwayScore()) && liveOverview.getQuarter() >= 4
+                && (liveOverview.getTimeLeft().equals("00:00") || liveOverview.getTimeLeft().equals("FINAL"))) {
             gameDate.setText(MainActivity.context.getString(R.string.live_game_overview_current_status_finished));
         } else {
             String statusInfoString = MainActivity.context.getString(R.string.live_game_overview_current_status)

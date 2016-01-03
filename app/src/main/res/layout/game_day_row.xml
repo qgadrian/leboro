@@ -5,6 +5,7 @@
   android:minHeight="84dp"
   android:orientation="vertical"
   android:gravity="center"
+  android:paddingTop="@dimen/games_list_padding_top"
   >
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="match_parent"

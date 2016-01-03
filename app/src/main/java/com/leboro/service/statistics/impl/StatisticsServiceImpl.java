@@ -22,6 +22,7 @@ import com.leboro.util.cache.GameDayCacheManager;
 import com.leboro.util.http.HttpUtils;
 import com.leboro.util.json.JSONUtils;
 import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
+import com.leboro.view.listeners.DataLoadedListener;
 
 import android.util.Log;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
@@ -49,7 +50,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public GameDayInfo getGameDayInfo() {
+    public void getDefaultGameDayInfo(final DataLoadedListener<GameDayInfo> dataLoadedListener) {
         if (!GameDayCacheManager.hasCacheData()) {
             String gameDaysHTML = requestGameDayData();
             Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
@@ -57,23 +58,30 @@ public class StatisticsServiceImpl implements StatisticsService {
             GameDayCacheManager.setGameDayInfo(gameDayInfo);
         }
 
-        return GameDayCacheManager.getGameDayInfo();
+        dataLoadedListener.onDataLoaded(GameDayCacheManager.getGameDayInfo());
     }
 
     @Override
-    public void refreshGameInfo(int gameDayId, int kind, int season) {
-        String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
-        Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
-        GameDay gameDay = Parser.getGameDay(gameDayInfoData);
-        GameDayCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
+    public void refreshGameInfo(final int gameDayId, final int kind, final int season,
+            final DataLoadedListener dataLoadedListener) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
+                Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
+                GameDay gameDay = Parser.getGameDay(gameDayInfoData);
+                GameDayCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
+                dataLoadedListener.onDataLoaded();
+            }
+        }).start();
     }
 
     @Override
-    public LiveData getLiveData() {
+    public void getLiveData(DataLoadedListener<LiveData> dataDataLoadedListener) {
         String url = MainActivity.properties.getProperty(Constants.URL_LIVE_GAMES_OVERVIEW_PROP);
         HttpGet request = new HttpGet(url);
         String response = HttpUtils.doAsyncGet(request);
-        return JSONUtils.readValue(response, LiveData.class);
+        dataDataLoadedListener.onDataLoaded(JSONUtils.readValue(response, LiveData.class));
     }
 
     private String requestClassificationData() {

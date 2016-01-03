@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:minHeight="64dp"
+  android:layout_height="match_parent"
   android:orientation="vertical"
   >
 
   <include
-    layout="@layout/game_day_list_view_header"
-    android:id="@+id/include"
+    layout="@layout/loading_layout"
+    android:id="@+id/gameDayFragmentLoadingFrame"
     />
 
   <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/liveGameDaySwipeLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_marginTop="@dimen/games_list_margin_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:minHeight="64dp"
+    android:visibility="gone"
     >
 
     <ListView

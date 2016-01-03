@@ -31,21 +31,7 @@ public class MainActivity extends FragmentDisplayableActivity
         context = getApplicationContext();
         DEBUG_APP = properties.getProperty(Constants.DEBUG_APP_PROP);
     }
-
-    public void setActionBarTitle(String title) {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(title);
-        }
-    }
-
-    public String getActionBarTitle() {
-        if (getSupportActionBar() != null) {
-            return String.valueOf(getSupportActionBar().getTitle());
-        }
-
-        return "";
-    }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +58,7 @@ public class MainActivity extends FragmentDisplayableActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //        displayView(R.id.nav_manage);
+        displayView(R.id.nav_classification);
     }
 
     @Override
@@ -88,8 +74,9 @@ public class MainActivity extends FragmentDisplayableActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        //        getMenuInflater().inflate(R.menu.main, menu);
+        //        return true;
+        return false;
     }
 
     @Override

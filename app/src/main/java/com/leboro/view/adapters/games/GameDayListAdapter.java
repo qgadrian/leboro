@@ -24,7 +24,7 @@ public class GameDayListAdapter extends ArrayAdapter<GameResult> {
 
     private final int resource;
 
-    private final List<GameResult> gameResults;
+    private List<GameResult> gameResults;
 
     private final static ImageLoader imageLoader = ApplicationServiceProvider.getNetworkImageLoaderService()
             .getImageLoader();
@@ -34,6 +34,11 @@ public class GameDayListAdapter extends ArrayAdapter<GameResult> {
         this.resource = resource;
         this.gameResults = gameResults;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void setGameResultsAndNotify(List<GameResult> gameResults) {
+        this.gameResults = gameResults;
+        super.notifyDataSetChanged();
     }
 
     @Override

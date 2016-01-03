@@ -16,6 +16,8 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_below="@+id/include"
+      android:divider="@drawable/game_day_list_divider"
+      android:dividerHeight="1dp"
       />
 
 </RelativeLayout>
