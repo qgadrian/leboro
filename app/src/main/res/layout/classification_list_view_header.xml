@@ -4,6 +4,7 @@
   android:layout_height="wrap_content"
   android:minHeight="24dp"
   android:orientation="horizontal"
+  style="@style/AppTheme.ClassificationStyle"
   >
 
     <TextView
@@ -13,15 +14,16 @@
       android:layout_gravity="center"
       android:layout_weight="1.55"
       android:gravity="center"
-      android:textStyle="bold"
+
       android:text="@string/classification_list_header_position"
+      style="@style/AppTheme.ClassificationHeaderStyle"
       />
 
     <TextView
       android:id="@+id/classificationListLogo"
       android:layout_width="64dp"
       android:layout_height="fill_parent"
-      android:textStyle="bold"
+      style="@style/AppTheme.ClassificationHeaderStyle"
       />
 
     <TextView
@@ -33,7 +35,7 @@
       android:gravity="center"
       android:padding="@dimen/classification_team_name_padding"
       android:text="@string/classification_list_header_team"
-      android:textStyle="bold"
+      style="@style/AppTheme.ClassificationHeaderStyle"
       />
 
     <TextView
@@ -44,7 +46,7 @@
       android:layout_weight="1.5"
       android:gravity="center"
       android:text="@string/classification_list_header_games_won"
-      android:textStyle="bold"
+      style="@style/AppTheme.ClassificationHeaderStyle"
       />
 
     <TextView
@@ -55,7 +57,7 @@
       android:layout_weight="1.5"
       android:gravity="center"
       android:text="@string/classification_list_header_games_lost"
-      android:textStyle="bold"
+      style="@style/AppTheme.ClassificationHeaderStyle"
       />
 
      <TextView
@@ -66,7 +68,7 @@
        android:gravity="center"
        android:layout_weight="1.5"
        android:text="@string/classification_list_header_points"
-       android:textStyle="bold"
+       style="@style/AppTheme.ClassificationHeaderStyle"
        />
 
 </LinearLayout>

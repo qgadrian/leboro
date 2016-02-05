@@ -1,9 +1,7 @@
 package com.leboro.view.fragment.games;
 
 import java.util.Collections;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -12,18 +10,19 @@ import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
 import com.leboro.model.game.GameResult;
 import com.leboro.service.ApplicationServiceProvider;
-import com.leboro.util.cache.GameDayCacheManager;
+import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.view.adapters.games.GameDayListAdapter;
+import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.DataLoadedListener;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class GameDayFragment extends Fragment implements DataLoadedListener<GameDay> {
+public class GameDayFragment extends LoadableFragment implements DataLoadedListener<GameDay> {
 
     private View mView;
 
@@ -34,9 +33,6 @@ public class GameDayFragment extends Fragment implements DataLoadedListener<Game
     private GameDayListAdapter gameDayListAdapter;
 
     private int pagerPosition;
-
-    private final static ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(10, 10, 3, TimeUnit
-            .SECONDS, new ArrayBlockingQueue<Runnable>(10));
 
     public GameDayFragment() {
     }
@@ -69,11 +65,11 @@ public class GameDayFragment extends Fragment implements DataLoadedListener<Game
     }
 
     private void initializeGameDayData() {
-        final GameDayInfo gameDayInfo = GameDayCacheManager.getGameDayInfo();
+        final GameDayInfo gameDayInfo = ApplicationCacheManager.getGameDayInfo();
         gameDay = gameDayInfo.getGameDays().get(pagerPosition - 1);
         if (CollectionUtils.isEmpty(gameDay.getGames())) {
             final DataLoadedListener dataLoadedListener = this;
-            THREAD_POOL_EXECUTOR.submit(new Runnable() {
+            AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
                 @Override
                 public void run() {
                     ApplicationServiceProvider.getStatisticsService()
@@ -87,26 +83,31 @@ public class GameDayFragment extends Fragment implements DataLoadedListener<Game
     }
 
     private void refreshView() {
-        View loadingView = mView.findViewById(R.id.gameDayFragmentLoadingFrame);
-        loadingView.setVisibility(View.GONE);
+        removeLoadingLayout(mView);
 
-        final GameDayInfo gameDayInfo = GameDayCacheManager.getGameDayInfo();
+        final GameDayInfo gameDayInfo = ApplicationCacheManager.getGameDayInfo();
         gameDay = gameDayInfo.getGameDays().get(pagerPosition - 1);
         gameDayListAdapter.setGameResultsAndNotify(gameDay.getGames());
     }
 
     @Override
-    public void onDataLoaded() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                refreshView();
-            }
-        });
+    public void onDataLoadedIntoCache() {
+        if (isVisible()) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    refreshView();
+                }
+            });
+        }
     }
 
     @Override
     public void onDataLoaded(GameDay data) {
         // noop
+    }
+
+    public void onDataLoaded(List<GameDay> data) {
+
     }
 }

@@ -6,9 +6,10 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.leboro.MainActivity;
 import com.leboro.R;
-import com.leboro.model.game.live.LiveOverview;
+import com.leboro.model.game.live.overview.LiveGameOverview;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.calendar.CalendarUtils;
+import com.leboro.view.helper.gameday.GameDayHelper;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,37 +18,37 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveOverview> {
+public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveGameOverview> {
 
     private static LayoutInflater inflater = null;
 
     private final int resource;
 
-    private List<LiveOverview> liveOverViews;
+    private List<LiveGameOverview> liveGameOverViews;
 
     private final static ImageLoader imageLoader = ApplicationServiceProvider.getNetworkImageLoaderService()
             .getImageLoader();
 
-    public LiveGameDayOverviewAdapter(Context context, int resource, List<LiveOverview> liveOverViews) {
-        super(context, resource, liveOverViews);
+    public LiveGameDayOverviewAdapter(Context context, int resource, List<LiveGameOverview> liveGameOverViews) {
+        super(context, resource, liveGameOverViews);
         this.resource = resource;
-        this.liveOverViews = liveOverViews;
+        this.liveGameOverViews = liveGameOverViews;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void updateDataAndNotifify(List<LiveOverview> liveOverviews) {
-        this.liveOverViews = liveOverviews;
+    public void updateDataAndNotifify(List<LiveGameOverview> liveGameOverviews) {
+        this.liveGameOverViews = liveGameOverviews;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return liveOverViews.size();
+        return liveGameOverViews.size();
     }
 
     @Override
-    public LiveOverview getItem(int position) {
-        return liveOverViews.get(position);
+    public LiveGameOverview getItem(int position) {
+        return liveGameOverViews.get(position);
     }
 
     @Override
@@ -68,36 +69,42 @@ public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveOverview> {
         TextView awayTeamScore = (TextView) view.findViewById(R.id.gameDayAwayScore);
         TextView gameDate = (TextView) view.findViewById(R.id.gameDayRowStatus);
 
-        LiveOverview liveOverview = liveOverViews.get(position);
+        LiveGameOverview liveGameOverview = liveGameOverViews.get(position);
 
-        homeTeamLogo.setImageUrl(liveOverview.getHomeTeam().getLogoUrl(), imageLoader);
-        awayTeamLogo.setImageUrl(liveOverview.getAwayTeam().getLogoUrl(), imageLoader);
-        homeTeamScore.setText(String.valueOf(liveOverview.getHomeScore()));
-        awayTeamScore.setText(String.valueOf(liveOverview.getAwayScore()));
+        homeTeamLogo.setImageUrl(liveGameOverview.getHomeTeam().getLogoUrl(), imageLoader);
+        awayTeamLogo.setImageUrl(liveGameOverview.getAwayTeam().getLogoUrl(), imageLoader);
 
-        if ((liveOverview.getHomeScore() == 0 && liveOverview.getAwayScore() == 0 && liveOverview.getStartDate()
-                .isBeforeNow()) || liveOverview.getStartDate().isAfterNow()) {
-            gameDate.setText(CalendarUtils.toString(liveOverview.getStartDate()));
-        } else if (!liveOverview.getHomeScore().equals(liveOverview.getAwayScore()) && liveOverview.getQuarter() >= 4
-                && (liveOverview.getTimeLeft().equals("00:00") || liveOverview.getTimeLeft().equals("FINAL"))) {
+        if (GameDayHelper.isStarted(liveGameOverview)) {
+            homeTeamScore.setText(String.valueOf(liveGameOverview.getHomeScore()));
+            awayTeamScore.setText(String.valueOf(liveGameOverview.getAwayScore()));
+        } else {
+            homeTeamScore.setText("");
+            awayTeamScore.setText("");
+        }
+
+        if (!GameDayHelper.isStarted(liveGameOverview)) {
+            gameDate.setText(CalendarUtils.toString(liveGameOverview.getStartDate()));
+        } else if (!liveGameOverview.getHomeScore().equals(liveGameOverview.getAwayScore())
+                && liveGameOverview.getQuarter() >= 4
+                && (liveGameOverview.getTimeLeft().equals("00:00") || liveGameOverview.getTimeLeft().equals("FINAL"))) {
             gameDate.setText(MainActivity.context.getString(R.string.live_game_overview_current_status_finished));
         } else {
             String statusInfoString = MainActivity.context.getString(R.string.live_game_overview_current_status)
-                    .replace("{quarter}", getGamePeriodString(liveOverview)).replace("{timeLeft}",
-                            liveOverview.getTimeLeft());
+                    .replace("{quarter}", getGamePeriodString(liveGameOverview)).replace("{timeLeft}",
+                            liveGameOverview.getTimeLeft());
             gameDate.setText(statusInfoString);
         }
 
         return view;
     }
 
-    private String getGamePeriodString(LiveOverview liveOverview) {
-        if (liveOverview.getQuarter() > 4) {
+    private String getGamePeriodString(LiveGameOverview liveGameOverview) {
+        if (liveGameOverview.getQuarter() > 4) {
             return MainActivity.context.getString(R.string.game_attr_overtime_res) + String
-                    .valueOf(liveOverview.getQuarter() - 4);
+                    .valueOf(liveGameOverview.getQuarter() - 4);
         }
 
-        return liveOverview.getQuarter() + MainActivity.context.getString(R.string.game_attr_quarter_res);
+        return liveGameOverview.getQuarter() + MainActivity.context.getString(R.string.game_attr_quarter_res);
     }
 
 }

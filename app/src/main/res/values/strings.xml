@@ -7,13 +7,15 @@
     <string name="action_settings">Settings</string>
 
   <!--Nav header-->
-  <string name="navigation_header_title">Liga LEB Oro</string>
+  <string name="navigation_header_title">LEB Oro league</string>
   <string name="navigation_header_subtitle">Unofficial app</string>
 
   <!--Menu-->
   <string name="navigation_drawer_classification">Classification</string>
+  <string name="navigation_drawer_news">News</string>
   <string name="navigation_drawer_live_games">Live games</string>
   <string name="navigation_drawer_games">Games</string>
+  <string name="navigation_live_video_game">Live game</string>
   <string name="navigation_menu_social_group">Social</string>
   <string name="navigation_menu_social_item_share">Share</string>
 
@@ -35,6 +37,14 @@
   <string name="game_list_bar_title">Game day</string>
 
   <!--Live game overview-->
-  <string name="live_game_overview_current_status">{quarter} {timeLeft}</string>
+  <string name="live_game_overview_current_status" translatable="false">{quarter} {timeLeft}</string>
   <string name="live_game_overview_current_status_finished">Finished</string>
+
+  <!--Sharing-->
+  <string name="share_application_title">Share using…</string>
+  <string name="share_application_message">Checkout this application to follow the LEB Oro! {url}</string>
+
+  <!-- News -->
+  <string name="news_article_toolbar_title">News</string>
+
 </resources>

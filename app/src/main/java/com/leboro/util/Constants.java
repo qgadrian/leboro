@@ -9,13 +9,15 @@ public class Constants {
 
     public final static String CLASSIFICATION_URL_PROP = "application.statistic.classification.url";
 
+    public final static String NEWS_URL_PROP = "application.statistic.news.url";
+
     public final static String GAMES_URL_PROP = "application.statistic.games.url";
 
     public final static String URL_HEADER_REFERRER_PROP = "application.url.header.referrer";
 
     public final static String URL_HEADER_ACCEPT_PROP = "application.url.header.accept";
 
-    public final static String URL_LIVE_GAMES_OVERVIEW_PROP = "aplication.live_games.overview.url";
+    public final static String URL_LIVE_GAMES_OVERVIEW_PROP = "application.live_games.overview.url";
 
     public final static String DEFAULT_REFRESH_TIME_PROP = "application.live_games.default_refresh_time_in_millis";
 
@@ -31,10 +33,8 @@ public class Constants {
 
     public static final String GAME_DATE_FORMAT_PROP = "application.statistic.games.ui_date_format";
 
-    // Bundle tags
-    public final static String BUNDLE_ARG_POSITIONS = "Positions";
-
-    public final static String BUNDLE_ARG_GAME_DAY = "GameDay";
+    //Bundle keys
+    public static final String BUNDLE_ARG_NEWS = "NewsArg";
 
     //Shared props
     public final static String EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";

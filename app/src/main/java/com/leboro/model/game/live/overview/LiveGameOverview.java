@@ -1,4 +1,4 @@
-package com.leboro.model.game.live;
+package com.leboro.model.game.live.overview;
 
 import org.joda.time.DateTime;
 
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.leboro.model.game.GameResult;
 import com.leboro.model.team.Team;
 
-public class LiveOverview extends GameResult {
+public class LiveGameOverview extends GameResult {
 
     private final int homeTeamId;
 
@@ -18,7 +18,7 @@ public class LiveOverview extends GameResult {
 
     private final String timeLeft;
 
-    public LiveOverview(String homeTeamName, int homeTeamId, int homeTeamScore, String homeTeamLogoUrl,
+    public LiveGameOverview(String homeTeamName, int homeTeamId, int homeTeamScore, String homeTeamLogoUrl,
             String awayTeamName, int awayTeamId, int awayTeamScore, String awayTeamLogoUrl, int quarter,
             DateTime startDate, String timeLeft) {
         super(startDate, new Team(homeTeamName, homeTeamLogoUrl),
@@ -47,7 +47,7 @@ public class LiveOverview extends GameResult {
     }
 
     @JsonCreator
-    public static LiveOverview build(@JsonProperty("TeamA") String homeTeam,
+    public static LiveGameOverview build(@JsonProperty("TeamA") String homeTeam,
             @JsonProperty("TeamAID") int homeTeamId,
             @JsonProperty("ScoreA") int homeTeamScore,
             @JsonProperty("LogoA") String homeTeamLogoUrl,
@@ -58,7 +58,8 @@ public class LiveOverview extends GameResult {
             @JsonProperty("Quarter") int quarter,
             @JsonProperty("Time") String timeLeft,
             @JsonProperty("StartTime") @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") DateTime startDate) {
-        return new LiveOverview(homeTeam, homeTeamId, homeTeamScore, homeTeamLogoUrl, awayTeamName, awayTeamId,
+        return new LiveGameOverview(homeTeam, homeTeamId, homeTeamScore, homeTeamLogoUrl, awayTeamName, awayTeamId,
                 awayTeamScore, awayTeamLogoUrl, quarter, startDate, timeLeft);
     }
+
 }

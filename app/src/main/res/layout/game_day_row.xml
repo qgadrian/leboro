@@ -44,7 +44,6 @@
         android:textStyle="bold"
         android:textSize="40sp"
         android:textColor="@color/gameScore"
-        android:text="90"
         />
 
       <Space
@@ -61,7 +60,6 @@
         android:textStyle="bold"
         android:textSize="40sp"
         android:textColor="@color/gameScore"
-        android:text="90"
         />
 
       <com.android.volley.toolbox.NetworkImageView

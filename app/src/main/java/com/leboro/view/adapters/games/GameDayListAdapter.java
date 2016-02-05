@@ -9,6 +9,7 @@ import com.leboro.R;
 import com.leboro.model.game.GameResult;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.calendar.CalendarUtils;
+import com.leboro.view.helper.gameday.GameDayHelper;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -73,16 +74,17 @@ public class GameDayListAdapter extends ArrayAdapter<GameResult> {
 
         homeTeamLogo.setImageUrl(gameResult.getHomeTeam().getLogoUrl(), imageLoader);
         awayTeamLogo.setImageUrl(gameResult.getAwayTeam().getLogoUrl(), imageLoader);
-        homeTeamScore.setText(String.valueOf(gameResult.getHomeScore()));
-        awayTeamScore.setText(String.valueOf(gameResult.getAwayScore()));
 
-        if (gameResult.getStartDate().isBeforeNow() && gameResult.getHomeScore() != 0
-                && gameResult.getAwayScore() != 0) {
+        if (GameDayHelper.isStarted(gameResult)) {
             gameStatus.setText(MainActivity.context.getString(R.string.game_attr_status_finished));
             gameStatus.setTypeface(Typeface.DEFAULT_BOLD);
+            homeTeamScore.setText(String.valueOf(gameResult.getHomeScore()));
+            awayTeamScore.setText(String.valueOf(gameResult.getAwayScore()));
         } else {
             gameStatus.setText(CalendarUtils.toString(gameResult.getStartDate()));
             gameStatus.setTypeface(Typeface.DEFAULT);
+            homeTeamScore.setText("");
+            awayTeamScore.setText("");
         }
 
         return view;

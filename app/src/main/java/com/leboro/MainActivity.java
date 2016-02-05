@@ -31,7 +31,7 @@ public class MainActivity extends FragmentDisplayableActivity
         context = getApplicationContext();
         DEBUG_APP = properties.getProperty(Constants.DEBUG_APP_PROP);
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class MainActivity extends FragmentDisplayableActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        displayView(R.id.nav_classification);
+        displayView(R.id.nav_news);
     }
 
     @Override
@@ -67,7 +67,11 @@ public class MainActivity extends FragmentDisplayableActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 

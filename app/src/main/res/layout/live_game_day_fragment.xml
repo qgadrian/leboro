@@ -7,7 +7,6 @@
 
   <include
     layout="@layout/loading_layout"
-    android:id="@+id/gameDayFragmentLoadingFrame"
     />
 
   <android.support.v4.widget.SwipeRefreshLayout

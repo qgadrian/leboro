@@ -11,7 +11,6 @@ import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ public class ClassificationListAdapter extends ArrayAdapter<Position> {
 
     private final int resource;
 
-    private final List<Position> positions;
+    private List<Position> positions;
 
     private final static ImageLoader imageLoader = ApplicationServiceProvider.getNetworkImageLoaderService()
             .getImageLoader();
@@ -36,6 +35,11 @@ public class ClassificationListAdapter extends ArrayAdapter<Position> {
     private final int numberOfDescendPlayoffsTeams;
 
     private final int numberOfDirectDescendTeams;
+
+    public void updateDataAndNotifify(List<Position> positions) {
+        this.positions = positions;
+        notifyDataSetChanged();
+    }
 
     public ClassificationListAdapter(Context context, int resource, List<Position> positions) {
         super(context, resource, positions);
@@ -96,19 +100,19 @@ public class ClassificationListAdapter extends ArrayAdapter<Position> {
     }
 
     private void setStyleForTeamPositions(int position, TextView... textViews) {
-        String textColor = "#212121";
+        int textColor = R.color.defaultTeamClassificationColor;
         if (position < numberOfDirectAscendTeams) {
-            textColor = "#3F51B5";
+            textColor = R.color.directAscendColor;
         } else if (position < numberOfPlayoffsTeams + numberOfDirectAscendTeams) {
-            textColor = "#448AFF";
+            textColor = R.color.playoffColor;
         } else if (getCount() - position <= numberOfDirectDescendTeams) {
-            textColor = "#B71C1C";
+            textColor = R.color.directDescendColor;
         } else if (getCount() - position <= numberOfDescendPlayoffsTeams + numberOfDirectDescendTeams) {
-            textColor = "#E57373";
+            textColor = R.color.playoffDescendColor;
         }
 
         for (TextView textView : textViews) {
-            textView.setTextColor(Color.parseColor(textColor));
+            textView.setTextColor(MainActivity.context.getResources().getColor(textColor));
         }
     }
 

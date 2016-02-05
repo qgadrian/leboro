@@ -1,15 +1,13 @@
 package com.leboro.service.statistics;
 
-import java.util.List;
-
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDayInfo;
-import com.leboro.model.game.live.LiveData;
+import com.leboro.model.game.live.overview.LiveData;
 import com.leboro.view.listeners.DataLoadedListener;
 
 public interface StatisticsService {
 
-    List<Position> getClassification();
+    void getClassification(DataLoadedListener<Position> dataLoadedListener);
 
     void getDefaultGameDayInfo(DataLoadedListener<GameDayInfo> dataLoadedListener);
 

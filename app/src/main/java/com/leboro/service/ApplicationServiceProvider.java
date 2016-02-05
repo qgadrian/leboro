@@ -1,5 +1,7 @@
 package com.leboro.service;
 
+import com.leboro.service.news.NewsService;
+import com.leboro.service.news.impl.NewsServiceImpl;
 import com.leboro.service.statistics.StatisticsService;
 import com.leboro.service.statistics.impl.StatisticsServiceImpl;
 import com.leboro.service.volley.NetworkImageLoaderService;
@@ -10,6 +12,8 @@ public class ApplicationServiceProvider {
     private static StatisticsService statisticsService;
 
     private static NetworkImageLoaderService networkImageLoaderService;
+
+    private static NewsService newsService;
 
     public static NetworkImageLoaderService getNetworkImageLoaderService() {
         if (networkImageLoaderService == null) {
@@ -25,5 +29,13 @@ public class ApplicationServiceProvider {
         }
 
         return statisticsService;
+    }
+
+    public static NewsService getNewsService() {
+        if (newsService == null) {
+            newsService = new NewsServiceImpl();
+        }
+
+        return newsService;
     }
 }

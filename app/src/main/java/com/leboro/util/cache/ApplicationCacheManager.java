@@ -2,20 +2,67 @@ package com.leboro.util.cache;
 
 import java.util.List;
 
+import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
 import com.leboro.model.game.GameResult;
+import com.leboro.model.news.News;
 import com.leboro.util.exception.InstanceNotFoundException;
 
-public class GameDayCacheManager {
+public class ApplicationCacheManager {
 
     private static GameDayInfo gameDayInfo;
 
-    public static boolean hasCacheData() {
+    private static List<Position> positions;
+
+    private static List<News> news;
+
+    public static boolean hasGameDayCacheData() {
         return gameDayInfo != null;
     }
 
+    public static boolean hasNewsData() {
+        return news != null;
+    }
+
+    public static boolean hasClassificationCacheData() {
+        return positions != null;
+    }
+
+    // Avoid overriding game day info by forcing manually clear the data
+    public static synchronized void setClassification(List<Position> newPositions) {
+        if (positions == null) {
+            positions = newPositions;
+        } else {
+            throw new IllegalStateException("Already assigned classification info, you have to clear the data first.");
+        }
+    }
+
+    public static synchronized void setNews(List<News> newNews) {
+        if (news == null) {
+            news = newNews;
+        } else {
+            throw new IllegalStateException("Already assigned news info, you have to clear the data first.");
+        }
+    }
+
+    public static synchronized void clearClassificationInfo() {
+        positions = null;
+    }
+
+    public static synchronized void clearNewsInfo() {
+        news = null;
+    }
+
     // todo: bad practice
+    public static List<Position> getClassification() {
+        return positions;
+    }
+
+    public static List<News> getNews() {
+        return news;
+    }
+
     public static GameDayInfo getGameDayInfo() {
         return gameDayInfo;
     }

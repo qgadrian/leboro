@@ -1,9 +1,10 @@
-package com.leboro.model.game.live;
+package com.leboro.model.game.live.overview;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.leboro.model.game.live.LiveBase;
 
 public class LiveData extends LiveBase {
 
@@ -44,9 +45,9 @@ public class LiveData extends LiveBase {
 
         private final int id;
 
-        private final List<LiveOverview> overviews;
+        private final List<LiveGameOverview> overviews;
 
-        public Competition(int id, List<LiveOverview> overviews) {
+        public Competition(int id, List<LiveGameOverview> overviews) {
             this.id = id;
             this.overviews = overviews;
         }
@@ -55,13 +56,13 @@ public class LiveData extends LiveBase {
             return id;
         }
 
-        public List<LiveOverview> getOverviews() {
+        public List<LiveGameOverview> getOverviews() {
             return overviews;
         }
 
         @JsonCreator
         public static Competition build(@JsonProperty("CompID") int id,
-                @JsonProperty("GAMES") List<LiveOverview> overviews) {
+                @JsonProperty("GAMES") List<LiveGameOverview> overviews) {
             return new Competition(id, overviews);
         }
     }

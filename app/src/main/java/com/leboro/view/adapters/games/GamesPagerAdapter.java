@@ -2,7 +2,7 @@ package com.leboro.view.adapters.games;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
-import com.leboro.util.cache.GameDayCacheManager;
+import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.view.fragment.games.GameDayFragment;
 
 import android.support.v4.app.Fragment;
@@ -28,11 +28,12 @@ public class GamesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return GameDayCacheManager.getGameDayInfo().getGameDays().size();
+        return ApplicationCacheManager.getGameDayInfo().getGameDays().size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return MainActivity.context.getString(R.string.game_list_bar_title) + " " + position;
+        int fixedPosition = position + 1;
+        return MainActivity.context.getString(R.string.game_list_bar_title) + " " + fixedPosition;
     }
 }

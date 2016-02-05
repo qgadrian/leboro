@@ -1,7 +1,5 @@
 package com.leboro.service.statistics.impl;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
@@ -13,15 +11,16 @@ import com.leboro.MainActivity;
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
-import com.leboro.model.game.live.LiveData;
+import com.leboro.model.game.live.overview.LiveData;
 import com.leboro.service.statistics.StatisticsService;
 import com.leboro.service.task.HttpPostAsyncTask;
 import com.leboro.util.Constants;
 import com.leboro.util.Parser;
-import com.leboro.util.cache.GameDayCacheManager;
+import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.util.http.HttpUtils;
 import com.leboro.util.json.JSONUtils;
 import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
+import com.leboro.view.helper.http.HttpHelper;
 import com.leboro.view.listeners.DataLoadedListener;
 
 import android.util.Log;
@@ -30,35 +29,38 @@ import cz.msebera.android.httpclient.client.methods.HttpGet;
 public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
-    public List<Position> getClassification() {
+    public void getClassification(DataLoadedListener<Position> dataLoadedListener) {
+        if (CollectionUtils.isEmpty(ApplicationCacheManager.getClassification())) {
 
-        String classificationHTML = requestClassificationData();
+            String classificationHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants
+                    .CLASSIFICATION_URL_PROP);
 
-        Document data = Parser.parseHTMLData(classificationHTML);
+            Document data = Parser.parseHTMLData(classificationHTML);
 
-        Elements elements = data.getElementsByTag("tbody");
-        if (CollectionUtils.isEmpty(elements)) {
-            Log.d(MainActivity.DEBUG_APP, "Unable to find data tp parse data for classification");
-        } else {
-            if (elements.size() > 1) {
-                Log.d(MainActivity.DEBUG_APP, "Unexpected number of parsed data for classification from request");
+            Elements elements = data.getElementsByTag("tbody");
+            if (CollectionUtils.isEmpty(elements)) {
+                Log.d(MainActivity.DEBUG_APP, "Unable to find data to parse data for classification");
+            } else {
+                if (elements.size() > 1) {
+                    Log.d(MainActivity.DEBUG_APP, "Unexpected number of parsed data for classification from request");
+                }
+                ApplicationCacheManager.setClassification(Parser.getPositionsInfo(elements.get(0).children()));
             }
-            return Parser.getPositionsInfo(elements.get(0).children());
         }
 
-        return Collections.emptyList();
+        dataLoadedListener.onDataLoadedIntoCache();
     }
 
     @Override
     public void getDefaultGameDayInfo(final DataLoadedListener<GameDayInfo> dataLoadedListener) {
-        if (!GameDayCacheManager.hasCacheData()) {
-            String gameDaysHTML = requestGameDayData();
+        if (!ApplicationCacheManager.hasGameDayCacheData()) {
+            String gameDaysHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants.GAMES_URL_PROP);
             Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
             GameDayInfo gameDayInfo = Parser.getGameInfoFromData(gameDayInfoData);
-            GameDayCacheManager.setGameDayInfo(gameDayInfo);
+            ApplicationCacheManager.setGameDayInfo(gameDayInfo);
         }
 
-        dataLoadedListener.onDataLoaded(GameDayCacheManager.getGameDayInfo());
+        dataLoadedListener.onDataLoaded(ApplicationCacheManager.getGameDayInfo());
     }
 
     @Override
@@ -70,8 +72,8 @@ public class StatisticsServiceImpl implements StatisticsService {
                 String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
                 Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
                 GameDay gameDay = Parser.getGameDay(gameDayInfoData);
-                GameDayCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
-                dataLoadedListener.onDataLoaded();
+                ApplicationCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
+                dataLoadedListener.onDataLoadedIntoCache();
             }
         }).start();
     }
@@ -82,32 +84,6 @@ public class StatisticsServiceImpl implements StatisticsService {
         HttpGet request = new HttpGet(url);
         String response = HttpUtils.doAsyncGet(request);
         dataDataLoadedListener.onDataLoaded(JSONUtils.readValue(response, LiveData.class));
-    }
-
-    private String requestClassificationData() {
-        Properties properties = MainActivity.properties;
-
-        String url = properties.getProperty(Constants.CLASSIFICATION_URL_PROP);
-        String acceptHeader = properties.getProperty(Constants.URL_HEADER_ACCEPT_PROP);
-        String referrerHeader = properties.getProperty(Constants.URL_HEADER_REFERRER_PROP);
-        HttpGet request = new HttpGet(url);
-        request.setHeader("Accept", acceptHeader);
-        request.setHeader("Referrer", referrerHeader);
-
-        return HttpUtils.doAsyncGet(request);
-    }
-
-    private String requestGameDayData() {
-        Properties properties = MainActivity.properties;
-
-        String url = properties.getProperty(Constants.GAMES_URL_PROP);
-        String acceptHeader = properties.getProperty(Constants.URL_HEADER_ACCEPT_PROP);
-        String referrerHeader = properties.getProperty(Constants.URL_HEADER_REFERRER_PROP);
-        HttpGet request = new HttpGet(url);
-        request.setHeader("Accept", acceptHeader);
-        request.setHeader("Referrer", referrerHeader);
-
-        return HttpUtils.doAsyncGet(request);
     }
 
     private String requestGameDayData(int gameDayId, int kind, int season) {
