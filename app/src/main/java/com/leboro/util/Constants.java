@@ -19,6 +19,8 @@ public class Constants {
 
     public final static String URL_LIVE_GAMES_OVERVIEW_PROP = "application.live_games.overview.url";
 
+    public final static String URL_LIVE_GAME_PROP = "application.live_games.game_view.url";
+
     public final static String DEFAULT_REFRESH_TIME_PROP = "application.live_games.default_refresh_time_in_millis";
 
     public final static String COMPETITION_DIRECT_ASCEND_TEAMS_PROP = "business.competition.league.number_direct_ascend_teams";
@@ -31,13 +33,18 @@ public class Constants {
 
     public static final String SERVER_GAME_DATE_FORMAT_PROP = "application.statistic.games.server_date_format";
 
+    public static final String API_LIVE_GAME_DATE_FORMAT_PROP = "application.statistic.games.api_live_game_date_format";
+
     public static final String GAME_DATE_FORMAT_PROP = "application.statistic.games.ui_date_format";
 
     //Bundle keys
     public static final String BUNDLE_ARG_NEWS = "NewsArg";
 
+    public static final String BUNDLE_ARG_GAME_ID = "GameId";
+
     //Shared props
     public final static String EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
 
     public static final String VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
+
 }

@@ -10,17 +10,17 @@ import android.os.Parcelable;
 
 public class GameDay implements Parcelable {
 
-    private List<GameResult> games;
+    private List<GameInfo> games;
 
     private final int id;
 
-    public GameDay(List<GameResult> games, int id) {
+    public GameDay(List<GameInfo> games, int id) {
         this.games = games;
         this.id = id;
     }
 
     protected GameDay(Parcel in) {
-        games = in.createTypedArrayList(GameResult.CREATOR);
+        games = in.createTypedArrayList(GameInfo.CREATOR);
         id = in.readInt();
     }
 
@@ -36,7 +36,7 @@ public class GameDay implements Parcelable {
         }
     };
 
-    public List<GameResult> getGames() {
+    public List<GameInfo> getGames() {
         return games;
     }
 
@@ -44,7 +44,7 @@ public class GameDay implements Parcelable {
         return id;
     }
 
-    public void setGames(List<GameResult> games) {
+    public void setGames(List<GameInfo> games) {
         this.games = games;
     }
 

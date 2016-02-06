@@ -3,11 +3,12 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:background="@color/navigationDrawerBackgroundColor"
-  android:gravity="center"
   android:orientation="horizontal"
-  android:paddingTop="@dimen/nav_header_overall_padding"
-  android:paddingRight="@dimen/nav_header_overall_padding"
-  android:paddingLeft="@dimen/nav_header_overall_padding"
+  android:paddingTop="@dimen/nav_header_padding_top"
+  android:paddingRight="@dimen/nav_header_padding_end"
+  android:paddingEnd="@dimen/nav_header_padding_end"
+  android:paddingStart="@dimen/nav_header_padding_start"
+  android:paddingLeft="@dimen/nav_header_padding_start"
   android:paddingBottom="@dimen/nav_header_padding_bottom"
   android:theme="@style/ThemeOverlay.AppCompat.Dark"
   android:fitsSystemWindows="true"
@@ -30,12 +31,12 @@
     >
 
       <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/navigation_header_title"
         android:textColor="@color/navigationDrawerTextColor"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         />
 
       <TextView

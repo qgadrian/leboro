@@ -6,6 +6,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.leboro.MainActivity;
 import com.leboro.R;
+import com.leboro.model.game.GameInfo;
 import com.leboro.model.game.GameResult;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.calendar.CalendarUtils;
@@ -19,37 +20,37 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class GameDayListAdapter extends ArrayAdapter<GameResult> {
+public class GameDayListAdapter extends ArrayAdapter<GameInfo> {
 
     private static LayoutInflater inflater = null;
 
     private final int resource;
 
-    private List<GameResult> gameResults;
+    private List<GameInfo> gameInfos;
 
     private final static ImageLoader imageLoader = ApplicationServiceProvider.getNetworkImageLoaderService()
             .getImageLoader();
 
-    public GameDayListAdapter(Context context, int resource, List<GameResult> gameResults) {
-        super(context, resource, gameResults);
+    public GameDayListAdapter(Context context, int resource, List<GameInfo> gameInfos) {
+        super(context, resource, gameInfos);
         this.resource = resource;
-        this.gameResults = gameResults;
+        this.gameInfos = gameInfos;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setGameResultsAndNotify(List<GameResult> gameResults) {
-        this.gameResults = gameResults;
+    public void setGameResultsAndNotify(List<GameInfo> gameInfos) {
+        this.gameInfos = gameInfos;
         super.notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return gameResults.size();
+        return gameInfos.size();
     }
 
     @Override
-    public GameResult getItem(int position) {
-        return gameResults.get(position);
+    public GameInfo getItem(int position) {
+        return gameInfos.get(position);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class GameDayListAdapter extends ArrayAdapter<GameResult> {
         TextView awayTeamScore = (TextView) view.findViewById(R.id.gameDayAwayScore);
         TextView gameStatus = (TextView) view.findViewById(R.id.gameDayRowStatus);
 
-        GameResult gameResult = gameResults.get(position);
+        GameResult gameResult = gameInfos.get(position).getGameResult();
 
         homeTeamLogo.setImageUrl(gameResult.getHomeTeam().getLogoUrl(), imageLoader);
         awayTeamLogo.setImageUrl(gameResult.getAwayTeam().getLogoUrl(), imageLoader);

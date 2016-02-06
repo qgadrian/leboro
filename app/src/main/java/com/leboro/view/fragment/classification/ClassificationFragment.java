@@ -3,12 +3,14 @@ package com.leboro.view.fragment.classification;
 import java.util.Collections;
 import java.util.List;
 
+import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.model.classification.Position;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.view.adapters.classification.ClassificationListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
+import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
 
 import android.os.AsyncTask;
@@ -18,7 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class ClassificationFragment extends LoadableFragment implements DataLoadedListener<Position> {
+public class ClassificationFragment extends LoadableFragment implements CacheDataLoadedListener {
 
     private View mView;
 
@@ -39,7 +41,7 @@ public class ClassificationFragment extends LoadableFragment implements DataLoad
     }
 
     private void initializeData() {
-        final DataLoadedListener<Position> dataLoadedListener = this;
+        final CacheDataLoadedListener dataLoadedListener = this;
         AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
@@ -75,12 +77,8 @@ public class ClassificationFragment extends LoadableFragment implements DataLoad
     }
 
     @Override
-    public void onDataLoaded(Position data) {
-
-    }
-
-    @Override
-    public void onDataLoaded(final List<Position> positions) {
-
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_classification));
     }
 }

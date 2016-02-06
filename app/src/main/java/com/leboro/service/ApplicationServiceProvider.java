@@ -1,5 +1,9 @@
 package com.leboro.service;
 
+import com.leboro.service.game.GameService;
+import com.leboro.service.game.impl.GameServiceImpl;
+import com.leboro.service.live.LiveService;
+import com.leboro.service.live.impl.LiveServiceImpl;
 import com.leboro.service.news.NewsService;
 import com.leboro.service.news.impl.NewsServiceImpl;
 import com.leboro.service.statistics.StatisticsService;
@@ -14,6 +18,10 @@ public class ApplicationServiceProvider {
     private static NetworkImageLoaderService networkImageLoaderService;
 
     private static NewsService newsService;
+
+    private static LiveService liveService;
+
+    private static GameService gameService;
 
     public static NetworkImageLoaderService getNetworkImageLoaderService() {
         if (networkImageLoaderService == null) {
@@ -37,5 +45,21 @@ public class ApplicationServiceProvider {
         }
 
         return newsService;
+    }
+
+    public static LiveService getLiveService() {
+        if (liveService == null) {
+            liveService = new LiveServiceImpl();
+        }
+
+        return liveService;
+    }
+
+    public static GameService getGameService() {
+        if (gameService == null) {
+            gameService = new GameServiceImpl();
+        }
+
+        return gameService;
     }
 }

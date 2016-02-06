@@ -5,17 +5,19 @@ import java.util.List;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
-import com.leboro.model.game.live.overview.LiveData;
-import com.leboro.model.game.live.overview.LiveGameOverview;
+import com.leboro.model.api.live.overview.LiveData;
+import com.leboro.model.api.live.overview.LiveGameOverview;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
 import com.leboro.view.adapters.games.live.LiveGameDayOverviewAdapter;
 import com.leboro.view.fragment.LoadableFragment;
+import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.listeners.DataLoadedListener;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,17 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
         gamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //                Toast.makeText(getContext(), "Clicked game " + position, Toast.LENGTH_SHORT).show();
+                LiveGameOverview liveGameOverview = liveGameDayOverviewAdapter.getItem(position);
+                long gameId = liveGameOverview.getGameId();
+                Bundle bundle = new Bundle(1);
+                bundle.putLong(Constants.BUNDLE_ARG_GAME_ID, gameId);
+                LiveGameViewFragment liveGameViewFragment = new LiveGameViewFragment();
+                liveGameViewFragment.setArguments(bundle);
+
+                String liveGameViewTitle = getString(R.string.navigation_game_view_title, liveGameOverview.getHomeTeam
+                        ().getName(), liveGameOverview.getAwayTeam().getName());
+
+                ((MainActivity) getActivity()).fragmentTransition(liveGameViewFragment, liveGameViewTitle);
             }
         });
     }
@@ -75,7 +87,7 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
     @Override
     public void onRefresh() {
         updateLiveData();
-        liveGameDaySwipeLayout.setRefreshing(false);
+        liveGameDaySwipeLayout.setRefreshing(true);
     }
 
     protected Runnable mSyncTask = new Runnable() {
@@ -93,26 +105,25 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
     }
 
     @Override
-    public void onDataLoadedIntoCache() {
-
-    }
-
-    @Override
     public void onDataLoaded(final LiveData liveData) {
         if (isVisible()) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.d(MainActivity.DEBUG_APP, "Updated live games data");
+                    liveGameDaySwipeLayout.setRefreshing(false);
                     removeLoadingLayoutAndShowResource(mView, liveGameDaySwipeLayout);
                     List<LiveGameOverview> gameDayOverviews = liveData.getOverview().getCompetitions().get(0)
                             .getOverviews();
-                    liveGameDayOverviewAdapter.updateDataAndNotifify(gameDayOverviews);
+                    liveGameDayOverviewAdapter.updateDataAndNotify(gameDayOverviews);
                 }
             });
         }
     }
 
-    public void onDataLoaded(List<LiveData> data) {
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_live_games));
     }
 }

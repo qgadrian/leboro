@@ -2,16 +2,18 @@
 <resources>
     <color name="colorPrimary">#F44336</color>
     <color name="colorPrimaryDark">#F44336</color>
-    <color name="navigationDrawerBackgroundColor">#C62828</color>
-    <color name="navigationDrawerTextColor">#F9A825</color>
+    <color name="navigationDrawerBackgroundColor">#E53935</color>
+    <color name="navigationDrawerTextColor">#FFC107</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="gameScore">#424242</color>
     <color name="gameDayListDividerSeparator">#CFD8DC</color>
-    <color name="loadingProgressBarColor">#FFB300</color>
+    <color name="loadingProgressBarColor">#FF9800</color>
     <color name="defaultTeamClassificationColor">#212121</color>
     <color name="directAscendColor">#3F51B5</color>
     <color name="playoffColor">#448AFF</color>
     <color name="directDescendColor">#B71C1C</color>
     <color name="playoffDescendColor">#E57373</color>
     <color name="newTitleTextColor">#ECEFF1</color>
+    <color name="textColor">#212121</color>
+    <color name="cardViewBackgroundColor">#424242</color>
 </resources>

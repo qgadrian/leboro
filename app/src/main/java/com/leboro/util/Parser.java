@@ -17,6 +17,7 @@ import com.leboro.MainActivity;
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
+import com.leboro.model.game.GameInfo;
 import com.leboro.model.game.GameResult;
 import com.leboro.model.news.News;
 import com.leboro.model.team.Team;
@@ -24,6 +25,7 @@ import com.leboro.util.calendar.CalendarUtils;
 import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class Parser {
 
@@ -44,7 +46,7 @@ public class Parser {
     }
 
     public static GameDayInfo getGameInfoFromData(Document gameDayInfoData) {
-        List<GameResult> gameResults = getGameInfos(gameDayInfoData);
+        List<GameInfo> gameInfos = getGameInfos(gameDayInfoData);
 
         Elements elements = gameDayInfoData.getElementsByTag("select");
 
@@ -57,7 +59,7 @@ public class Parser {
         for (Element element : elements.get(2).getElementsByTag("option")) {
             int gameDayId = Integer.valueOf(element.val());
             if (current == gameDayId) {
-                gameDay = new GameDay(gameResults, gameDayId);
+                gameDay = new GameDay(gameInfos, gameDayId);
             } else {
                 gameDay = new GameDay(null, gameDayId);
             }
@@ -68,23 +70,25 @@ public class Parser {
     }
 
     public static GameDay getGameDay(Document gameDayInfoData) {
-        List<GameResult> gameResults = getGameInfos(gameDayInfoData);
+        List<GameInfo> gameInfos = getGameInfos(gameDayInfoData);
 
         Elements gameDayElements = gameDayInfoData.getElementsByTag("select").get(2).getElementsByAttribute("selected");
 
         GameDay gameDay = null;
         for (Element element : gameDayElements) {
             int gameDayId = Integer.valueOf(element.val());
-            gameDay = new GameDay(gameResults, gameDayId);
+            gameDay = new GameDay(gameInfos, gameDayId);
         }
 
         return gameDay;
     }
 
-    private static List<GameResult> getGameInfos(Document gamesDocumment) {
-        List<GameResult> gameResults = Lists.newArrayList();
+    private static List<GameInfo> getGameInfos(Document gamesDocument) {
+        List<GameInfo> gameInfos = Lists.newArrayList();
 
-        for (Element nodeElement : gamesDocumment.getElementsByClass("nodo")) {
+        for (Element nodeElement : gamesDocument.getElementsByClass("nodo")) {
+            Element gameIdElement = nodeElement.getElementsByClass("wrap-resultado-info-ficha").get(0);
+            long gameId = Long.valueOf(gameIdElement.attr("id"));
             Element resultElement = nodeElement.getElementsByClass("row-resultado").get(0);
             Pair<String, String> homeTeamNameAndLogo = getTeamInfo(resultElement, "local");
             Pair<String, String> awayTeamNameAndLogo = getTeamInfo(resultElement, "visitante");
@@ -94,11 +98,11 @@ public class Parser {
             DateTime startDate = getGameDateInfo(nodeElement.getElementsByClass("fecha-label").get(0));
             GameResult gameResult = new GameResult(startDate, homeTeam, awayTeam,
                     gameResultHomeAndAway.getLeft(), gameResultHomeAndAway.getRight());
-            gameResults.add(gameResult);
+            gameInfos.add(new GameInfo(gameId, gameResult));
         }
 
-        Collections.sort(gameResults);
-        return gameResults;
+        Collections.sort(gameInfos);
+        return gameInfos;
     }
 
     private static DateTime getGameDateInfo(Element element) {
@@ -162,13 +166,17 @@ public class Parser {
         List<News> news = Lists.newArrayList();
 
         for (Element element : children) {
-            Element aElement = element.getElementsByTag("a").get(0);
-            String title = aElement.attr("title");
-            String articleUrl = aElement.attr("href");
+            try {
+                Element aElement = element.getElementsByTag("a").get(0);
+                String title = aElement.attr("title");
+                String articleUrl = aElement.attr("href");
 
-            String imageUrl = element.getElementsByTag("img").get(0).attr("src").replace("_4", "_1");
-            String description = element.getElementsByClass("entradilla").html();
-            news.add(new News(title, description, imageUrl, articleUrl));
+                String imageUrl = element.getElementsByTag("img").get(0).attr("src").replace("_4", "_1");
+                String description = element.getElementsByClass("entradilla").html();
+                news.add(new News(title, description, imageUrl, articleUrl));
+            } catch (Exception e) {
+                Log.e(MainActivity.DEBUG_APP, "Could not parse a news", e);
+            }
         }
 
         return news;

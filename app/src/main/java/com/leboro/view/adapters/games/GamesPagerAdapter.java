@@ -3,11 +3,13 @@ package com.leboro.view.adapters.games;
 import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.util.cache.ApplicationCacheManager;
+import com.leboro.util.exception.InstanceNotFoundException;
 import com.leboro.view.fragment.games.GameDayFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.ViewGroup;
 
 public class GamesPagerAdapter extends FragmentPagerAdapter {
@@ -28,7 +30,12 @@ public class GamesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return ApplicationCacheManager.getGameDayInfo().getGameDays().size();
+        try {
+            return ApplicationCacheManager.getGameDayInfo().getGameDays().size();
+        } catch (InstanceNotFoundException e) {
+            Log.d(MainActivity.DEBUG_APP, "Could not get games information", e);
+            return 0;
+        }
     }
 
     @Override

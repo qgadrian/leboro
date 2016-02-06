@@ -14,6 +14,7 @@ import com.leboro.util.Constants;
 import com.leboro.util.Parser;
 import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.view.helper.http.HttpHelper;
+import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
 
 import android.util.Log;
@@ -21,7 +22,7 @@ import android.util.Log;
 public class NewsServiceImpl implements NewsService {
 
     @Override
-    public void getNews(DataLoadedListener<News> dataLoadedListener) {
+    public void getNews(CacheDataLoadedListener dataLoadedListener) {
         String newsHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants.NEWS_URL_PROP);
 
         // TODO getting document here for parse after this into another method...
@@ -30,7 +31,7 @@ public class NewsServiceImpl implements NewsService {
         List<News> news = Lists.newArrayList();
 
         Elements elements = data.getElementsByClass("content-mod");
-        if (CollectionUtils.isEmpty(elements)) {
+        if (CollectionUtils.isEmpty(elements) || CollectionUtils.isEmpty(elements.get(0).children())) {
             Log.d(MainActivity.DEBUG_APP, "Unable to find data to parse data for classification");
         } else {
             news = Parser.getNews(elements.get(0).children());

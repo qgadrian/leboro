@@ -54,6 +54,8 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
         if (currentFragmentResourceId == null || !currentFragmentResourceId.equals(viewId)) {
             currentFragmentResourceId = viewId;
             fragmentTransition(fragment, title);
+        } else {
+            closeDrawer();
         }
 
     }
@@ -73,13 +75,14 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
             ft.commit();
         }
 
-        // set the toolbar title
+        setActionBarTitle(title);
+        closeDrawer();
+    }
+
+    public void setActionBarTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
     }
 
     private void shareApplication() {
@@ -89,6 +92,11 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, sharingMessage);
         startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_application_title)));
+    }
+
+    private void closeDrawer() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 
 }

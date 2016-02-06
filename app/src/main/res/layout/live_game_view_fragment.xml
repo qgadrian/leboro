@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
+
+  <android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/liveGameSwipeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="128dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    >
+
+    <include layout="@layout/game_day_row" />
+
+  </android.support.v4.widget.SwipeRefreshLayout>
+
+  <RelativeLayout
+    android:id="@+id/liveGameViewFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/liveGameSwipeLayout"
+    >
+
+    <include layout="@layout/loading_layout" />
+
+    <android.support.v4.view.ViewPager
+      android:id="@+id/gamesPagerContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      android:visibility="gone"
+      >
+
+      <android.support.v4.view.PagerTitleStrip
+        android:id="@+id/pager_title_strip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/white"
+        android:padding="@dimen/games_day_tab_title_padding"
+        />
+    </android.support.v4.view.ViewPager>
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center_horizontal"
+      android:textStyle="bold"
+      android:id="@+id/liveGameNoInfoMessage"
+      android:visibility="gone"
+      />
+
+  </RelativeLayout>
+
+</RelativeLayout>

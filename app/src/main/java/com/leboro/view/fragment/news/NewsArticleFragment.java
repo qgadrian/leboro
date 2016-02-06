@@ -12,17 +12,13 @@ import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.DataLoadedListener;
-import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 public class NewsArticleFragment extends LoadableFragment implements DataLoadedListener<News> {
 
@@ -54,51 +50,8 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
                 }
             });
         }
-
-        initializeView();
-
+        
         return mView;
-    }
-
-    private void initializeView() {
-        RecyclerView myRecycler = (RecyclerView) mView.findViewById(R.id.newsArticleContentLayout);
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        myRecycler.setLayoutManager(manager);
-        myRecycler.setHasFixedSize(true);
-
-        ParallaxRecyclerAdapter<News> stringAdapter = new ParallaxRecyclerAdapter<>(news);
-        stringAdapter.implementRecyclerAdapterMethods(new ParallaxRecyclerAdapter.RecyclerAdapterMethods() {
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-                ((TextView) viewHolder.itemView).setText(content.get(i));
-            }
-
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-                return new SimpleViewHolder(
-                        getLayoutInflater().inflate(android.R.layout.simple_list_item_1, viewGroup, false));
-            }
-
-            @Override
-            public int getItemCount() {
-                return content.size();
-            }
-        });
-
-        stringAdapter.setParallaxHeader(getLayoutInflater().inflate(R.layout.my_header, myRecycler, false), myRecycler);
-        stringAdapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
-            @Override
-            public void onParallaxScroll(float percentage, float offset, View parallax) {
-                //TODO: implement toolbar alpha. See README for details
-            }
-        });
-        myRecycler.setAdapter(stringAdapter);
-    }
-
-    @Override
-    public void onDataLoadedIntoCache() {
-        // noop
     }
 
     @Override
@@ -114,11 +67,6 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
         }
     }
 
-    @Override
-    public void onDataLoaded(List<News> data) {
-        // noop
-    }
-
     private void updateNewsText(News news) {
         WebView articleTextWebView = (WebView) mView.findViewById(R.id.newsArticleTextWebView);
         articleTextWebView.loadData(news.getArticleText(), "text/html; charset=UTF-8", null);
@@ -127,13 +75,6 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
     private void updateNewsImage() {
         NetworkImageView newsImage = (NetworkImageView) mView.findViewById(R.id.newsArticleImage);
         newsImage.setImageUrl(news.getImageUrl(), imageLoader);
-    }
-
-    private static class SimpleViewHolder extends RecyclerView.ViewHolder {
-
-        public SimpleViewHolder(View itemView) {
-            super(itemView);
-        }
     }
 
 }

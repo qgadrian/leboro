@@ -2,6 +2,7 @@ package com.leboro.model.game;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -122,13 +123,13 @@ public class GameResult implements Comparable<GameResult>, Parcelable {
 
     @Override
     public String toString() {
-        return "GameResult{" +
-                "startDate=" + startDate +
-                ", homeTeam=" + homeTeam +
-                ", awayTeam=" + awayTeam +
-                ", homeScore=" + homeScore +
-                ", awayScore=" + awayScore +
-                '}';
+        return new ToStringBuilder(this)
+                .append("startDate", startDate)
+                .append("homeTeam", homeTeam)
+                .append("awayTeam", awayTeam)
+                .append("homeScore", homeScore)
+                .append("awayScore", awayScore)
+                .toString();
     }
 
     @Override

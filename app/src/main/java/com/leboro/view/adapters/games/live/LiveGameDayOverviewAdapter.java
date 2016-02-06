@@ -6,9 +6,10 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.leboro.MainActivity;
 import com.leboro.R;
-import com.leboro.model.game.live.overview.LiveGameOverview;
+import com.leboro.model.api.live.overview.LiveGameOverview;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.calendar.CalendarUtils;
+import com.leboro.util.game.GameUtil;
 import com.leboro.view.helper.gameday.GameDayHelper;
 
 import android.content.Context;
@@ -36,7 +37,7 @@ public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveGameOverview> {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void updateDataAndNotifify(List<LiveGameOverview> liveGameOverviews) {
+    public void updateDataAndNotify(List<LiveGameOverview> liveGameOverviews) {
         this.liveGameOverViews = liveGameOverviews;
         notifyDataSetChanged();
     }
@@ -85,26 +86,17 @@ public class LiveGameDayOverviewAdapter extends ArrayAdapter<LiveGameOverview> {
         if (!GameDayHelper.isStarted(liveGameOverview)) {
             gameDate.setText(CalendarUtils.toString(liveGameOverview.getStartDate()));
         } else if (!liveGameOverview.getHomeScore().equals(liveGameOverview.getAwayScore())
-                && liveGameOverview.getQuarter() >= 4
+                && liveGameOverview.getCurrentQuarter() >= 4
                 && (liveGameOverview.getTimeLeft().equals("00:00") || liveGameOverview.getTimeLeft().equals("FINAL"))) {
             gameDate.setText(MainActivity.context.getString(R.string.live_game_overview_current_status_finished));
         } else {
             String statusInfoString = MainActivity.context.getString(R.string.live_game_overview_current_status)
-                    .replace("{quarter}", getGamePeriodString(liveGameOverview)).replace("{timeLeft}",
+                    .replace("{quarter}", GameUtil.getGamePeriodString(liveGameOverview.getCurrentQuarter())).replace("{timeLeft}",
                             liveGameOverview.getTimeLeft());
             gameDate.setText(statusInfoString);
         }
 
         return view;
-    }
-
-    private String getGamePeriodString(LiveGameOverview liveGameOverview) {
-        if (liveGameOverview.getQuarter() > 4) {
-            return MainActivity.context.getString(R.string.game_attr_overtime_res) + String
-                    .valueOf(liveGameOverview.getQuarter() - 4);
-        }
-
-        return liveGameOverview.getQuarter() + MainActivity.context.getString(R.string.game_attr_quarter_res);
     }
 
 }

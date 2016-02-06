@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="2dp"
+  >
+
+  <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/playerStatisticRow"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:theme="@style/AppTheme.CardViewStyle"
+    card_view:contentPadding="8dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="2dp"
+    >
+
+    <RelativeLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+      <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/playerLogo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:padding="@dimen/player_statistic_image_padding"
+        />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/playerLogo"
+        android:layout_toEndOf="@+id/playerLogo"
+        android:layout_alignBottom="@+id/playerLogo"
+        android:padding="@dimen/player_statistic_header_padding"
+        >
+
+        <TextView
+          android:textSize="@dimen/player_statistic_name_size"
+          android:textAllCaps="true"
+          android:textStyle="bold"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@color/textColor"
+          android:id="@+id/playerName"
+          android:layout_gravity="start"
+          android:ellipsize="end"
+          android:singleLine="true"
+          />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal"
+          android:gravity="center|start"
+          >
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticHighlightTextStyle"
+            android:id="@+id/playerStatisticHighlightPoints"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticHighlightTextStyle"
+            android:id="@+id/playerStatisticHighlightRebounds"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticHighlightTextStyle"
+            android:id="@+id/playerStatisticHighlightAssists"
+            />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/playerLogo"
+        >
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:id="@+id/playerStatisticColumnHead"
+          >
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_field_goal_attempted"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_field_goal_made"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_3_point_attempted"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_3_point_made"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_free_throws_attempted"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_free_throws_made"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_offensive_rebound"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_defensive_rebound"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_turn_overs"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_fouls"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_steals"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:text="@string/statistic_header_blocks"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          >
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticFieldGoalAttempted"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticFieldGoalMade"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatistic3PointAttempted"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatistic3PointMade"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticFreeThrowAttempted"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticFreeThrowMade"
+
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticOffensiveRebounds"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticDefensiveRebounds"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticTurnOvers"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticPersonalFouls"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticSteals"
+            />
+
+          <TextView
+            style="@style/AppTheme.PlayerStatisticTextStyle"
+            android:id="@+id/playerStatisticBlocks"
+            />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </RelativeLayout>
+
+  </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -33,6 +33,7 @@ public class NewsListAdapter extends BaseArrayAdapter<News> {
         News news = elements.get(position);
 
         newsImage.setImageUrl(news.getImageUrl(), imageLoader);
+        newsImage.setOn
         newsTitle.setText(news.getTitle());
 
         return view;

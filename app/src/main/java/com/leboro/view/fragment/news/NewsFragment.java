@@ -11,6 +11,7 @@ import com.leboro.util.Constants;
 import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.view.adapters.news.NewsListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
+import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
 
 import android.os.AsyncTask;
@@ -21,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class NewsFragment extends LoadableFragment implements DataLoadedListener<News> {
+public class NewsFragment extends LoadableFragment implements CacheDataLoadedListener {
 
     private View mView;
 
@@ -40,7 +41,7 @@ public class NewsFragment extends LoadableFragment implements DataLoadedListener
             removeLoadingLayoutAndShowResource(mView, R.id.newsListView);
         } else {
             news = Collections.emptyList();
-            final DataLoadedListener<News> dataLoadedListener = this;
+            final CacheDataLoadedListener dataLoadedListener = this;
             AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -98,13 +99,8 @@ public class NewsFragment extends LoadableFragment implements DataLoadedListener
     }
 
     @Override
-    public void onDataLoaded(News data) {
-        // noop
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
     }
-
-    @Override
-    public void onDataLoaded(final List<News> news) {
-        // noop
-    }
-
 }

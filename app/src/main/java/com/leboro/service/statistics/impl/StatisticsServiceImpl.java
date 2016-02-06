@@ -8,10 +8,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.leboro.MainActivity;
+import com.leboro.model.api.live.overview.LiveData;
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
-import com.leboro.model.game.live.overview.LiveData;
 import com.leboro.service.statistics.StatisticsService;
 import com.leboro.service.task.HttpPostAsyncTask;
 import com.leboro.util.Constants;
@@ -21,6 +21,7 @@ import com.leboro.util.http.HttpUtils;
 import com.leboro.util.json.JSONUtils;
 import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
 import com.leboro.view.helper.http.HttpHelper;
+import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
 
 import android.util.Log;
@@ -29,7 +30,7 @@ import cz.msebera.android.httpclient.client.methods.HttpGet;
 public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
-    public void getClassification(DataLoadedListener<Position> dataLoadedListener) {
+    public void getClassification(CacheDataLoadedListener dataLoadedListener) {
         if (CollectionUtils.isEmpty(ApplicationCacheManager.getClassification())) {
 
             String classificationHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants
@@ -52,7 +53,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public void getDefaultGameDayInfo(final DataLoadedListener<GameDayInfo> dataLoadedListener) {
+    public void getDefaultGameDayInfo(final CacheDataLoadedListener dataLoadedListener) {
         if (!ApplicationCacheManager.hasGameDayCacheData()) {
             String gameDaysHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants.GAMES_URL_PROP);
             Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
@@ -60,12 +61,12 @@ public class StatisticsServiceImpl implements StatisticsService {
             ApplicationCacheManager.setGameDayInfo(gameDayInfo);
         }
 
-        dataLoadedListener.onDataLoaded(ApplicationCacheManager.getGameDayInfo());
+        dataLoadedListener.onDataLoadedIntoCache();
     }
 
     @Override
     public void refreshGameInfo(final int gameDayId, final int kind, final int season,
-            final DataLoadedListener dataLoadedListener) {
+            final CacheDataLoadedListener dataLoadedListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

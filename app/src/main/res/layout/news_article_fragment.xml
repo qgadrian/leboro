@@ -5,39 +5,37 @@
   android:layout_height="match_parent"
   >
 
-      <include layout="@layout/loading_layout" />
+  <include layout="@layout/loading_layout" />
 
-  <!--<RelativeLayout-->
-  <!--android:id="@+id/newsArticleContentLayout"-->
-  <!--android:layout_width="match_parent"-->
-  <!--android:layout_height="match_parent"-->
-  <!--android:visibility="gone"-->
-  <!--&gt;-->
-  <android.support.v7.widget.RecyclerView
+  <ScrollView
     android:id="@+id/newsArticleContentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
     >
 
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
 
-          <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/newsArticleImage"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/news_article_image_height"
-            android:scaleType="centerCrop"
-            />
+      <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/newsArticleImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/news_article_image_height"
+        android:scaleType="centerCrop"
+        />
 
-        <WebView
-          android:id="@+id/newsArticleTextWebView"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_below="@+id/newsArticleImage"
-          android:padding="@dimen/news_article_text_padding"
-          />
+      <WebView
+        android:id="@+id/newsArticleTextWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newsArticleImage"
+        android:padding="@dimen/news_article_text_padding"
+        />
 
-    </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
 
-  <!--</RelativeLayout>-->
+  </ScrollView>
 
 </LinearLayout>

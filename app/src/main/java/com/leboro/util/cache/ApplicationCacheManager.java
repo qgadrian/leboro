@@ -5,6 +5,7 @@ import java.util.List;
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
+import com.leboro.model.game.GameInfo;
 import com.leboro.model.game.GameResult;
 import com.leboro.model.news.News;
 import com.leboro.util.exception.InstanceNotFoundException;
@@ -63,8 +64,12 @@ public class ApplicationCacheManager {
         return news;
     }
 
-    public static GameDayInfo getGameDayInfo() {
-        return gameDayInfo;
+    public static GameDayInfo getGameDayInfo() throws InstanceNotFoundException {
+        if (gameDayInfo == null) {
+            throw new InstanceNotFoundException(0, "No game day info available.");
+        } else {
+            return gameDayInfo;
+        }
     }
 
     // Avoid overriding game day info by forcing manually clear the data
@@ -80,10 +85,10 @@ public class ApplicationCacheManager {
         gameDayInfo = null;
     }
 
-    public static synchronized void updateGameDay(int gameDayId, List<GameResult> gameResults) {
+    public static synchronized void updateGameDay(int gameDayId, List<GameInfo> gameInfos) {
         for (GameDay gameDay : gameDayInfo.getGameDays()) {
             if (gameDay.getId() == gameDayId) {
-                gameDay.setGames(gameResults);
+                gameDay.setGames(gameInfos);
             }
         }
     }

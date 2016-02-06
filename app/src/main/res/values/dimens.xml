@@ -6,7 +6,9 @@
   <!--App values-->
   <dimen name="nav_header_vertical_spacing">16dp</dimen>
   <dimen name="nav_header_height">160dp</dimen>
-  <dimen name="nav_header_overall_padding">48dp</dimen>
+  <dimen name="nav_header_padding_top">48dp</dimen>
+  <dimen name="nav_header_padding_end">16dp</dimen>
+  <dimen name="nav_header_padding_start">16dp</dimen>
   <dimen name="nav_header_padding_bottom">24dp</dimen>
   <dimen name="classification_logo_padding">12dp</dimen>
   <dimen name="classification_team_name_padding">4dp</dimen>
@@ -18,4 +20,12 @@
   <dimen name="news_article_row_title_size">16sp</dimen>
   <dimen name="news_article_image_height">192dp</dimen>
   <dimen name="news_article_text_padding">8dp</dimen>
+  <dimen name="play_by_play_line_text_padding">8dp</dimen>
+  <dimen name="play_by_play_line_text_size">12sp</dimen>
+  <dimen name="player_statistic_image_padding">8dp</dimen>
+  <dimen name="player_statistic_name_size">16sp</dimen>
+  <dimen name="player_statistic_header_padding">8dp</dimen>
+  <dimen name="player_statistic_highlights_padding">4dp</dimen>
+  <dimen name="player_statistic_normal_padding">2dp</dimen>
+  <dimen name="player_statistic_team_header_text_size">24sp</dimen>
 </resources>
