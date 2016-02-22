@@ -33,7 +33,7 @@ public class NewsListAdapter extends BaseArrayAdapter<News> {
         News news = elements.get(position);
 
         newsImage.setImageUrl(news.getImageUrl(), imageLoader);
-        newsImage.setOn
+        newsImage.setDefaultImageResId(R.drawable.basketball_ball);
         newsTitle.setText(news.getTitle());
 
         return view;
