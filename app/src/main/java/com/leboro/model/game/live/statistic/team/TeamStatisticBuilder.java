@@ -28,6 +28,8 @@ public class TeamStatisticBuilder {
 
     private int fieldGoalsMade;
 
+    private int blocks;
+
     public TeamStatisticBuilder setPoints(int points) {
         this.points = points;
         return this;
@@ -93,9 +95,15 @@ public class TeamStatisticBuilder {
         return this;
     }
 
+    public TeamStatisticBuilder setBlocks(int blocks) {
+        this.blocks = blocks;
+        return this;
+    }
+
     public TeamStatistic createTeamStatistic() {
         return new TeamStatistic(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds,
                 freeThrowsAttempted, freeThrowsMade, threePointersAttempted, threePointersMade, fieldGoalsAttempted,
-                fieldGoalsMade);
+                fieldGoalsMade, blocks);
     }
+
 }

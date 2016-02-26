@@ -1,7 +1,6 @@
 package com.leboro.view.fragment.games;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -19,9 +18,7 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
-import com.leboro.view.listeners.DataLoadedListener;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,7 +94,7 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
                 refreshView();
             }
         } catch (InstanceNotFoundException e) {
-            Log.e(MainActivity.DEBUG_APP, "Could not get game info for game day", e);
+            Log.e(MainActivity.DEBUG_APP_NAME, "Could not get game info for game day", e);
         }
     }
 
@@ -134,7 +131,7 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
             gameDay = gameDayInfo.getGameDays().get(pagerPosition);
             gameDayListAdapter.setGameResultsAndNotify(gameDay.getGames());
         } catch (InstanceNotFoundException e) {
-            Log.e(MainActivity.DEBUG_APP, "Could not get game info for game day", e);
+            Log.e(MainActivity.DEBUG_APP_NAME, "Could not get game info for game day", e);
         }
     }
 

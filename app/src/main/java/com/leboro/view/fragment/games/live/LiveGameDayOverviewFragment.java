@@ -110,7 +110,7 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d(MainActivity.DEBUG_APP, "Updated live games data");
+                    Log.d(MainActivity.DEBUG_APP_NAME, "Updated live games data");
                     liveGameDaySwipeLayout.setRefreshing(false);
                     removeLoadingLayoutAndShowResource(mView, liveGameDaySwipeLayout);
                     List<LiveGameOverview> gameDayOverviews = liveData.getOverview().getCompetitions().get(0)

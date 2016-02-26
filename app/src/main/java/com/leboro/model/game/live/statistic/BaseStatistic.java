@@ -28,9 +28,11 @@ public abstract class BaseStatistic {
 
     private final int points;
 
+    private final int blocks;
+
     public BaseStatistic(int points, int fouls, int assists, int steals, int turnovers, int defensiveRebounds,
             int offensiveRebounds, int freeThrowsAttempted, int freeThrowsMade, int threePointersAttempted,
-            int threePointersMade, int fieldGoalsAttempted, int fieldGoalsMade) {
+            int threePointersMade, int fieldGoalsAttempted, int fieldGoalsMade, int blocks) {
         this.points = points;
         this.fouls = fouls;
         this.assists = assists;
@@ -44,6 +46,7 @@ public abstract class BaseStatistic {
         this.threePointersMade = threePointersMade;
         this.fieldGoalsAttempted = fieldGoalsAttempted;
         this.fieldGoalsMade = fieldGoalsMade;
+        this.blocks = blocks;
     }
 
     public int getFieldGoalsMade() {
@@ -108,6 +111,10 @@ public abstract class BaseStatistic {
 
     public int getPoints() {
         return points;
+    }
+
+    public int getBlocks() {
+        return blocks;
     }
 
     //    @JsonCreator

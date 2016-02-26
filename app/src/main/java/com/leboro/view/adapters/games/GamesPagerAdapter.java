@@ -33,7 +33,7 @@ public class GamesPagerAdapter extends FragmentPagerAdapter {
         try {
             return ApplicationCacheManager.getGameDayInfo().getGameDays().size();
         } catch (InstanceNotFoundException e) {
-            Log.d(MainActivity.DEBUG_APP, "Could not get games information", e);
+            Log.d(MainActivity.DEBUG_APP_NAME, "Could not get games information", e);
             return 0;
         }
     }

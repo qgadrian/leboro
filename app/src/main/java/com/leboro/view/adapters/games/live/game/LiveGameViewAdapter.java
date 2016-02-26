@@ -1,7 +1,6 @@
 package com.leboro.view.adapters.games.live.game;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +47,7 @@ public class LiveGameViewAdapter extends FragmentPagerAdapter {
             }
             return instancedFragments.get(position);
         } catch (Exception e) {
-            Log.e(MainActivity.DEBUG_APP, "Error creating view page fragment for live game", e);
+            Log.e(MainActivity.DEBUG_APP_NAME, "Error creating view page fragment for live game", e);
         }
 
         return null; // TODO
@@ -70,7 +69,7 @@ public class LiveGameViewAdapter extends FragmentPagerAdapter {
                     .invoke(instancedFragments.get(position));
             return MainActivity.context.getString(titleResourceId);
         } catch (Exception e) {
-            Log.e(MainActivity.DEBUG_APP, "Error creating fragment title for live game");
+            Log.e(MainActivity.DEBUG_APP_NAME, "Error creating fragment title for live game");
             e.printStackTrace();
         }
 

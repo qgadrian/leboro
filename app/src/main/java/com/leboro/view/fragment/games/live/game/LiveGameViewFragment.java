@@ -138,7 +138,7 @@ public class LiveGameViewFragment extends LoadableFragment implements SwipeRefre
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.d(MainActivity.DEBUG_APP, "Updated live game data for game [" + gameId + "]");
+                Log.d(MainActivity.DEBUG_APP_NAME, "Updated live game data for game [" + gameId + "]");
                 liveGameDaySwipeLayout.setRefreshing(false);
                 LiveGameViewFragment.data = data;
                 for (StatisticPageFragment statisticPageFragment : liveGameViewAdapter.getInstancedFragments()) {

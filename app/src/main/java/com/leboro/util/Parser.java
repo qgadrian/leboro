@@ -175,7 +175,7 @@ public class Parser {
                 String description = element.getElementsByClass("entradilla").html();
                 news.add(new News(title, description, imageUrl, articleUrl));
             } catch (Exception e) {
-                Log.e(MainActivity.DEBUG_APP, "Could not parse a news", e);
+                Log.e(MainActivity.DEBUG_APP_NAME, "Could not parse a news", e);
             }
         }
 

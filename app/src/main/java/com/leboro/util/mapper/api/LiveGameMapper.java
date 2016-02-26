@@ -32,7 +32,7 @@ import android.util.Log;
 public class LiveGameMapper {
 
     public static LiveGame toLiveGame(LiveGameInfo liveGameInfo) throws NoLiveDataException {
-        Log.d(MainActivity.DEBUG_APP, "Parsing game [" + liveGameInfo.getGameId() + "]");
+        Log.d(MainActivity.DEBUG_APP_NAME, "Parsing game [" + liveGameInfo.getGameId() + "]");
 
         com.leboro.model.api.live.game.header.Team apiHomeTeam = liveGameInfo.getHeader().getTeams().get(0);
         com.leboro.model.api.live.game.header.Team apiAwayTeam = liveGameInfo.getHeader().getTeams().get(1);
@@ -58,15 +58,18 @@ public class LiveGameMapper {
 
         if (dateTime == null) {
             try {
-                dateTime = ApplicationServiceProvider.getGameService().getGameInfoFromCacheByGameId(liveGameInfo.getGameId());
+                dateTime = ApplicationServiceProvider.getGameService()
+                        .getGameInfoFromCacheByGameId(liveGameInfo.getGameId());
             } catch (InstanceNotFoundException e) {
-                Log.e(MainActivity.DEBUG_APP, "Cannot found game id in cache [" + liveGameInfo.getGameId() + "]", e);
+                Log.e(MainActivity.DEBUG_APP_NAME, "Cannot found game id in cache [" + liveGameInfo.getGameId() + "]",
+                        e);
                 if ("FINAL".equalsIgnoreCase(liveGameInfo.getHeader().getCurrentGameTime())) {
-                    Log.d(MainActivity.DEBUG_APP, "Cannot found game information, but it has a finished status");
+                    Log.d(MainActivity.DEBUG_APP_NAME, "Cannot found game information, but it has a finished status");
                     DateTime.now().minus(100L);
                     // Create a before time since it's a finished game, ergo it already started
                 }
-                Log.d(MainActivity.DEBUG_APP, "No information about this game at all, returning current timestamp.");
+                Log.d(MainActivity.DEBUG_APP_NAME,
+                        "No information about this game at all, returning current timestamp.");
                 return DateTime.now();
             }
         }
@@ -74,7 +77,7 @@ public class LiveGameMapper {
         return dateTime;
     }
 
-    public static PlayByPlay toPlayByPlay(com.leboro.model.api.live.game.playbyplay.PlayByPlay apiPlayByPlay,
+    private static PlayByPlay toPlayByPlay(com.leboro.model.api.live.game.playbyplay.PlayByPlay apiPlayByPlay,
             Team homeTeam, Team awayTeam) {
         List<PlayLine> playLines = mapPlayByPlayLines(apiPlayByPlay.getLines(), homeTeam, awayTeam);
         return new PlayByPlay(playLines);
@@ -113,32 +116,43 @@ public class LiveGameMapper {
 
     private static PlayerStatistic mapPlayerStatistic(
             com.leboro.model.api.live.game.statistic.player.PlayerStatistic homeTeamPlayerStatistic) {
-        return new PlayerStatisticBuilder().setPoints(homeTeamPlayerStatistic.getPoints()).setAssists
-                (homeTeamPlayerStatistic.getAssists()).setDefensiveRebounds(homeTeamPlayerStatistic
-                .getDefensiveRebounds()).setOffensiveRebounds(homeTeamPlayerStatistic.getOffensiveRebounds())
-                .setFieldGoalsAttempted(homeTeamPlayerStatistic.getFieldGoalsAttempted()).setFieldGoalsMade
-                        (homeTeamPlayerStatistic.getFieldGoalsMade()).setThreePointsAttempted(homeTeamPlayerStatistic
-                        .getThreePointersAttempted()).setThreePointsMade(homeTeamPlayerStatistic.getThreePointersMade
-                        ()).setFreeThrowsAttempted(homeTeamPlayerStatistic.getFreeThrowsAttempted())
-                .setFreeThrowsMade(homeTeamPlayerStatistic.getFreeThrowsMade())
-                .setSteals(homeTeamPlayerStatistic.getSteals())
-                .setTurnovers(homeTeamPlayerStatistic.getTurnovers()).setPlayerName(homeTeamPlayerStatistic
-                        .getPlayerName()).setPlayerNumber(homeTeamPlayerStatistic.getPlayerNumber())
-                .setPlayerImageUrl(homeTeamPlayerStatistic.getPlayerImageUrl()).createPlayerStatistic();
+        return new PlayerStatisticBuilder()
+                .setPoints(homeTeamPlayerStatistic.getPoints()) //
+                .setAssists(homeTeamPlayerStatistic.getAssists()) //
+                .setDefensiveRebounds(homeTeamPlayerStatistic.getDefensiveRebounds()) //
+                .setOffensiveRebounds(homeTeamPlayerStatistic.getOffensiveRebounds()) //
+                .setFieldGoalsAttempted(homeTeamPlayerStatistic.getFieldGoalsAttempted()) //
+                .setFieldGoalsMade(homeTeamPlayerStatistic.getFieldGoalsMade()) //
+                .setThreePointsAttempted(homeTeamPlayerStatistic.getThreePointersAttempted()) //
+                .setThreePointsMade(homeTeamPlayerStatistic.getThreePointersMade()) //
+                .setFreeThrowsAttempted(homeTeamPlayerStatistic.getFreeThrowsAttempted()) //
+                .setFreeThrowsMade(homeTeamPlayerStatistic.getFreeThrowsMade()) //
+                .setSteals(homeTeamPlayerStatistic.getSteals()) //
+                .setTurnovers(homeTeamPlayerStatistic.getTurnovers()) //
+                .setPlayerName(homeTeamPlayerStatistic.getPlayerName()) //
+                .setPlayerNumber(homeTeamPlayerStatistic.getPlayerNumber()) //
+                .setPlayerImageUrl(homeTeamPlayerStatistic.getPlayerImageUrl()) //
+                .setBlocks(homeTeamPlayerStatistic.getBlocks()) //
+                .createPlayerStatistic();
     }
 
     private static TeamStatistic mapTeamStatistic(
             com.leboro.model.api.live.game.statistic.team.TeamStatistic apiTeamStatistic) {
-        return new TeamStatisticBuilder().setPoints(apiTeamStatistic.getPoints()).setAssists
-                (apiTeamStatistic.getAssists()).setDefensiveRebounds(apiTeamStatistic
-                .getDefensiveRebounds()).setOffensiveRebounds(apiTeamStatistic.getOffensiveRebounds())
-                .setFieldGoalsAttempted(apiTeamStatistic.getFieldGoalsAttempted()).setFieldGoalsMade
-                        (apiTeamStatistic.getFieldGoalsMade()).setThreePointersAttempted(apiTeamStatistic
-                        .getThreePointersAttempted()).setThreePointersMade(apiTeamStatistic.getThreePointersMade
-                        ()).setFreeThrowsAttempted(apiTeamStatistic.getFreeThrowsAttempted())
-                .setFreeThrowsMade(apiTeamStatistic.getFreeThrowsMade())
-                .setSteals(apiTeamStatistic.getSteals())
-                .setTurnovers(apiTeamStatistic.getTurnovers()).createTeamStatistic();
+        return new TeamStatisticBuilder()
+                .setPoints(apiTeamStatistic.getPoints()) //
+                .setAssists(apiTeamStatistic.getAssists()) //
+                .setDefensiveRebounds(apiTeamStatistic.getDefensiveRebounds()) //
+                .setOffensiveRebounds(apiTeamStatistic.getOffensiveRebounds()) //
+                .setFieldGoalsAttempted(apiTeamStatistic.getFieldGoalsAttempted()) //
+                .setFieldGoalsMade(apiTeamStatistic.getFieldGoalsMade()) //
+                .setThreePointersAttempted(apiTeamStatistic.getThreePointersAttempted()) //
+                .setThreePointersMade(apiTeamStatistic.getThreePointersMade()) //
+                .setFreeThrowsAttempted(apiTeamStatistic.getFreeThrowsAttempted()) //
+                .setFreeThrowsMade(apiTeamStatistic.getFreeThrowsMade()) //
+                .setSteals(apiTeamStatistic.getSteals()) //
+                .setTurnovers(apiTeamStatistic.getTurnovers()) //
+                .setBlocks(apiTeamStatistic.getBlocks()) //
+                .createTeamStatistic();
     }
 
     private static List<PlayLine> mapPlayByPlayLines(List<com.leboro.model.api.live.game.playbyplay.PlayByPlay.Line>

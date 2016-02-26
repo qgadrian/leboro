@@ -12,12 +12,12 @@ public class PlayerStatistic extends BaseStatistic {
 
     private String playerImageUrl;
 
-    public PlayerStatistic(int points, int fouls, int assists, int steals, int turnovers, int defensiveRebounds,
-            int offensiveRebounds, int freeThrowsAttempted, int freeThrowsMade, int threePointsAttempted,
-            int threePointsMade, int fieldGoalsAttempted, int fieldGoalsMade, String playerName, int playerNumber,
-            String playerImageUrl) {
+    private PlayerStatistic(int points, int fouls, int assists, int steals, int turnovers, int blocks, int
+            defensiveRebounds, int offensiveRebounds, int freeThrowsAttempted, int freeThrowsMade,
+            int threePointsAttempted, int threePointsMade, int fieldGoalsAttempted, int fieldGoalsMade,
+            String playerName, int playerNumber, String playerImageUrl) {
         super(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds, freeThrowsAttempted,
-                freeThrowsMade, threePointsAttempted, threePointsMade, fieldGoalsAttempted, fieldGoalsMade);
+                freeThrowsMade, threePointsAttempted, threePointsMade, fieldGoalsAttempted, fieldGoalsMade, blocks);
         this.playerName = playerName;
         this.playerNumber = playerNumber;
         this.playerImageUrl = playerImageUrl;
@@ -58,6 +58,7 @@ public class PlayerStatistic extends BaseStatistic {
             @JsonProperty("ro") int offensiveRebounds,
             @JsonProperty("rd") int defensiveRebounds,
             @JsonProperty("to") int turnovers,
+            @JsonProperty("bs") int blocks,
             @JsonProperty("st") int steals,
             @JsonProperty("assist") int assists,
             @JsonProperty("pf") int fouls,
@@ -66,8 +67,8 @@ public class PlayerStatistic extends BaseStatistic {
             @JsonProperty("no") int playerNumber,
             @JsonProperty("logo") String playerImageUrl
     ) {
-        return new PlayerStatistic(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds,
-                freeThrowsAttempted, freeThrowsMade, threePointersAttempted, threePointersMade, fieldGoalsAttempted,
-                fieldGoalsMade, playerName, playerNumber, playerImageUrl);
+        return new PlayerStatistic(points, fouls, assists, steals, turnovers, blocks, defensiveRebounds,
+                offensiveRebounds, freeThrowsAttempted, freeThrowsMade, threePointersAttempted, threePointersMade,
+                fieldGoalsAttempted, fieldGoalsMade, playerName, playerNumber, playerImageUrl);
     }
 }

@@ -23,13 +23,13 @@ public class MainActivity extends FragmentDisplayableActivity
 
     public static Context context;
 
-    public static String DEBUG_APP;
+    public static String DEBUG_APP_NAME;
 
     private void initStaticData() {
         properties = PropertiesHelper.getProperties(getApplicationContext(), Constants
                 .PROPERTIES_FILENAME);
         context = getApplicationContext();
-        DEBUG_APP = properties.getProperty(Constants.DEBUG_APP_PROP);
+        DEBUG_APP_NAME = properties.getProperty(Constants.DEBUG_APP_PROP);
     }
 
     @Override

@@ -8,9 +8,9 @@ public class TeamStatistic extends BaseStatistic {
 
     public TeamStatistic(int points, int fouls, int assists, int steals, int turnovers, int defensiveRebounds,
             int offensiveRebounds, int freeThrowsAttempted, int freeThrowsMade, int threePointersAttempted,
-            int threePointersMade, int fieldGoalsAttempted, int fieldGoalsMade) {
+            int threePointersMade, int fieldGoalsAttempted, int fieldGoalsMade, int blocks) {
         super(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds, freeThrowsAttempted,
-                freeThrowsMade, threePointersAttempted, threePointersMade, fieldGoalsAttempted, fieldGoalsMade);
+                freeThrowsMade, threePointersAttempted, threePointersMade, fieldGoalsAttempted, fieldGoalsMade, blocks);
     }
 
     @JsonCreator
@@ -27,10 +27,11 @@ public class TeamStatistic extends BaseStatistic {
             @JsonProperty("st") int steals,
             @JsonProperty("assist") int assists,
             @JsonProperty("pf") int fouls,
-            @JsonProperty("pts") int points
+            @JsonProperty("pts") int points,
+            @JsonProperty("bs") int blocks
     ) {
         return new TeamStatistic(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds,
                 freeThrowsAttempted, freeThrowsMade, threePointersAttempted, threePointersMade, fieldGoalsAttempted,
-                fieldGoalsMade);
+                fieldGoalsMade, blocks);
     }
 }

@@ -2,7 +2,6 @@ package com.leboro.view.fragment.games.live.game.statistic.playbyplay;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
-import com.leboro.model.game.live.LiveGame;
 import com.leboro.view.adapters.games.live.game.playbyplay.PlayByPlayAdapter;
 import com.leboro.view.adapters.games.live.game.playbyplay.PlayByPlayViewHolder;
 import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
@@ -54,7 +53,7 @@ public class PlayByPlayFragment extends StatisticPageFragment {
         if (playByPlayAdapter != null) {
             playByPlayAdapter.updateDataAndNotify(LiveGameViewFragment.data.getPlayByPlay().getLines());
         } else {
-            Log.d(MainActivity.DEBUG_APP, "Trying to update data on null adapter");
+            Log.d(MainActivity.DEBUG_APP_NAME, "Trying to update data on null adapter");
         }
     }
 }

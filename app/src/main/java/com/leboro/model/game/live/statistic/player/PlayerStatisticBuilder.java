@@ -12,6 +12,8 @@ public class PlayerStatisticBuilder {
 
     private int turnovers;
 
+    private int blocks;
+
     private int defensiveRebounds;
 
     private int offensiveRebounds;
@@ -33,6 +35,8 @@ public class PlayerStatisticBuilder {
     private int playerNumber;
 
     private String playerImageUrl;
+
+    public PlayerStatisticBuilder() {}
 
     public PlayerStatisticBuilder setPoints(int points) {
         this.points = points;
@@ -56,6 +60,11 @@ public class PlayerStatisticBuilder {
 
     public PlayerStatisticBuilder setTurnovers(int turnovers) {
         this.turnovers = turnovers;
+        return this;
+    }
+
+    public PlayerStatisticBuilder setBlocks(int blocks) {
+        this.blocks = blocks;
         return this;
     }
 
@@ -115,8 +124,9 @@ public class PlayerStatisticBuilder {
     }
 
     public PlayerStatistic createPlayerStatistic() {
-        return new PlayerStatistic(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds,
-                freeThrowsAttempted, freeThrowsMade, threePointsAttempted, threePointsMade, fieldGoalsAttempted,
-                fieldGoalsMade, playerName, playerNumber, playerImageUrl);
+        return new PlayerStatistic(points, fouls, assists, steals, turnovers, blocks, defensiveRebounds,
+                offensiveRebounds, freeThrowsAttempted, freeThrowsMade, threePointsAttempted, threePointsMade,
+                fieldGoalsAttempted, fieldGoalsMade, playerName, playerNumber, playerImageUrl);
     }
+
 }

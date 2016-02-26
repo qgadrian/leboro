@@ -5,9 +5,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.leboro.MainActivity;
-import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
-import com.leboro.util.cache.ApplicationCacheManager;
 
 import android.util.Log;
 
@@ -38,7 +36,7 @@ public class CalendarUtils {
         }
 
         if (!apiGameInfoDateAsString.contains(",")) {
-            Log.e(MainActivity.DEBUG_APP, "Received bad date format from api [" + apiGameInfoDateAsString + "]");
+            Log.e(MainActivity.DEBUG_APP_NAME, "Received bad date format from api [" + apiGameInfoDateAsString + "]");
             return null;
         } else {
             String parsedApiLiveGameDate = apiGameInfoDateAsString.split(",")[1].trim();

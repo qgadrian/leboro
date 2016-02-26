@@ -53,12 +53,9 @@
   <string name="news_article_toolbar_title">News</string>
 
   <!-- Live game view -->
-  <string name="statistic_header_field_goal_attempted">FGA</string>
-  <string name="statistic_header_field_goal_made">FGM</string>
-  <string name="statistic_header_3_point_attempted">3PA</string>
-  <string name="statistic_header_3_point_made">3PM</string>
-  <string name="statistic_header_free_throws_attempted">FTA</string>
-  <string name="statistic_header_free_throws_made">FTM</string>
+  <string name="statistic_header_field_goal">FG</string>
+  <string name="statistic_header_3_point">3P</string>
+  <string name="statistic_header_free_throws">FT</string>
   <string name="statistic_header_offensive_rebound">OFF</string>
   <string name="statistic_header_defensive_rebound">DEF</string>
   <string name="statistic_header_assists">AST</string>
@@ -67,6 +64,7 @@
   <string name="statistic_header_turn_overs">TO</string>
   <string name="statistic_header_fouls">PF</string>
   <string name="statistic_header_blocks">BLK</string>
+  <string name="statistic_header_value">%1$d/%2$d</string>
   <plurals name="statistic_highlight_points">
     <item quantity="one">%d point</item>
     <item quantity="other">%d points</item>

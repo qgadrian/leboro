@@ -32,7 +32,7 @@ public class NewsServiceImpl implements NewsService {
 
         Elements elements = data.getElementsByClass("content-mod");
         if (CollectionUtils.isEmpty(elements) || CollectionUtils.isEmpty(elements.get(0).children())) {
-            Log.d(MainActivity.DEBUG_APP, "Unable to find data to parse data for classification");
+            Log.d(MainActivity.DEBUG_APP_NAME, "Unable to find data to parse data for classification");
         } else {
             news = Parser.getNews(elements.get(0).children());
         }

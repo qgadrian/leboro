@@ -9,7 +9,6 @@ import org.jsoup.select.Elements;
 
 import com.leboro.MainActivity;
 import com.leboro.model.api.live.overview.LiveData;
-import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
 import com.leboro.service.statistics.StatisticsService;
@@ -40,10 +39,11 @@ public class StatisticsServiceImpl implements StatisticsService {
 
             Elements elements = data.getElementsByTag("tbody");
             if (CollectionUtils.isEmpty(elements)) {
-                Log.d(MainActivity.DEBUG_APP, "Unable to find data to parse data for classification");
+                Log.d(MainActivity.DEBUG_APP_NAME, "Unable to find data to parse data for classification");
             } else {
                 if (elements.size() > 1) {
-                    Log.d(MainActivity.DEBUG_APP, "Unexpected number of parsed data for classification from request");
+                    Log.d(MainActivity.DEBUG_APP_NAME,
+                            "Unexpected number of parsed data for classification from request");
                 }
                 ApplicationCacheManager.setClassification(Parser.getPositionsInfo(elements.get(0).children()));
             }
@@ -83,6 +83,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     public void getLiveData(DataLoadedListener<LiveData> dataDataLoadedListener) {
         String url = MainActivity.properties.getProperty(Constants.URL_LIVE_GAMES_OVERVIEW_PROP);
         HttpGet request = new HttpGet(url);
+        HttpHelper.addApiRequestHeaders(request);
         String response = HttpUtils.doAsyncGet(request);
         dataDataLoadedListener.onDataLoaded(JSONUtils.readValue(response, LiveData.class));
     }
@@ -105,7 +106,7 @@ public class StatisticsServiceImpl implements StatisticsService {
                             serverEventValidationToken);
             return httpPostAsyncTask.execute(resultTaskArgument).get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.d(MainActivity.DEBUG_APP, "Error obtaining classification data", e);
+            Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }
 
         return null;

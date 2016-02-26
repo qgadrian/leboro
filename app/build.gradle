@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.leboro"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 9
-        versionName "1.6.2"
+        versionCode 11
+        versionName "1.6.4"
     }
     buildTypes {
         release {
@@ -50,7 +50,7 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.6.4'
 
     //volley
-    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.android.volley:volley:1.0.0'
 
     //joda
     compile 'joda-time:joda-time:2.9.1'
@@ -65,5 +65,5 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
 
     // parallax recycler
-    compile 'com.github.kanytu:android-parallax-recyclerview:v1.6'
+    compile 'com.github.kanytu:android-parallax-recyclerview:v1.7'
 }

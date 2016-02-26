@@ -1,10 +1,7 @@
 package com.leboro.view.fragment.games;
 
-import java.util.List;
-
 import com.leboro.MainActivity;
 import com.leboro.R;
-import com.leboro.model.game.GameDayInfo;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.util.exception.InstanceNotFoundException;
@@ -12,13 +9,11 @@ import com.leboro.view.adapters.games.GamesPagerAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
-import com.leboro.view.listeners.DataLoadedListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +73,7 @@ public class GamesFragment extends LoadableFragment implements CacheDataLoadedLi
                     GamesPagerAdapter gamesPagerAdapter = new GamesPagerAdapter(getChildFragmentManager());
                     viewPager.setAdapter(gamesPagerAdapter); // to set current item it's necessary to set adapter first
                     if (lastPosition != null) {
-                        Log.d(MainActivity.DEBUG_APP, "Detected last position on page [" + lastPosition + "]");
+                        Log.d(MainActivity.DEBUG_APP_NAME, "Detected last position on page [" + lastPosition + "]");
                         viewPager.setCurrentItem(lastPosition);
                     } else {
                         try {
@@ -86,7 +81,7 @@ public class GamesFragment extends LoadableFragment implements CacheDataLoadedLi
                                     GameDayHelper
                                             .getGameDayCurrentPositionIndex(ApplicationCacheManager.getGameDayInfo()));
                         } catch (InstanceNotFoundException e) {
-                            Log.e(MainActivity.DEBUG_APP, "Could not get game info for game day", e);
+                            Log.e(MainActivity.DEBUG_APP_NAME, "Could not get game info for game day", e);
                         }
                     }
                 }

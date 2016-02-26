@@ -37,7 +37,7 @@ public class BaseRecyclerViewAdapter<ELEMENT_TYPE, HOLDER_TYPE extends BaseViewH
             e.printStackTrace();
         }
 
-        Log.e(MainActivity.DEBUG_APP, "Exception creating view holder");
+        Log.e(MainActivity.DEBUG_APP_NAME, "Exception creating view holder");
         throw new RuntimeException("Exception creating view holder");
     }
 

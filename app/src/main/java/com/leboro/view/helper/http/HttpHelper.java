@@ -28,4 +28,7 @@ public class HttpHelper {
         return HttpUtils.doAsyncGet(request);
     }
 
+    public static void addApiRequestHeaders(HttpGet request) {
+        request.setHeader("Accept", "application/json");
+    }
 }

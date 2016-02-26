@@ -96,32 +96,17 @@
 
           <TextView
             style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:text="@string/statistic_header_field_goal_attempted"
+            android:text="@string/statistic_header_field_goal"
             />
 
           <TextView
             style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:text="@string/statistic_header_field_goal_made"
+            android:text="@string/statistic_header_3_point"
             />
 
           <TextView
             style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:text="@string/statistic_header_3_point_attempted"
-            />
-
-          <TextView
-            style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:text="@string/statistic_header_3_point_made"
-            />
-
-          <TextView
-            style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:text="@string/statistic_header_free_throws_attempted"
-            />
-
-          <TextView
-            style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:text="@string/statistic_header_free_throws_made"
+            android:text="@string/statistic_header_free_throws"
             />
 
           <TextView
@@ -165,33 +150,17 @@
 
           <TextView
             style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:id="@+id/playerStatisticFieldGoalAttempted"
+            android:id="@+id/playerStatisticFieldGoal"
             />
 
           <TextView
             style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:id="@+id/playerStatisticFieldGoalMade"
+            android:id="@+id/playerStatistic3Point"
             />
 
           <TextView
             style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:id="@+id/playerStatistic3PointAttempted"
-            />
-
-          <TextView
-            style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:id="@+id/playerStatistic3PointMade"
-            />
-
-          <TextView
-            style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:id="@+id/playerStatisticFreeThrowAttempted"
-            />
-
-          <TextView
-            style="@style/AppTheme.PlayerStatisticTextStyle"
-            android:id="@+id/playerStatisticFreeThrowMade"
-
+            android:id="@+id/playerStatisticFreeThrow"
             />
 
           <TextView

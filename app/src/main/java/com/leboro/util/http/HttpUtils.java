@@ -19,7 +19,7 @@ public class HttpUtils {
         try {
             return httpGetAsyncTask.execute(requestBase).get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.d(MainActivity.DEBUG_APP, "Error obtaining classification data", e);
+            Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }
 
         return null;
@@ -39,7 +39,7 @@ public class HttpUtils {
                 result.append(line);
             }
         } catch (Exception e) {
-            Log.d(MainActivity.DEBUG_APP, "Error obtaining classification data", e);
+            Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }
 
         return result.toString();

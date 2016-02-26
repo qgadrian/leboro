@@ -54,7 +54,7 @@ public class PlayerStatisticFragment extends StatisticPageFragment {
         if (playerStatisticListView != null) {
             playerStatisticListView.swapAdapter(buildPlayerStatisticAdapter(), true);
         } else {
-            Log.d(MainActivity.DEBUG_APP, "Trying to update data on null adapter");
+            Log.d(MainActivity.DEBUG_APP_NAME, "Trying to update data on null adapter");
         }
     }
 
