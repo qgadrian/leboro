@@ -1,6 +1,8 @@
-package com.leboro.service.task;
+package com.leboro.service.task.standing;
 
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 import com.leboro.util.http.HttpUtils;
@@ -14,16 +16,14 @@ import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.impl.client.HttpClientBuilder;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
-public class HttpPostAsyncTask extends AsyncTask<HttpPostAsyncTask.ResultTaskArgument, Void, String> {
+public class StandingHttpPostAsyncTask extends AsyncTask<StandingHttpPostAsyncTask.ResultTaskArgument, Void, String> {
 
     @Override
     protected String doInBackground(ResultTaskArgument... params) {
         String url = params[0].getUrl();
         String acceptHeader = params[0].getAcceptHeader();
         String referrerHeader = params[0].getReferrerHeader();
-        String gameDayId = params[0].getGameDayId();
-        String kind = params[0].getKind();
-        String season = params[0].getSeason();
+        int standingType = params[0].getStandingType();
         String _EVENTVALIDATION = params[0].get_EVENTVALIDATION();
         String _VIEWSTATE = params[0].get_VIEWSTATE();
 
@@ -34,11 +34,14 @@ public class HttpPostAsyncTask extends AsyncTask<HttpPostAsyncTask.ResultTaskArg
         request.setHeader("Referrer", referrerHeader);
 
         List<NameValuePair> pairs = Lists.newArrayList();
-        pairs.add(new BasicNameValuePair("ctl00$jornadasDropDownList", gameDayId));
-        pairs.add(new BasicNameValuePair("ctl00$gruposDropDownList", kind));
-        pairs.add(new BasicNameValuePair("ctl00$temporadasDropDownList", season));
-        pairs.add(new BasicNameValuePair("__VIEWSTATE", _VIEWSTATE));
-        pairs.add(new BasicNameValuePair("__EVENTVALIDATION", _EVENTVALIDATION));
+        pairs.add(new BasicNameValuePair("ctl00$tiposRankingDropDownList", String.valueOf(standingType)));
+
+        // Server throws an error if the tokens are empty or invalid
+        if (StringUtils.isNotBlank(_VIEWSTATE) && StringUtils.isNotBlank(_EVENTVALIDATION)) {
+            pairs.add(new BasicNameValuePair("__VIEWSTATE", _VIEWSTATE));
+            pairs.add(new BasicNameValuePair("__EVENTVALIDATION", _EVENTVALIDATION));
+        }
+
         HttpEntity entity = EntityBuilder.create().setParameters(pairs).setContentType(null).build();
         request.setEntity(entity);
 
@@ -53,57 +56,43 @@ public class HttpPostAsyncTask extends AsyncTask<HttpPostAsyncTask.ResultTaskArg
 
         private final String referrerHeader;
 
-        private final int gameDayId;
-
-        private final int kind;
-
-        private final int season;
+        private final int standingType;
 
         private final String _EVENTVALIDATION;
 
         private final String _VIEWSTATE;
 
-        public ResultTaskArgument(int gameDayId, int kind, int season, String referrerHeader, String acceptHeader,
-                String url, String _VIEWSTATE, String _EVENTVALIDATION) {
-            this._VIEWSTATE = _VIEWSTATE;
-            this._EVENTVALIDATION = _EVENTVALIDATION;
-            this.season = season;
-            this.kind = kind;
-            this.gameDayId = gameDayId;
-            this.referrerHeader = referrerHeader;
-            this.acceptHeader = acceptHeader;
+        public ResultTaskArgument(String url, String acceptHeader, String referrerHeader, int standingType,
+                String _EVENTVALIDATION, String _VIEWSTATE) {
             this.url = url;
+            this.acceptHeader = acceptHeader;
+            this.referrerHeader = referrerHeader;
+            this.standingType = standingType;
+            this._EVENTVALIDATION = _EVENTVALIDATION;
+            this._VIEWSTATE = _VIEWSTATE;
         }
 
-        public String getUrl() {
+        private int getStandingType() {
+            return standingType;
+        }
+
+        private String getUrl() {
             return url;
         }
 
-        public String getAcceptHeader() {
+        private String getAcceptHeader() {
             return acceptHeader;
         }
 
-        public String getReferrerHeader() {
+        private String getReferrerHeader() {
             return referrerHeader;
         }
 
-        public String getGameDayId() {
-            return String.valueOf(gameDayId);
-        }
-
-        public String getKind() {
-            return String.valueOf(kind);
-        }
-
-        public String getSeason() {
-            return String.valueOf(season);
-        }
-
-        public String get_EVENTVALIDATION() {
+        private String get_EVENTVALIDATION() {
             return _EVENTVALIDATION;
         }
 
-        public String get_VIEWSTATE() {
+        private String get_VIEWSTATE() {
             return _VIEWSTATE;
         }
     }

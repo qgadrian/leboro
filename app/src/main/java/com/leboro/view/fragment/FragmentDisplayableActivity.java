@@ -2,10 +2,11 @@ package com.leboro.view.fragment;
 
 import com.leboro.R;
 import com.leboro.view.fragment.classification.ClassificationFragment;
-import com.leboro.view.fragment.games.GamesFragment;
+import com.leboro.view.fragment.games.gameday.GameDaysFragment;
 import com.leboro.view.fragment.games.live.LiveGameDayOverviewFragment;
 import com.leboro.view.fragment.games.live.LiveGameVideoFragment;
 import com.leboro.view.fragment.news.NewsFragment;
+import com.leboro.view.fragment.standings.StandingsFragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -20,7 +21,7 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
 
     private Integer currentFragmentResourceId;
 
-    public void displayView(int viewId) {
+    protected void displayView(int viewId) {
 
         Fragment fragment = null;
         String title = getString(R.string.app_name);
@@ -31,7 +32,7 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
                 title = getString(R.string.navigation_drawer_classification);
                 break;
             case R.id.nav_games:
-                fragment = new GamesFragment();
+                fragment = new GameDaysFragment();
                 title = getString(R.string.navigation_drawer_games);
                 break;
             case R.id.nav_live_games:
@@ -41,6 +42,10 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
             case R.id.nav_news:
                 fragment = new NewsFragment();
                 title = getString(R.string.navigation_drawer_news);
+                break;
+            case R.id.nav_standings:
+                fragment = new StandingsFragment();
+                title = getString(R.string.navigation_drawer_standings);
                 break;
             case R.id.live_game_video_layout:
                 fragment = new LiveGameVideoFragment();

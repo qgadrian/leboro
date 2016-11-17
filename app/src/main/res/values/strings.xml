@@ -16,6 +16,7 @@
 
   <!--Menu-->
   <string name="navigation_drawer_classification">Classification</string>
+  <string name="navigation_drawer_standings">Standings</string>
   <string name="navigation_drawer_news">News</string>
   <string name="navigation_drawer_live_games">Live games</string>
   <string name="navigation_drawer_games">Games</string>
@@ -51,6 +52,17 @@
 
   <!-- News -->
   <string name="news_article_toolbar_title">News</string>
+
+  <!--Standings-->
+  <string name="standing_points_bar_title">Points</string>
+  <string name="standing_rebounds_bar_title">Rebounds</string>
+  <string name="standing_defensive_rebounds_bar_title">Offensive rebounds</string>
+  <string name="standing_offensive_rebounds_bar_title">Defensive rebounds</string>
+  <string name="standing_assists_bar_title">Assists</string>
+  <string name="standing_steals_bar_title">Steals</string>
+  <string name="standing_turnovers_bar_title">Turnovers</string>
+  <string name="standing_blocks_bar_title">Blocks</string>
+  <string name="standing_game_value_bar_title">Game value</string>
 
   <!-- Live game view -->
   <string name="statistic_header_field_goal">FG</string>

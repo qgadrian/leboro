@@ -11,8 +11,9 @@ import com.leboro.MainActivity;
 import com.leboro.model.news.News;
 import com.leboro.service.news.NewsService;
 import com.leboro.util.Constants;
-import com.leboro.util.Parser;
 import com.leboro.util.cache.ApplicationCacheManager;
+import com.leboro.util.parser.BaseParser;
+import com.leboro.util.parser.news.NewsParser;
 import com.leboro.view.helper.http.HttpHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
@@ -26,7 +27,7 @@ public class NewsServiceImpl implements NewsService {
         String newsHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants.NEWS_URL_PROP);
 
         // TODO getting document here for parse after this into another method...
-        Document data = Parser.parseHTMLData(newsHTML);
+        Document data = BaseParser.parseHTMLData(newsHTML);
 
         List<News> news = Lists.newArrayList();
 
@@ -34,7 +35,7 @@ public class NewsServiceImpl implements NewsService {
         if (CollectionUtils.isEmpty(elements) || CollectionUtils.isEmpty(elements.get(0).children())) {
             Log.d(MainActivity.DEBUG_APP_NAME, "Unable to find data to parse data for classification");
         } else {
-            news = Parser.getNews(elements.get(0).children());
+            news = NewsParser.getNews(elements.get(0).children());
         }
 
         ApplicationCacheManager.setNews(news);
@@ -45,7 +46,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void fillNewsWithArticleText(News news, DataLoadedListener<News> dataLoadedListener) {
         String newsArticleHTML = HttpHelper.getHtmlFromSimpleHttpRequest(news.getArticleUrl());
-        String articleText = Parser.getArticleText(newsArticleHTML);
+        String articleText = NewsParser.getArticleText(newsArticleHTML);
         news.setArticleText(articleText);
         dataLoadedListener.onDataLoaded(news);
     }

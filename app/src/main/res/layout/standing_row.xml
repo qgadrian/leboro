@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:minHeight="84dp"
+  android:orientation="vertical"
+  android:gravity="center"
+  android:paddingTop="@dimen/games_list_padding_top"
+  >
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+      android:id="@+id/playerStandingPosition"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:textSize="18sp"
+      android:textColor="@color/gameScore"
+      android:paddingLeft="2dp"
+      android:paddingStart="2dp"
+      android:paddingRight="2dp"
+      android:paddingEnd="2dp"
+      />
+
+    <com.android.volley.toolbox.NetworkImageView
+      android:id="@+id/playerStandingImage"
+      android:layout_width="84dp"
+      android:layout_height="84dp"
+      android:layout_gravity="start"
+      android:padding="@dimen/classification_logo_padding"
+      />
+
+    <RelativeLayout
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:layout_weight="2"
+      >
+      <TextView
+        android:id="@+id/playerStandingName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="@color/gameScore"
+        />
+
+      <TextView
+        android:id="@+id/playerStandingTeamName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="start|center"
+        android:textSize="12sp"
+        android:textColor="@color/gameScore"
+        />
+    </RelativeLayout>
+
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      >
+      <TextView
+        android:id="@+id/playerStandingAverageValue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/gameScore"
+        />
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="wrap_content"-->
+  <!--android:orientation="horizontal"-->
+  <!--android:gravity="center"-->
+  <!--&gt;-->
+
+  <!--<TextView-->
+  <!--android:id="@+id/playerStandingTotals"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="wrap_content"-->
+  <!--/>-->
+
+  <!--</LinearLayout>-->
+
+</LinearLayout>

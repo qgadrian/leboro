@@ -1,4 +1,4 @@
-package com.leboro.service.task;
+package com.leboro.service.task.gameday;
 
 import com.leboro.util.http.HttpUtils;
 
@@ -7,7 +7,7 @@ import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.methods.HttpRequestBase;
 import cz.msebera.android.httpclient.impl.client.HttpClientBuilder;
 
-public class HttpGetAsyncTask extends AsyncTask<HttpRequestBase, Void, String> {
+public class GameDayHttpGetAsyncTask extends AsyncTask<HttpRequestBase, Void, String> {
 
     @Override
     protected String doInBackground(HttpRequestBase... params) {

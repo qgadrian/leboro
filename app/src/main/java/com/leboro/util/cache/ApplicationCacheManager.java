@@ -1,12 +1,15 @@
 package com.leboro.util.cache;
 
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.leboro.model.api.standing.PlayerStanding;
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
 import com.leboro.model.game.GameInfo;
-import com.leboro.model.game.GameResult;
 import com.leboro.model.news.News;
 import com.leboro.util.exception.InstanceNotFoundException;
 
@@ -17,6 +20,8 @@ public class ApplicationCacheManager {
     private static List<Position> positions;
 
     private static List<News> news;
+
+    private static Map<Integer, List<PlayerStanding>> playerStandingsByStandingType;
 
     public static boolean hasGameDayCacheData() {
         return gameDayInfo != null;
@@ -102,4 +107,24 @@ public class ApplicationCacheManager {
 
         throw new InstanceNotFoundException(id, "No game day found for id[" + id + "]");
     }
+
+    public static synchronized void clearPlayerStandings() {
+        playerStandingsByStandingType.clear();
+    }
+
+    public static synchronized void updatePlayerStandings(int standingType, List<PlayerStanding> playerStandings) {
+        if (playerStandingsByStandingType == null) {
+            playerStandingsByStandingType = Maps.newHashMap();
+        }
+        playerStandingsByStandingType.put(standingType, playerStandings);
+    }
+
+    public static synchronized List<PlayerStanding> getPlayerStandings(int standingType) {
+        if (playerStandingsByStandingType == null) {
+            playerStandingsByStandingType = Maps.newHashMap();
+        }
+        List<PlayerStanding> playerStandings = playerStandingsByStandingType.get(standingType);
+        return playerStandings == null ? Lists.<PlayerStanding>newArrayList() : playerStandings;
+    }
+
 }

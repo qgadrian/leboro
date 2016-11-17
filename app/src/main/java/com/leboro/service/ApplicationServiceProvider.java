@@ -6,6 +6,8 @@ import com.leboro.service.live.LiveService;
 import com.leboro.service.live.impl.LiveServiceImpl;
 import com.leboro.service.news.NewsService;
 import com.leboro.service.news.impl.NewsServiceImpl;
+import com.leboro.service.standing.StandingService;
+import com.leboro.service.standing.impl.StandingServiceImpl;
 import com.leboro.service.statistics.StatisticsService;
 import com.leboro.service.statistics.impl.StatisticsServiceImpl;
 import com.leboro.service.volley.NetworkImageLoaderService;
@@ -22,6 +24,8 @@ public class ApplicationServiceProvider {
     private static LiveService liveService;
 
     private static GameService gameService;
+
+    private static StandingService standingService;
 
     public static NetworkImageLoaderService getNetworkImageLoaderService() {
         if (networkImageLoaderService == null) {
@@ -61,5 +65,13 @@ public class ApplicationServiceProvider {
         }
 
         return gameService;
+    }
+
+    public static StandingService getStandingService() {
+        if (standingService == null) {
+            standingService = new StandingServiceImpl();
+        }
+
+        return standingService;
     }
 }

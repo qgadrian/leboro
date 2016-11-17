@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.concurrent.ExecutionException;
 
 import com.leboro.MainActivity;
-import com.leboro.service.task.HttpGetAsyncTask;
+import com.leboro.service.task.gameday.GameDayHttpGetAsyncTask;
 
 import android.util.Log;
 import cz.msebera.android.httpclient.HttpResponse;
@@ -15,9 +15,9 @@ import cz.msebera.android.httpclient.client.methods.HttpRequestBase;
 public class HttpUtils {
 
     public static String doAsyncGet(HttpRequestBase requestBase) {
-        HttpGetAsyncTask httpGetAsyncTask = new HttpGetAsyncTask();
+        GameDayHttpGetAsyncTask gameDayHttpGetAsyncTask = new GameDayHttpGetAsyncTask();
         try {
-            return httpGetAsyncTask.execute(requestBase).get();
+            return gameDayHttpGetAsyncTask.execute(requestBase).get();
         } catch (InterruptedException | ExecutionException e) {
             Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }

@@ -1,13 +1,11 @@
-package com.leboro.view.fragment.games;
+package com.leboro.view.fragment.standings;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.service.ApplicationServiceProvider;
-import com.leboro.util.cache.ApplicationCacheManager;
-import com.leboro.util.exception.InstanceNotFoundException;
-import com.leboro.view.adapters.games.GamesPagerAdapter;
+import com.leboro.util.html.HTMLHelper;
+import com.leboro.view.adapters.standing.StandingPagerAdapter;
 import com.leboro.view.fragment.LoadableFragment;
-import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
 import android.os.AsyncTask;
@@ -18,18 +16,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class GamesFragment extends LoadableFragment implements CacheDataLoadedListener {
+public class StandingsFragment extends LoadableFragment implements CacheDataLoadedListener {
 
     private ViewPager viewPager;
 
     private View mView;
 
-    protected static Integer lastPosition = null;
+    private static Integer lastPosition = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.games_fragment, container, false);
-        viewPager = (ViewPager) mView.findViewById(R.id.gamesPagerContainer);
+        mView = inflater.inflate(R.layout.standings_fragment, container, false);
+        viewPager = (ViewPager) mView.findViewById(R.id.standingsPagerContainer);
 
         initializeListeners();
 
@@ -37,7 +35,8 @@ public class GamesFragment extends LoadableFragment implements CacheDataLoadedLi
         AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
-                ApplicationServiceProvider.getStatisticsService().getDefaultGameDayInfo(dataLoadedListener);
+                ApplicationServiceProvider.getStandingService().getPlayerStandings(HTMLHelper.StandingType
+                        .POINTS.getId(), dataLoadedListener);
             }
         });
 
@@ -70,18 +69,17 @@ public class GamesFragment extends LoadableFragment implements CacheDataLoadedLi
                 @Override
                 public void run() {
                     removeLoadingLayout(mView);
-                    GamesPagerAdapter gamesPagerAdapter = new GamesPagerAdapter(getChildFragmentManager());
-                    viewPager.setAdapter(gamesPagerAdapter); // to set current item it's necessary to set adapter first
+                    StandingPagerAdapter standingPagerAdapter = new StandingPagerAdapter(getChildFragmentManager());
+                    viewPager.setAdapter(standingPagerAdapter);
+
                     if (lastPosition != null) {
                         Log.d(MainActivity.DEBUG_APP_NAME, "Detected last position on page [" + lastPosition + "]");
                         viewPager.setCurrentItem(lastPosition);
                     } else {
                         try {
-                            viewPager.setCurrentItem(
-                                    GameDayHelper
-                                            .getGameDayCurrentPositionIndex(ApplicationCacheManager.getGameDayInfo()));
-                        } catch (InstanceNotFoundException e) {
-                            Log.e(MainActivity.DEBUG_APP_NAME, "Could not get game info for game day", e);
+                            viewPager.setCurrentItem(0);
+                        } catch (Exception e) {
+                            Log.e(MainActivity.DEBUG_APP_NAME, "Could not get standing info", e);
                         }
                     }
                 }

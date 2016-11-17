@@ -12,13 +12,15 @@ import com.leboro.model.api.live.overview.LiveData;
 import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
 import com.leboro.service.statistics.StatisticsService;
-import com.leboro.service.task.HttpPostAsyncTask;
+import com.leboro.service.task.gameday.GameDayHttpPostAsyncTask;
 import com.leboro.util.Constants;
-import com.leboro.util.Parser;
 import com.leboro.util.cache.ApplicationCacheManager;
+import com.leboro.util.html.HTMLHelper;
 import com.leboro.util.http.HttpUtils;
 import com.leboro.util.json.JSONUtils;
-import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
+import com.leboro.util.parser.BaseParser;
+import com.leboro.util.parser.classification.ClassificationParser;
+import com.leboro.util.parser.game.GameParser;
 import com.leboro.view.helper.http.HttpHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
@@ -35,7 +37,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             String classificationHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants
                     .CLASSIFICATION_URL_PROP);
 
-            Document data = Parser.parseHTMLData(classificationHTML);
+            Document data = BaseParser.parseHTMLData(classificationHTML);
 
             Elements elements = data.getElementsByTag("tbody");
             if (CollectionUtils.isEmpty(elements)) {
@@ -45,7 +47,8 @@ public class StatisticsServiceImpl implements StatisticsService {
                     Log.d(MainActivity.DEBUG_APP_NAME,
                             "Unexpected number of parsed data for classification from request");
                 }
-                ApplicationCacheManager.setClassification(Parser.getPositionsInfo(elements.get(0).children()));
+                ApplicationCacheManager
+                        .setClassification(ClassificationParser.getPositionsInfo(elements.get(0).children()));
             }
         }
 
@@ -56,8 +59,8 @@ public class StatisticsServiceImpl implements StatisticsService {
     public void getDefaultGameDayInfo(final CacheDataLoadedListener dataLoadedListener) {
         if (!ApplicationCacheManager.hasGameDayCacheData()) {
             String gameDaysHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants.GAMES_URL_PROP);
-            Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
-            GameDayInfo gameDayInfo = Parser.getGameInfoFromData(gameDayInfoData);
+            Document gameDayInfoData = BaseParser.parseHTMLAndSaveTokenData(gameDaysHTML);
+            GameDayInfo gameDayInfo = GameParser.getGameInfoFromData(gameDayInfoData);
             ApplicationCacheManager.setGameDayInfo(gameDayInfo);
         }
 
@@ -71,8 +74,8 @@ public class StatisticsServiceImpl implements StatisticsService {
             @Override
             public void run() {
                 String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
-                Document gameDayInfoData = Parser.parseHTMLAndSaveTokenData(gameDaysHTML);
-                GameDay gameDay = Parser.getGameDay(gameDayInfoData);
+                Document gameDayInfoData = BaseParser.parseHTMLAndSaveTokenData(gameDaysHTML);
+                GameDay gameDay = GameParser.getGameDay(gameDayInfoData);
                 ApplicationCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
                 dataLoadedListener.onDataLoadedIntoCache();
             }
@@ -95,16 +98,15 @@ public class StatisticsServiceImpl implements StatisticsService {
         String acceptHeader = properties.getProperty(Constants.URL_HEADER_ACCEPT_PROP);
         String referrerHeader = properties.getProperty(Constants.URL_HEADER_REFERRER_PROP);
 
-        HttpPostAsyncTask httpPostAsyncTask = new HttpPostAsyncTask();
+        GameDayHttpPostAsyncTask gameDayHttpPostAsyncTask = new GameDayHttpPostAsyncTask();
         try {
-            String serverEventValidationToken = SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
-                    .context).getString(Constants.EVENT_VALIDATION_TOKEN_SHARED_PROP, "");
-            String serverViewState = SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
-                    .context).getString(Constants.VIEW_STATE_TOKEN_SHARED_PROP, "");
-            HttpPostAsyncTask.ResultTaskArgument resultTaskArgument = new HttpPostAsyncTask.ResultTaskArgument
+            String serverEventValidationToken = HTMLHelper.getEventValidationToken();
+            String serverViewState = HTMLHelper.getViewStateToken();
+
+            GameDayHttpPostAsyncTask.ResultTaskArgument resultTaskArgument = new GameDayHttpPostAsyncTask.ResultTaskArgument
                     (gameDayId, kind, season, referrerHeader, acceptHeader, url, serverViewState,
                             serverEventValidationToken);
-            return httpPostAsyncTask.execute(resultTaskArgument).get();
+            return gameDayHttpPostAsyncTask.execute(resultTaskArgument).get();
         } catch (InterruptedException | ExecutionException e) {
             Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }

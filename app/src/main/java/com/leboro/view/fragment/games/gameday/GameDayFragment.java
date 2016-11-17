@@ -1,4 +1,4 @@
-package com.leboro.view.fragment.games;
+package com.leboro.view.fragment.games.gameday;
 
 import java.util.Collections;
 

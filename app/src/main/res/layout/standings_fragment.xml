@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.leboro.MainActivity"
+  >
+
+  <include layout="@layout/loading_layout" />
+
+  <android.support.v4.view.ViewPager
+    android:id="@+id/standingsPagerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+  <android.support.v4.view.PagerTitleStrip
+    android:id="@+id/standings_pager_title_strip"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@android:color/white"
+    android:padding="@dimen/games_day_tab_title_padding"
+    />
+
+</android.support.v4.view.ViewPager>
+
+</RelativeLayout>

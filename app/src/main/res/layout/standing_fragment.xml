@@ -6,12 +6,10 @@
   android:orientation="vertical"
   >
 
-      <include
-        layout="@layout/loading_layout"
-        />
+      <include layout="@layout/loading_layout" />
 
     <ListView
-      android:id="@+id/gameDayListView"
+      android:id="@+id/standingListView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:divider="@drawable/global_list_divider"

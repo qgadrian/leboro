@@ -9,7 +9,9 @@ public class Constants {
 
     public final static String CLASSIFICATION_URL_PROP = "application.statistic.classification.url";
 
-    public final static String NEWS_URL_PROP = "application.statistic.news.url";
+    public final static String NEWS_URL_PROP = "application.news.url";
+
+    public final static String STANDINGS_URL_PROP = "application.standings.url";
 
     public final static String GAMES_URL_PROP = "application.statistic.games.url";
 
@@ -46,5 +48,9 @@ public class Constants {
     public final static String EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
 
     public static final String VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
+
+    public final static String STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
+
+    public static final String STANDING_VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
 
 }

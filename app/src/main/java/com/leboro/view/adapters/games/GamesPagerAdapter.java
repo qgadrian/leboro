@@ -4,7 +4,7 @@ import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.util.exception.InstanceNotFoundException;
-import com.leboro.view.fragment.games.GameDayFragment;
+import com.leboro.view.fragment.games.gameday.GameDayFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
