@@ -46,9 +46,9 @@ public class PlayerStatisticViewHolder extends BaseViewHolder<PlayerStatistic> {
         playerName.setText(element.getPlayerName());
         points.setText(mView.getContext().getResources().getQuantityString(R.plurals.statistic_highlight_points,
                 element.getPoints(), element.getPoints()));
-        assists.setText(mView.getContext().getResources().getQuantityString(R.plurals.statistic_highlight_assists,
+        assists.setText(mView.getContext().getResources().getQuantityString(R.plurals.statistic_plural_assists,
                 element.getAssists(), element.getAssists()));
-        rebounds.setText(mView.getContext().getResources().getQuantityString(R.plurals.statistic_highlight_rebounds,
+        rebounds.setText(mView.getContext().getResources().getQuantityString(R.plurals.statistic_plural_rebounds,
                 element.getTotalRebounds(), element.getTotalRebounds()));
 
 

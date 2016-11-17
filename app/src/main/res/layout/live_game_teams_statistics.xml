@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/teamsStatistics"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="2dp"
+  >
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/teamsStatisticsGroup"
+      android:layout_gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      card_view:theme="@style/AppTheme.CardViewStyle"
+      card_view:contentPadding="8dp"
+      card_view:cardCornerRadius="4dp"
+      card_view:cardUseCompatPadding="true"
+      card_view:cardElevation="2dp"
+      >
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <!--Home team statistics-->
+        <LinearLayout
+          android:id="@+id/homeTeamStatistics"
+          android:orientation="vertical"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          >
+
+          <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/homeTeamLogo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="@dimen/team_statistic_image_padding"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticFieldGoals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticThreePoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticFreeThrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticFieldGoalsPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticThreePointPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticFreeThrowPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticDefensiveRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticOffensiveRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticTotalRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticAssists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticSteals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticTurnovers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticBlocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/homeTeamStatisticFouls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        </LinearLayout>
+
+        <!--Statistic names-->
+        <LinearLayout
+          android:id="@+id/statisticNames"
+          android:orientation="vertical"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="2"
+          >
+
+          <Space
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticFieldGoals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_field_goals"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticThreePoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_three_points"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticFreeThrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_free_throws"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticFieldGoalsPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_field_goals_percentage"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticThreePointPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_three_points_percentage"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticFreeThrowPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_free_throws_percentage"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticDefensiveRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_defensive_rebounds"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticOffensiveRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_offensive_rebounds"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticTotalRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_total_rebounds"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticAssists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_assists"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticSteals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_steals"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticTurnovers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_turnovers"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticBlocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_blocks"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/statisticFouls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistic_fouls"
+            />
+
+        </LinearLayout>
+
+        <!--Away team statistics-->
+        <LinearLayout
+          android:id="@+id/awayTeamStatistics"
+          android:orientation="vertical"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          >
+
+          <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/awayTeamLogo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="@dimen/team_statistic_image_padding"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticFieldGoals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticThreePoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticFreeThrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticFieldGoalsPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticThreePointPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticFreeThrowPercentage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticDefensiveRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticOffensiveRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticTotalRebounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticAssists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticSteals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticTurnovers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticBlocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+          <TextView
+            style="@style/AppTheme.TeamStatisticRowTextStyle"
+            android:id="@+id/awayTeamStatisticFouls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+  </ScrollView>
+
+</RelativeLayout>

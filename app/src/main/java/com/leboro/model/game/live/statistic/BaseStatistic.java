@@ -1,5 +1,7 @@
 package com.leboro.model.game.live.statistic;
 
+import java.text.DecimalFormat;
+
 public abstract class BaseStatistic {
 
     private final int fieldGoalsMade;
@@ -57,8 +59,8 @@ public abstract class BaseStatistic {
         return fieldGoalsAttempted;
     }
 
-    public double getFieldGoalPercentage() {
-        return fieldGoalsAttempted / fieldGoalsMade;
+    public String getFieldGoalPercentageString() {
+        return new DecimalFormat("0").format((fieldGoalsMade * 100) / fieldGoalsAttempted) + "%";
     }
 
     public int getThreePointersMade() {
@@ -69,8 +71,8 @@ public abstract class BaseStatistic {
         return threePointersAttempted;
     }
 
-    public double getThreePointersPercentage() {
-        return threePointersAttempted / threePointersMade;
+    public String getThreePointersPercentageString() {
+        return new DecimalFormat("0").format((threePointersMade * 100) / threePointersAttempted) + "%";
     }
 
     public int getFreeThrowsMade() {
@@ -79,6 +81,10 @@ public abstract class BaseStatistic {
 
     public int getFreeThrowsAttempted() {
         return freeThrowsAttempted;
+    }
+
+    public String getFreeThrowPercentageString() {
+        return new DecimalFormat("0").format((freeThrowsMade * 100) / freeThrowsAttempted) + "%";
     }
 
     public int getOffensiveRebounds() {
@@ -116,25 +122,5 @@ public abstract class BaseStatistic {
     public int getBlocks() {
         return blocks;
     }
-
-    //    @JsonCreator
-    //    public static BaseStatistic build(
-    //            @JsonProperty("fgm") int fieldGoalsMade,
-    //            @JsonProperty("fga") int fieldGoalsAttempted,
-    //            @JsonProperty("p3m") int threePointersMade,
-    //            @JsonProperty("p3a") int threePointersAttempted,
-    //            @JsonProperty("p1m") int freeThrowsMade,
-    //            @JsonProperty("p1a") int freeThrowsAttempted,
-    //            @JsonProperty("ro") int offensiveRebounds,
-    //            @JsonProperty("rd") int defensiveRebounds,
-    //            @JsonProperty("to") int turnovers,
-    //            @JsonProperty("st") int steals,
-    //            @JsonProperty("assist") int assists,
-    //            @JsonProperty("pf") int fouls,
-    //            @JsonProperty("pts") int points
-    //    ) {
-    //        return new BaseStatistic(points, fouls, assists, steals, turnovers, defensiveRebounds, offensiveRebounds,
-    //                freeThrowsAttempted, freeThrowsMade, threePointersAttempted, threePointersMade, fieldGoalsAttempted,
-    //                fieldGoalsMade);
-    //    }
+    
 }

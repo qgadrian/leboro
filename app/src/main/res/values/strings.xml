@@ -12,7 +12,7 @@
 
   <!--Nav header-->
   <string name="navigation_header_title">LEB Oro league</string>
-  <string name="navigation_header_subtitle">Unofficial app</string>
+  <string name="navigation_header_subtitle">For basketball fans</string>
 
   <!--Menu-->
   <string name="navigation_drawer_classification">Classification</string>
@@ -65,20 +65,63 @@
   <string name="statistic_header_fouls">PF</string>
   <string name="statistic_header_blocks">BLK</string>
   <string name="statistic_header_value">%1$d/%2$d</string>
+
   <plurals name="statistic_highlight_points">
     <item quantity="one">%d point</item>
     <item quantity="other">%d points</item>
   </plurals>
-  <plurals name="statistic_highlight_assists">
+  <plurals name="statistic_plural_assists">
     <item quantity="one">%d assist</item>
     <item quantity="other">%d assists</item>
   </plurals>
-  <plurals name="statistic_highlight_rebounds">
+  <plurals name="statistic_plural_offensive_rebounds">
+    <item quantity="one">%d offensive rebound</item>
+    <item quantity="other">%d offensive rebounds</item>
+  </plurals>
+  <plurals name="statistic_plural_defensive_rebounds">
+    <item quantity="one">%d defensive rebound</item>
+    <item quantity="other">%d defensive rebounds</item>
+  </plurals>
+  <plurals name="statistic_plural_rebounds">
     <item quantity="one">%d rebound</item>
     <item quantity="other">%d rebounds</item>
   </plurals>
+  <plurals name="statistic_plural_steals">
+    <item quantity="one">%d steal</item>
+    <item quantity="other">%d steals</item>
+  </plurals>
+  <plurals name="statistic_plural_blocks">
+    <item quantity="one">%d block</item>
+    <item quantity="other">%d blocks</item>
+  </plurals>
+  <plurals name="statistic_plural_turnovers">
+    <item quantity="one">%d turnover</item>
+    <item quantity="other">%d turnovers</item>
+  </plurals>
+  <plurals name="statistic_plural_fouls">
+    <item quantity="one">%d foul</item>
+    <item quantity="other">%d fouls</item>
+  </plurals>
+
+  <string name="statistic_points">Points</string>
+  <string name="statistic_field_goals">FG</string>
+  <string name="statistic_field_goals_percentage">FG%</string>
+  <string name="statistic_three_points">3P</string>
+  <string name="statistic_three_points_percentage">3P%</string>
+  <string name="statistic_free_throws">FT</string>
+  <string name="statistic_free_throws_percentage">FT%</string>
+  <string name="statistic_defensive_rebounds">Defensive rebounds</string>
+  <string name="statistic_offensive_rebounds">Offensive rebounds</string>
+  <string name="statistic_total_rebounds">Total rebounds</string>
+  <string name="statistic_assists">Assists</string>
+  <string name="statistic_steals">Steals</string>
+  <string name="statistic_blocks">Blocks</string>
+  <string name="statistic_turnovers">Turnovers</string>
+  <string name="statistic_fouls">Fouls</string>
+
   <string name="live_game_tab_play_by_play">Play by play</string>
   <string name="live_game_tab_player_stats">Players stats</string>
+  <string name="live_game_tab_team_stats">Teams stats</string>
   <string name="live_game_no_data_message">No live data</string>
 
 </resources>

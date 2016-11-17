@@ -36,11 +36,11 @@ public class PlayerStatisticFragment extends StatisticPageFragment {
     }
 
     private void initializeView() {
-        RecyclerView recyclerView = (RecyclerView) mView.findViewById(R.id.playerStatisticList);
+        playerStatisticListView = (RecyclerView) mView.findViewById(R.id.playerStatisticList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(buildPlayerStatisticAdapter());
+        playerStatisticListView.setLayoutManager(mLayoutManager);
+        playerStatisticListView.setItemAnimator(new DefaultItemAnimator());
+        playerStatisticListView.setAdapter(buildPlayerStatisticAdapter());
 
     }
 

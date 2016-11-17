@@ -104,10 +104,10 @@ public class LiveGameMapper {
     }
 
     private static List<PlayerStatistic> mapPlayerStatistics(
-            List<com.leboro.model.api.live.game.statistic.player.PlayerStatistic> teamPlayerStatistics) {
+            List<com.leboro.model.api.live.game.statistic.player.PlayerStatistic> apiTeamPlayerStatistics) {
         List<PlayerStatistic> playerStatistics = Lists.newArrayList();
 
-        for (com.leboro.model.api.live.game.statistic.player.PlayerStatistic teamPlayerStatistic : teamPlayerStatistics) {
+        for (com.leboro.model.api.live.game.statistic.player.PlayerStatistic teamPlayerStatistic : apiTeamPlayerStatistics) {
             playerStatistics.add(mapPlayerStatistic(teamPlayerStatistic));
         }
 
@@ -115,24 +115,25 @@ public class LiveGameMapper {
     }
 
     private static PlayerStatistic mapPlayerStatistic(
-            com.leboro.model.api.live.game.statistic.player.PlayerStatistic homeTeamPlayerStatistic) {
+            com.leboro.model.api.live.game.statistic.player.PlayerStatistic apiTeamPlayerStatistic) {
         return new PlayerStatisticBuilder()
-                .setPoints(homeTeamPlayerStatistic.getPoints()) //
-                .setAssists(homeTeamPlayerStatistic.getAssists()) //
-                .setDefensiveRebounds(homeTeamPlayerStatistic.getDefensiveRebounds()) //
-                .setOffensiveRebounds(homeTeamPlayerStatistic.getOffensiveRebounds()) //
-                .setFieldGoalsAttempted(homeTeamPlayerStatistic.getFieldGoalsAttempted()) //
-                .setFieldGoalsMade(homeTeamPlayerStatistic.getFieldGoalsMade()) //
-                .setThreePointsAttempted(homeTeamPlayerStatistic.getThreePointersAttempted()) //
-                .setThreePointsMade(homeTeamPlayerStatistic.getThreePointersMade()) //
-                .setFreeThrowsAttempted(homeTeamPlayerStatistic.getFreeThrowsAttempted()) //
-                .setFreeThrowsMade(homeTeamPlayerStatistic.getFreeThrowsMade()) //
-                .setSteals(homeTeamPlayerStatistic.getSteals()) //
-                .setTurnovers(homeTeamPlayerStatistic.getTurnovers()) //
-                .setPlayerName(homeTeamPlayerStatistic.getPlayerName()) //
-                .setPlayerNumber(homeTeamPlayerStatistic.getPlayerNumber()) //
-                .setPlayerImageUrl(homeTeamPlayerStatistic.getPlayerImageUrl()) //
-                .setBlocks(homeTeamPlayerStatistic.getBlocks()) //
+                .setPoints(apiTeamPlayerStatistic.getPoints()) //
+                .setAssists(apiTeamPlayerStatistic.getAssists()) //
+                .setDefensiveRebounds(apiTeamPlayerStatistic.getDefensiveRebounds()) //
+                .setOffensiveRebounds(apiTeamPlayerStatistic.getOffensiveRebounds()) //
+                .setFieldGoalsAttempted(apiTeamPlayerStatistic.getFieldGoalsAttempted()) //
+                .setFieldGoalsMade(apiTeamPlayerStatistic.getFieldGoalsMade()) //
+                .setThreePointsAttempted(apiTeamPlayerStatistic.getThreePointersAttempted()) //
+                .setThreePointsMade(apiTeamPlayerStatistic.getThreePointersMade()) //
+                .setFreeThrowsAttempted(apiTeamPlayerStatistic.getFreeThrowsAttempted()) //
+                .setFreeThrowsMade(apiTeamPlayerStatistic.getFreeThrowsMade()) //
+                .setSteals(apiTeamPlayerStatistic.getSteals()) //
+                .setTurnovers(apiTeamPlayerStatistic.getTurnovers()) //
+                .setPlayerName(apiTeamPlayerStatistic.getPlayerName()) //
+                .setPlayerNumber(apiTeamPlayerStatistic.getPlayerNumber()) //
+                .setPlayerImageUrl(apiTeamPlayerStatistic.getPlayerImageUrl()) //
+                .setBlocks(apiTeamPlayerStatistic.getBlocks()) //
+                .setFouls(apiTeamPlayerStatistic.getFouls())
                 .createPlayerStatistic();
     }
 
@@ -152,6 +153,7 @@ public class LiveGameMapper {
                 .setSteals(apiTeamStatistic.getSteals()) //
                 .setTurnovers(apiTeamStatistic.getTurnovers()) //
                 .setBlocks(apiTeamStatistic.getBlocks()) //
+                .setFouls(apiTeamStatistic.getFouls())
                 .createTeamStatistic();
     }
 

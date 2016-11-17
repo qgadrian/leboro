@@ -58,7 +58,7 @@ public class PlayerStatisticAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         switch (viewType) {
             case HEADER_TITLE:
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.live_game_player_statistic_team_header, parent, false);
+                        .inflate(R.layout.live_game_statistic_team_header, parent, false);
                 return new PlayerStatisticTitleViewHolder(view);
             default:
                 view = LayoutInflater.from(parent.getContext())

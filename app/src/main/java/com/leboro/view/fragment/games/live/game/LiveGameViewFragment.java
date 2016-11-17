@@ -17,6 +17,7 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.fragment.games.live.game.statistic.StatisticPageFragment;
 import com.leboro.view.fragment.games.live.game.statistic.playbyplay.PlayByPlayFragment;
 import com.leboro.view.fragment.games.live.game.statistic.player.PlayerStatisticFragment;
+import com.leboro.view.fragment.games.live.game.statistic.team.TeamStatisticFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.DataLoadedListener;
 
@@ -60,7 +61,8 @@ public class LiveGameViewFragment extends LoadableFragment implements SwipeRefre
         ViewPager viewPager = (ViewPager) mView.findViewById(R.id.gamesPagerContainer);
 
         liveGameViewAdapter = new LiveGameViewAdapter(getChildFragmentManager());
-        liveGameViewAdapter.addViewPageStatisticFragments(PlayByPlayFragment.class, PlayerStatisticFragment.class);
+        liveGameViewAdapter.addViewPageStatisticFragments(PlayByPlayFragment.class, PlayerStatisticFragment.class,
+                TeamStatisticFragment.class);
         viewPager.setAdapter(liveGameViewAdapter);
 
         liveGameDaySwipeLayout = (SwipeRefreshLayout) mView.findViewById(R.id.liveGameSwipeLayout); // TODO unify swipes

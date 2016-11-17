@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="64dp"
+  android:layout_height="wrap_content"
   >
 
         <com.android.volley.toolbox.NetworkImageView
@@ -16,7 +16,7 @@
     android:padding="@dimen/play_by_play_line_text_padding"
     android:textSize="@dimen/play_by_play_line_text_size"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:textColor="@color/textColor"
     android:id="@+id/playByPayRowText"
     android:layout_toRightOf="@+id/teamLogo"

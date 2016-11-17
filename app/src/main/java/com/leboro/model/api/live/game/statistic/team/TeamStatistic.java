@@ -26,7 +26,7 @@ public class TeamStatistic extends BaseStatistic {
             @JsonProperty("to") int turnovers,
             @JsonProperty("st") int steals,
             @JsonProperty("assist") int assists,
-            @JsonProperty("pf") int fouls,
+            @JsonProperty("fouls") int fouls,
             @JsonProperty("pts") int points,
             @JsonProperty("bs") int blocks
     ) {
