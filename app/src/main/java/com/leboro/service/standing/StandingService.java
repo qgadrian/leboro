@@ -6,6 +6,6 @@ public interface StandingService {
 
     void getPlayerStandings(int standingType, CacheDataLoadedListener dataLoadedListener);
 
-    int getPlayerStandingResourceId(int standingType);
+    int getPlayerStandingNameStringResourceId(int standingType);
 
 }

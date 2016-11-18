@@ -12,8 +12,8 @@ public class HTMLHelper {
         POINTS(0),
         GAME_VALUE(12, 1),
         TOTAL_REBOUNDS(1, 2),
-        OFFENSIVE_REBOUNDS(2, 3),
-        DEFENSIVE_REBOUNDS(3, 4),
+        DEFENSIVE_REBOUNDS(3, 3),
+        OFFENSIVE_REBOUNDS(2, 4),
         ASSISTS(4, 5),
         STEALS(5, 6),
         TURNOVERS(6, 7),
@@ -55,9 +55,9 @@ public class HTMLHelper {
                 case 2:
                     return TOTAL_REBOUNDS;
                 case 3:
-                    return OFFENSIVE_REBOUNDS;
-                case 4:
                     return DEFENSIVE_REBOUNDS;
+                case 4:
+                    return OFFENSIVE_REBOUNDS;
                 case 5:
                     return ASSISTS;
                 case 6:
@@ -77,6 +77,41 @@ public class HTMLHelper {
                 default:
                     Log.d(MainActivity.DEBUG_APP_NAME,
                             "Unrecognized standing position [" + position + "]. Returning points type");
+                    return POINTS;
+            }
+        }
+
+        public static StandingType getFromId(int id) {
+            switch (id) {
+                case 0:
+                    return POINTS;
+                case 1:
+                    return TOTAL_REBOUNDS;
+                case 2:
+                    return OFFENSIVE_REBOUNDS;
+                case 3:
+                    return DEFENSIVE_REBOUNDS;
+                case 4:
+                    return ASSISTS;
+                case 5:
+                    return STEALS;
+                case 6:
+                    return TURNOVERS;
+                case 7:
+                    return BLOCKS;
+                case 12:
+                    return GAME_VALUE;
+                //                case 9:
+                //                    return MINUTES_PER_GAME;
+                //                case 10:
+                //                    return FIELD_GOALS_PERCENTAGE;
+                //                case 11:
+                //                    return THREE_POINTER_PERCENTAGE;
+                //                case 12:
+                //                    return FREE_THROW_PERCENTAGE;
+                default:
+                    Log.d(MainActivity.DEBUG_APP_NAME,
+                            "Unrecognized standing id [" + id + "]. Returning points type");
                     return POINTS;
             }
         }

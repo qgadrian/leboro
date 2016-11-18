@@ -34,7 +34,7 @@ public class StandingPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         int pageTitleStringResourceId = ApplicationServiceProvider.getStandingService()
-                .getPlayerStandingResourceId(position);
+                .getPlayerStandingNameStringResourceId(position);
         return MainActivity.context.getString(pageTitleStringResourceId);
     }
 }

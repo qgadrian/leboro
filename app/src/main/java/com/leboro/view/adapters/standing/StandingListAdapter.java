@@ -70,7 +70,7 @@ public class StandingListAdapter extends ArrayAdapter<PlayerStanding> {
         PlayerStanding playerStanding = playerStandings.get(position);
 
         playerImage.setImageUrl(playerStanding.getImageUrl(), imageLoader);
-        playerStandingPosition.setText(String.valueOf(position));
+        playerStandingPosition.setText(String.valueOf(position + 1));
         playerStandingName.setText(playerStanding.getPlayerName());
         playerStandingTeamName.setText(playerStanding.getTeamName());
         playerStandingAverageValue

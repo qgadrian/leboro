@@ -55,25 +55,27 @@ public class StandingServiceImpl implements StandingService {
     }
 
     @Override
-    public int getPlayerStandingResourceId(int standingType) {
+    public int getPlayerStandingNameStringResourceId(int position) {
+        HTMLHelper.StandingType standingType = HTMLHelper.StandingType.getFromPosition(position);
+
         switch (standingType) {
-            case 0:
+            case POINTS:
                 return R.string.standing_points_bar_title;
-            case 1:
+            case GAME_VALUE:
                 return R.string.standing_game_value_bar_title;
-            case 2:
+            case TOTAL_REBOUNDS:
                 return R.string.standing_rebounds_bar_title;
-            case 3:
+            case DEFENSIVE_REBOUNDS:
                 return R.string.standing_offensive_rebounds_bar_title;
-            case 4:
+            case OFFENSIVE_REBOUNDS:
                 return R.string.standing_defensive_rebounds_bar_title;
-            case 5:
+            case ASSISTS:
                 return R.string.standing_assists_bar_title;
-            case 6:
+            case STEALS:
                 return R.string.standing_steals_bar_title;
-            case 7:
+            case TURNOVERS:
                 return R.string.standing_turnovers_bar_title;
-            case 8:
+            case BLOCKS:
                 return R.string.standing_blocks_bar_title;
             //                case 9:
             //                    return MINUTES_PER_GAME;
@@ -85,7 +87,7 @@ public class StandingServiceImpl implements StandingService {
             //                    return FREE_THROW_PERCENTAGE;
             default:
                 Log.d(MainActivity.DEBUG_APP_NAME,
-                        "Unrecognized standing type [" + standingType + "]. Returning points string");
+                        "Unrecognized standing position [" + position + "]. Returning points string");
                 return R.string.standing_points_bar_title;
         }
     }
