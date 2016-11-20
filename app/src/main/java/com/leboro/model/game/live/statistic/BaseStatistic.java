@@ -60,6 +60,9 @@ public abstract class BaseStatistic {
     }
 
     public String getFieldGoalPercentageString() {
+        if (fieldGoalsMade == 0) {
+            return "0%";
+        }
         return new DecimalFormat("0").format((fieldGoalsMade * 100) / fieldGoalsAttempted) + "%";
     }
 
@@ -72,6 +75,9 @@ public abstract class BaseStatistic {
     }
 
     public String getThreePointersPercentageString() {
+        if (threePointersAttempted == 0) {
+            return "0%";
+        }
         return new DecimalFormat("0").format((threePointersMade * 100) / threePointersAttempted) + "%";
     }
 
@@ -84,6 +90,9 @@ public abstract class BaseStatistic {
     }
 
     public String getFreeThrowPercentageString() {
+        if (freeThrowsMade == 0) {
+            return "0%";
+        }
         return new DecimalFormat("0").format((freeThrowsMade * 100) / freeThrowsAttempted) + "%";
     }
 
