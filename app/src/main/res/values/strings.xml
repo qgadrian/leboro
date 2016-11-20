@@ -9,6 +9,7 @@
   <!-- Toast messages -->
   <string name="toast_no_live_data_found">No live data available for this game yet</string>
   <string name="toast_game_not_started_yet">There is no data available for this game</string>
+  <string name="toast_error_parsing">Couldn\'t process the article. Try again and email me if the problem persist.</string>
 
   <!--Nav header-->
   <string name="navigation_header_title">LEB Oro league</string>
@@ -52,6 +53,11 @@
 
   <!-- News -->
   <string name="news_article_toolbar_title">News</string>
+
+  <!--News providers-->
+  <string name="news_provider_feb" translatable="false">Feb</string>
+  <string name="news_provider_cobrothers" translatable="false">COBrothers</string>
+  <string name="news_provider_zona_de_basquet" translatable="false">ZonaDeBasquet</string>
 
   <!--Standings-->
   <string name="standing_points_bar_title">Points</string>

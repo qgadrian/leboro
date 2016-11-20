@@ -2,6 +2,7 @@ package com.leboro.util.parser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.leboro.MainActivity;
 import com.leboro.util.Constants;
@@ -29,14 +30,24 @@ public class BaseParser {
     private static Document parseHTMLAndSaveToken(String htmlAsString, String viewStateTokenPropertyName, String
             eventValidationTokenPropertyName) {
         Document parsedHTML = BaseParser.parseHTMLData(htmlAsString);
-        String _VIEWSTATE = parsedHTML.getElementsByAttributeValue("name", "__VIEWSTATE").get(0).val();
-        String _EVENTVALIDATION = parsedHTML.getElementsByAttributeValue("name", "__EVENTVALIDATION").get(0).val();
-        SharedPreferences.Editor sharedPrefsEditor = SharedPreferencesHelper.getDefaultSharedPreferencesEditor
-                (MainActivity.context);
-        sharedPrefsEditor.putString(viewStateTokenPropertyName, _VIEWSTATE);
-        sharedPrefsEditor.putString(eventValidationTokenPropertyName, _EVENTVALIDATION);
-        sharedPrefsEditor.commit();
+        saveHTMLTokensIfPresent(parsedHTML, viewStateTokenPropertyName, eventValidationTokenPropertyName);
         return parsedHTML;
+    }
+
+    private static void saveHTMLTokensIfPresent(Document parsedHTML, String viewStateTokenPropertyName,
+            String eventValidationTokenPropertyName) {
+
+        Element viewStateElement = parsedHTML.getElementsByAttributeValue("name", "__VIEWSTATE").first();
+        Element eventValidationStateElement =
+                parsedHTML.getElementsByAttributeValue("name", "__EVENTVALIDATION").first();
+
+        if (viewStateElement != null && eventValidationStateElement != null) {
+            SharedPreferences.Editor sharedPrefsEditor = SharedPreferencesHelper.getDefaultSharedPreferencesEditor
+                    (MainActivity.context);
+            sharedPrefsEditor.putString(viewStateTokenPropertyName, viewStateElement.val());
+            sharedPrefsEditor.putString(eventValidationTokenPropertyName, eventValidationStateElement.val());
+            sharedPrefsEditor.commit();
+        }
     }
 
 }

@@ -24,7 +24,8 @@ public class StandingParser extends BaseParser {
             Elements standingsTables = htmlInfoData.getElementsByClass("tabla-estadistica");
 
             if (CollectionUtils.isEmpty(standingsTables)) {
-                Log.d(MainActivity.DEBUG_APP_NAME, "Couldnt found any standing table");
+                Log.e(MainActivity.DEBUG_APP_NAME, "Couldn't found any standing table");
+                Log.d(MainActivity.DEBUG_APP_NAME, "HTML: " + htmlInfoData.outerHtml());
                 return playerStandings;
             }
 

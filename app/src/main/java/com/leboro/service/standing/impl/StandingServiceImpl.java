@@ -1,7 +1,6 @@
 package com.leboro.service.standing.impl;
 
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -11,14 +10,17 @@ import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.model.api.standing.PlayerStanding;
 import com.leboro.service.standing.StandingService;
-import com.leboro.service.task.standing.StandingHttpPostAsyncTask;
+import com.leboro.service.task.http.standing.StandingHttpPostAsyncTask;
 import com.leboro.util.Constants;
 import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.util.html.HTMLHelper;
+import com.leboro.util.http.HttpRequestResponse;
 import com.leboro.util.parser.standing.StandingParser;
+import com.leboro.util.properties.PropertiesHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
 import android.util.Log;
+import cz.msebera.android.httpclient.HttpStatus;
 
 public class StandingServiceImpl implements StandingService {
 
@@ -28,15 +30,18 @@ public class StandingServiceImpl implements StandingService {
             @Override
             public void run() {
                 if (CollectionUtils.isEmpty(ApplicationCacheManager.getPlayerStandings(standingType))) {
-                    String standingsHTML = requestStandingData(standingType);
+                    String standingsHTML;
 
                     try {
+                        standingsHTML = requestStandingData(standingType);
                         parseHTMLAndSaveStandingsToCache(standingsHTML, standingType);
                     } catch (Exception e) {
+                        Log.e(MainActivity.DEBUG_APP_NAME, "Oh jezz, problems with the api again...");
+
                         HTMLHelper.clearStandingViewStateToken();
                         HTMLHelper.clearStandingEventValidationToken();
 
-                        Log.e(MainActivity.DEBUG_APP_NAME, "Oh jezz, problems with the api again...");
+                        standingsHTML = requestStandingData(standingType);
 
                         parseHTMLAndSaveStandingsToCache(standingsHTML, standingType);
                     }
@@ -93,11 +98,9 @@ public class StandingServiceImpl implements StandingService {
     }
 
     private String requestStandingData(int standingType) {
-        Properties properties = MainActivity.properties;
-
-        String url = properties.getProperty(Constants.STANDINGS_URL_PROP);
-        String acceptHeader = properties.getProperty(Constants.URL_HEADER_ACCEPT_PROP);
-        String referrerHeader = properties.getProperty(Constants.URL_HEADER_REFERRER_PROP);
+        String url = PropertiesHelper.getProperty(Constants.STANDINGS_URL_PROP);
+        String acceptHeader = PropertiesHelper.getProperty(Constants.URL_HEADER_ACCEPT_PROP);
+        String referrerHeader = PropertiesHelper.getProperty(Constants.URL_HEADER_REFERRER_PROP);
 
         StandingHttpPostAsyncTask httpPostAsyncTask = new StandingHttpPostAsyncTask();
         try {
@@ -107,7 +110,15 @@ public class StandingServiceImpl implements StandingService {
             StandingHttpPostAsyncTask.ResultTaskArgument resultTaskArgument = new StandingHttpPostAsyncTask.ResultTaskArgument
                     (url, acceptHeader, referrerHeader, standingType, serverEventValidationToken, serverViewState);
 
-            return httpPostAsyncTask.execute(resultTaskArgument).get();
+            HttpRequestResponse response = httpPostAsyncTask.execute(resultTaskArgument).get();
+
+            if (response.getResponseStatusCode() != HttpStatus.SC_OK) {
+                Log.d(MainActivity.DEBUG_APP_NAME, "Received and status error from standings request");
+                throw new RuntimeException("Error obtaining classification data");
+            }
+
+            return response.getResponseBody();
+
         } catch (InterruptedException | ExecutionException e) {
             Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }

@@ -12,6 +12,8 @@ import com.leboro.service.statistics.StatisticsService;
 import com.leboro.service.statistics.impl.StatisticsServiceImpl;
 import com.leboro.service.volley.NetworkImageLoaderService;
 import com.leboro.service.volley.impl.VolleyServiceImpl;
+import com.leboro.util.parser.news.feb.FebNewsParser;
+import com.leboro.util.parser.news.zonadebasquet.ZonaDeBasquetNewsParser;
 
 public class ApplicationServiceProvider {
 
@@ -26,6 +28,12 @@ public class ApplicationServiceProvider {
     private static GameService gameService;
 
     private static StandingService standingService;
+
+    // News providers parsers
+
+    private static FebNewsParser febNewsParser;
+
+    private static ZonaDeBasquetNewsParser zonaDeBasquetNewsParser;
 
     public static NetworkImageLoaderService getNetworkImageLoaderService() {
         if (networkImageLoaderService == null) {
@@ -73,5 +81,21 @@ public class ApplicationServiceProvider {
         }
 
         return standingService;
+    }
+
+    public static FebNewsParser getFebNewsParser() {
+        if (febNewsParser == null) {
+            febNewsParser = new FebNewsParser();
+        }
+
+        return febNewsParser;
+    }
+
+    public static ZonaDeBasquetNewsParser getZonaDeBasquetNewsParser() {
+        if (zonaDeBasquetNewsParser == null) {
+            zonaDeBasquetNewsParser = new ZonaDeBasquetNewsParser();
+        }
+
+        return zonaDeBasquetNewsParser;
     }
 }

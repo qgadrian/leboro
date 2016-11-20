@@ -9,6 +9,7 @@ import com.leboro.model.api.live.overview.LiveData;
 import com.leboro.model.api.live.overview.LiveGameOverview;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
+import com.leboro.util.properties.PropertiesHelper;
 import com.leboro.view.adapters.games.live.LiveGameDayOverviewAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
@@ -39,7 +40,7 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
     protected Handler mHandler = new Handler();
 
     private final static int SYNC_INTERVAL = Integer
-            .valueOf(MainActivity.properties.getProperty(Constants.DEFAULT_REFRESH_TIME_PROP));
+            .valueOf(PropertiesHelper.getProperty(Constants.DEFAULT_REFRESH_TIME_PROP));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

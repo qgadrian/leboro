@@ -9,6 +9,7 @@ import com.leboro.R;
 import com.leboro.model.classification.Position;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
+import com.leboro.util.properties.PropertiesHelper;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -46,13 +47,13 @@ public class ClassificationListAdapter extends ArrayAdapter<Position> {
         this.resource = resource;
         this.positions = positions;
         this.numberOfDirectAscendTeams = Integer
-                .valueOf(MainActivity.properties.getProperty(Constants.COMPETITION_DIRECT_ASCEND_TEAMS_PROP));
+                .valueOf(PropertiesHelper.getProperty(Constants.COMPETITION_DIRECT_ASCEND_TEAMS_PROP));
         this.numberOfPlayoffsTeams = Integer
-                .valueOf(MainActivity.properties.getProperty(Constants.COMPETITION_PLAYOFF_TEAMS_PROP));
+                .valueOf(PropertiesHelper.getProperty(Constants.COMPETITION_PLAYOFF_TEAMS_PROP));
         this.numberOfDescendPlayoffsTeams = Integer
-                .valueOf(MainActivity.properties.getProperty(Constants.COMPETITION_PLAYOFF_DESCEND_TEAMS_PROP));
+                .valueOf(PropertiesHelper.getProperty(Constants.COMPETITION_PLAYOFF_DESCEND_TEAMS_PROP));
         this.numberOfDirectDescendTeams = Integer
-                .valueOf(MainActivity.properties.getProperty(Constants.COMPETITION_DIRECT_DESCEND_TEAMS_PROP));
+                .valueOf(PropertiesHelper.getProperty(Constants.COMPETITION_DIRECT_DESCEND_TEAMS_PROP));
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

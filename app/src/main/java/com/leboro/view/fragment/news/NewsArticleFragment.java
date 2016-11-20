@@ -1,11 +1,10 @@
 package com.leboro.view.fragment.news;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.model.news.News;
 import com.leboro.service.ApplicationServiceProvider;
@@ -15,6 +14,7 @@ import com.leboro.view.listeners.DataLoadedListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +46,19 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
                 @Override
                 public void run() {
                     updateNewsImage();
-                    ApplicationServiceProvider.getNewsService().fillNewsWithArticleText(news, dataLoadedListener);
+
+                    switch (news.getKind()) {
+                        case FEB_ARTICLE:
+                            ApplicationServiceProvider.getFebNewsParser()
+                                    .fillNewsWithArticleText(news, dataLoadedListener);
+                            break;
+                        case ZONA_DE_BASQUET_ARTICLE:
+                            ApplicationServiceProvider.getZonaDeBasquetNewsParser()
+                                    .fillNewsWithArticleText(news, dataLoadedListener);
+                            break;
+                        default:
+                            Log.e(MainActivity.DEBUG_APP_NAME, "Unrecognized news kind [" + news.getKind() + "]");
+                    }
                 }
             });
         }

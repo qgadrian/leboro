@@ -3,17 +3,19 @@ package com.leboro.view.fragment.news;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.model.news.News;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.util.Constants;
 import com.leboro.util.cache.ApplicationCacheManager;
+import com.leboro.util.properties.PropertiesHelper;
 import com.leboro.view.adapters.news.NewsListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
-import com.leboro.view.listeners.DataLoadedListener;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import static com.leboro.util.Constants.SECRET_YOUTUBE_API;
 
 public class NewsFragment extends LoadableFragment implements CacheDataLoadedListener {
 
@@ -45,7 +49,7 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
             AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
                 @Override
                 public void run() {
-                    ApplicationServiceProvider.getNewsService().getNews(dataLoadedListener);
+                    ApplicationServiceProvider.getNewsService().getAllProviderNews(dataLoadedListener);
                 }
             });
         }
@@ -71,14 +75,16 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 News news = newsListAdapter.getItem(position);
-                Bundle bundle = new Bundle(1);
-                bundle.putParcelable(Constants.BUNDLE_ARG_NEWS, news);
 
-                NewsArticleFragment newsArticleFragment = new NewsArticleFragment();
-                newsArticleFragment.setArguments(bundle);
-
-                ((MainActivity) getActivity())
-                        .fragmentTransition(newsArticleFragment, getString(R.string.news_article_toolbar_title));
+                switch (news.getKind()) {
+                    case FEB_ARTICLE:
+                    case ZONA_DE_BASQUET_ARTICLE:
+                        openNewsArticle(news);
+                        break;
+                    case COBROTHERS_YOUTUBE_VIDEO:
+                        openYoutubeVideo(news);
+                        break;
+                }
             }
         });
     }
@@ -102,5 +108,23 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
+    }
+
+    private void openNewsArticle(News news) {
+        Bundle bundle = new Bundle(1);
+        bundle.putParcelable(Constants.BUNDLE_ARG_NEWS, news);
+
+        NewsArticleFragment newsArticleFragment = new NewsArticleFragment();
+        newsArticleFragment.setArguments(bundle);
+
+        ((MainActivity) getActivity())
+                .fragmentTransition(newsArticleFragment, getString(R.string.news_article_toolbar_title));
+    }
+
+    private void openYoutubeVideo(News news) {
+        Intent intent = YouTubeStandalonePlayer
+                .createVideoIntent(getActivity(), PropertiesHelper.getSecretProperty(SECRET_YOUTUBE_API),
+                        news.getArticleUrl(), 0, true, false);
+        startActivity(intent);
     }
 }

@@ -9,7 +9,9 @@ public class Constants {
 
     public final static String CLASSIFICATION_URL_PROP = "application.statistic.classification.url";
 
-    public final static String NEWS_URL_PROP = "application.news.url";
+    public final static String NEWS_YOUTUBE_ITEMS = "application.news.youtube_snippet_items";
+
+    public final static String NEWS_MAX_VIDEOS_PER_PLAYLIST = "application.news.max_videos_per_playlist";
 
     public final static String STANDINGS_URL_PROP = "application.standings.url";
 
@@ -39,6 +41,12 @@ public class Constants {
 
     public static final String GAME_DATE_FORMAT_PROP = "application.statistic.games.ui_date_format";
 
+    // Secrets
+
+    public final static String SECRETS_PROPERTIES_FILENAME = "secrets.properties";
+
+    public static final String SECRET_YOUTUBE_API = "youtube.api";
+
     //Bundle keys
     public static final String BUNDLE_ARG_NEWS = "NewsArg";
 
@@ -52,5 +60,13 @@ public class Constants {
     public final static String STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
 
     public static final String STANDING_VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
+
+    // News services providers
+
+    public final static String NEWS_COBROTHERS_PLAYLIST = "application.news.youtube_cobrothers_playlist";
+
+    public final static String NEWS_FEB_URL = "application.news.feb_url";
+
+    public final static String NEWS_ZONA_DE_BASQUET_URL = "application.news.zonadebasquet_url";
 
 }

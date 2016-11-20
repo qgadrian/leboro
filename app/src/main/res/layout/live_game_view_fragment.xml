@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@color/colorPrimaryDark"
-        android:textColor="@android:color/white"
+        android:textColor="@color/newTitleTextColor"
         android:padding="@dimen/games_day_tab_title_padding"
         />
     </android.support.v4.view.ViewPager>

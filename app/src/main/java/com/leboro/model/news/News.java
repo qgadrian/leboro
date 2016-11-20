@@ -1,12 +1,59 @@
 package com.leboro.model.news;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.leboro.R;
+import com.leboro.util.properties.PropertiesHelper;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-public class News implements Parcelable {
+import static com.leboro.util.Constants.NEWS_COBROTHERS_PLAYLIST;
+
+public class News implements Parcelable, Comparable<News> {
+
+    public enum NewsKind {
+        FEB_ARTICLE(R.string.news_provider_feb, R.color.news_provider_feb_color),
+        COBROTHERS_YOUTUBE_VIDEO(R.string.news_provider_cobrothers, R.color.news_provider_cobrothers_color,
+                PropertiesHelper.getProperty(NEWS_COBROTHERS_PLAYLIST)),
+        ZONA_DE_BASQUET_ARTICLE(R.string.news_provider_zona_de_basquet, R.color.news_provider_zona_de_basquet_color);
+
+        private final int providerNameResourceId;
+
+        private final int providerLabelBackgroundColorId;
+
+        private final String providerValue;
+
+        NewsKind(int providerNameResourceId, int providerLabelBackgroundColorId) {
+            this.providerNameResourceId = providerNameResourceId;
+            this.providerLabelBackgroundColorId = providerLabelBackgroundColorId;
+            this.providerValue = null;
+        }
+
+        NewsKind(int providerNameResourceId, int providerLabelBackgroundColorId, String providerValue) {
+            this.providerNameResourceId = providerNameResourceId;
+            this.providerLabelBackgroundColorId = providerLabelBackgroundColorId;
+            this.providerValue = providerValue;
+        }
+
+        public int getProviderNameResourceId() {
+            return providerNameResourceId;
+        }
+
+        public String getProviderValue() {
+            return providerValue;
+        }
+
+        public int getProviderLabelBackgroundColorId() {
+            return providerLabelBackgroundColorId;
+        }
+    }
+
+    private Date publicationDate;
 
     private String title;
 
@@ -18,11 +65,16 @@ public class News implements Parcelable {
 
     private String articleText;
 
-    public News(String title, String description, String imageUrl, String articleUrl) {
+    private final NewsKind kind;
+
+    public News(String title, String description, String imageUrl, String articleUrl, NewsKind kind,
+            Date publicationDate) {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.articleUrl = articleUrl;
+        this.kind = kind;
+        this.publicationDate = publicationDate;
     }
 
     protected News(Parcel in) {
@@ -31,6 +83,8 @@ public class News implements Parcelable {
         imageUrl = in.readString();
         articleUrl = in.readString();
         articleText = in.readString();
+        kind = NewsKind.valueOf(in.readString());
+        publicationDate = new Date(in.readLong());
     }
 
     public static final Creator<News> CREATOR = new Creator<News>() {
@@ -85,6 +139,14 @@ public class News implements Parcelable {
         this.articleText = articleText;
     }
 
+    public NewsKind getKind() {
+        return kind;
+    }
+
+    public Date getPublicationDate() {
+        return publicationDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -103,6 +165,8 @@ public class News implements Parcelable {
                 .append(imageUrl, news.imageUrl)
                 .append(articleUrl, news.articleUrl)
                 .append(articleText, news.articleText)
+                .append(kind, news.kind)
+                .append(publicationDate, news.publicationDate)
                 .isEquals();
     }
 
@@ -114,6 +178,8 @@ public class News implements Parcelable {
                 .append(imageUrl)
                 .append(articleUrl)
                 .append(articleText)
+                .append(kind)
+                .append(publicationDate)
                 .toHashCode();
     }
 
@@ -129,5 +195,23 @@ public class News implements Parcelable {
         dest.writeString(imageUrl);
         dest.writeString(articleUrl);
         dest.writeString(articleText);
+        dest.writeString(kind.name());
+        dest.writeLong(publicationDate.getTime());
+    }
+
+    // TODO: Check why RelfectionCompare is returng 0 for dates, until then...
+    @Override
+    public int compareTo(@NonNull News another) {
+        if (publicationDate == null) {
+            if (another.publicationDate == null) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else if (another.publicationDate == null) {
+            return -1;
+        } else {
+            return another.publicationDate.compareTo(publicationDate);
+        }
     }
 }

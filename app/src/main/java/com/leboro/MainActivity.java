@@ -9,6 +9,7 @@ import com.leboro.view.fragment.FragmentDisplayableActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.multidex.MultiDex;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +22,8 @@ public class MainActivity extends FragmentDisplayableActivity
 
     public static Properties properties;
 
+    public static Properties secretProperties;
+
     public static Context context;
 
     public static String DEBUG_APP_NAME;
@@ -28,6 +31,8 @@ public class MainActivity extends FragmentDisplayableActivity
     private void initStaticData() {
         properties = PropertiesHelper.getProperties(getApplicationContext(), Constants
                 .PROPERTIES_FILENAME);
+        secretProperties = PropertiesHelper.getProperties(getApplicationContext(), Constants
+                .SECRETS_PROPERTIES_FILENAME);
         context = getApplicationContext();
         DEBUG_APP_NAME = properties.getProperty(Constants.DEBUG_APP_PROP);
     }
@@ -103,6 +108,14 @@ public class MainActivity extends FragmentDisplayableActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         displayView(item.getItemId());
         return true;
+    }
+
+    // To enable jsoup library compability with multidex
+    // See: http://stackoverflow.com/questions/26609734/how-to-enable-multidexing-with-the-new-android-multidex-support-library/27284064#27284064
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
 }

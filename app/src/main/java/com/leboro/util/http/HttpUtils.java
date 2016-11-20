@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.concurrent.ExecutionException;
 
 import com.leboro.MainActivity;
-import com.leboro.service.task.gameday.GameDayHttpGetAsyncTask;
+import com.leboro.service.task.http.HttpGetAsyncTask;
 
 import android.util.Log;
 import cz.msebera.android.httpclient.HttpResponse;
@@ -15,9 +15,9 @@ import cz.msebera.android.httpclient.client.methods.HttpRequestBase;
 public class HttpUtils {
 
     public static String doAsyncGet(HttpRequestBase requestBase) {
-        GameDayHttpGetAsyncTask gameDayHttpGetAsyncTask = new GameDayHttpGetAsyncTask();
+        HttpGetAsyncTask httpGetAsyncTask = new HttpGetAsyncTask();
         try {
-            return gameDayHttpGetAsyncTask.execute(requestBase).get();
+            return httpGetAsyncTask.execute(requestBase).get();
         } catch (InterruptedException | ExecutionException e) {
             Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
         }
@@ -25,11 +25,13 @@ public class HttpUtils {
         return null;
     }
 
-    public static String doRequest(HttpClient client, HttpRequestBase request) {
+    public static HttpRequestResponse doRequest(HttpClient client, HttpRequestBase request) {
         StringBuilder result = new StringBuilder();
 
+        HttpResponse response;
+
         try {
-            HttpResponse response = client.execute(request);
+            response = client.execute(request);
 
             BufferedReader rd = new BufferedReader(
                     new InputStreamReader(response.getEntity().getContent()));
@@ -39,10 +41,13 @@ public class HttpUtils {
                 result.append(line);
             }
         } catch (Exception e) {
-            Log.d(MainActivity.DEBUG_APP_NAME, "Error obtaining classification data", e);
+            Log.d(MainActivity.DEBUG_APP_NAME, "Error doing request", e);
+            throw new RuntimeException("Error doing request");
         }
 
-        return result.toString();
+        int responseCode = response.getStatusLine().getStatusCode();
+
+        return new HttpRequestResponse(responseCode, result.toString());
     }
 
 }
