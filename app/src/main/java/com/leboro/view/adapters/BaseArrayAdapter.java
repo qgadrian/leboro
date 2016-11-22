@@ -2,17 +2,11 @@ package com.leboro.view.adapters;
 
 import java.util.List;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.leboro.service.ApplicationServiceProvider;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
 
 public abstract class BaseArrayAdapter<T> extends ArrayAdapter<T> {
-
-    protected final static ImageLoader imageLoader = ApplicationServiceProvider.getNetworkImageLoaderService()
-            .getImageLoader();
 
     protected static LayoutInflater inflater = null;
 

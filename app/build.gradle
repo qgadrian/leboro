@@ -8,8 +8,8 @@ android {
         applicationId "com.leboro"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 19
-        versionName "1.8.3"
+        versionCode 20
+        versionName "1.8.4"
 
         multiDexEnabled true
     }
@@ -73,7 +73,4 @@ dependencies {
 
     // progress bar
     compile 'com.pnikosis:materialish-progress:1.7'
-
-    // parallax recycler
-    compile 'com.github.kanytu:android-parallax-recyclerview:v1.7'
 }
