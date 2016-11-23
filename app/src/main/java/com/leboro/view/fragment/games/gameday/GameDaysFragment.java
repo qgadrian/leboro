@@ -10,7 +10,6 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -24,7 +23,7 @@ public class GameDaysFragment extends LoadableFragment implements CacheDataLoade
 
     private View mView;
 
-    protected static Integer lastPosition = null;
+    private static Integer lastPosition = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,12 +33,12 @@ public class GameDaysFragment extends LoadableFragment implements CacheDataLoade
         initializeListeners();
 
         final CacheDataLoadedListener dataLoadedListener = this;
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 ApplicationServiceProvider.getStatisticsService().getDefaultGameDayInfo(dataLoadedListener);
             }
-        });
+        }).start();
 
         return mView;
     }

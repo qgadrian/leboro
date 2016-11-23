@@ -42,15 +42,18 @@ public class NewsServiceImpl implements NewsService {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<News> febNews = getFEBNews();
-                List<News> youtubeNews = getYoutubeVideos(COBROTHERS_YOUTUBE_VIDEO);
-                List<News> zonaDeBasquetNews = getZonaDeBasquetNews();
+                if (!ApplicationCacheManager.hasNewsData()) {
+                    List<News> febNews = getFEBNews();
+                    List<News> youtubeNews = getYoutubeVideos(COBROTHERS_YOUTUBE_VIDEO);
+                    List<News> zonaDeBasquetNews = getZonaDeBasquetNews();
 
-                List<News> newsToCache = ListUtils.getJoinedLists(febNews, youtubeNews, zonaDeBasquetNews);
+                    List<News> newsToCache = ListUtils.getJoinedLists(febNews, youtubeNews, zonaDeBasquetNews);
 
-                Collections.sort(newsToCache);
+                    Collections.sort(newsToCache);
 
-                ApplicationCacheManager.setNews(newsToCache);
+                    ApplicationCacheManager.setNews(newsToCache);
+                }
+
                 dataLoadedListener.onDataLoadedIntoCache();
             }
         }).start();

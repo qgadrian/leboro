@@ -8,7 +8,6 @@ import com.leboro.view.adapters.standing.StandingPagerAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -32,13 +31,13 @@ public class StandingsFragment extends LoadableFragment implements CacheDataLoad
         initializeListeners();
 
         final CacheDataLoadedListener dataLoadedListener = this;
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 ApplicationServiceProvider.getStandingService().getPlayerStandings(HTMLHelper.StandingType
                         .POINTS.getId(), dataLoadedListener);
             }
-        });
+        }).start();
 
         return mView;
     }

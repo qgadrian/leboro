@@ -11,7 +11,6 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.helper.news.NewsHelper;
 import com.leboro.view.listeners.DataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.util.Log;
@@ -38,7 +37,7 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
             initializeViews(news);
         } else {
             final DataLoadedListener<News> dataLoadedListener = this;
-            AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     updateNewsImage();
@@ -56,7 +55,7 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
                             Log.e(MainActivity.DEBUG_APP_NAME, "Unrecognized news kind [" + news.getKind() + "]");
                     }
                 }
-            });
+            }).start();
         }
         
         return mView;

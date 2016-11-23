@@ -15,7 +15,6 @@ import com.leboro.view.adapters.standing.StandingListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,13 +71,13 @@ public class StandingFragment extends LoadableFragment implements CacheDataLoade
 
             if (CollectionUtils.isEmpty(playerStandings)) {
                 final CacheDataLoadedListener dataLoadedListener = this;
-                AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+                new Thread(new Runnable() {
                     @Override
                     public void run() {
                         ApplicationServiceProvider.getStandingService()
                                 .getPlayerStandings(standingType.getId(), dataLoadedListener);
                     }
-                });
+                }).start();
             } else {
                 refreshView(standingType.getPosition());
             }

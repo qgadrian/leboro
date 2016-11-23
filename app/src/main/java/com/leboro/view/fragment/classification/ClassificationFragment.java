@@ -1,7 +1,6 @@
 package com.leboro.view.fragment.classification;
 
 import java.util.Collections;
-import java.util.List;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -11,9 +10,7 @@ import com.leboro.util.cache.ApplicationCacheManager;
 import com.leboro.view.adapters.classification.ClassificationListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
-import com.leboro.view.listeners.DataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,12 +39,12 @@ public class ClassificationFragment extends LoadableFragment implements CacheDat
 
     private void initializeData() {
         final CacheDataLoadedListener dataLoadedListener = this;
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 ApplicationServiceProvider.getStatisticsService().getClassification(dataLoadedListener);
             }
-        });
+        }).start();
 
     }
 

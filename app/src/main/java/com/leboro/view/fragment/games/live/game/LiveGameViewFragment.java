@@ -21,7 +21,6 @@ import com.leboro.view.fragment.games.live.game.statistic.team.TeamStatisticFrag
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.DataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -122,8 +121,8 @@ public class LiveGameViewFragment extends LoadableFragment implements SwipeRefre
     }
 
     private void updateLiveData() {
-        final DataLoadedListener dataLoadedListener = this;
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+        final DataLoadedListener<LiveGame> dataLoadedListener = this;
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -132,7 +131,7 @@ public class LiveGameViewFragment extends LoadableFragment implements SwipeRefre
                     dataLoadedListener.onDataLoaded(null);
                 }
             }
-        });
+        }).start();
     }
 
     @Override

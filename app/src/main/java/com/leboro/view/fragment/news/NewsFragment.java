@@ -1,6 +1,5 @@
 package com.leboro.view.fragment.news;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
@@ -16,7 +15,6 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,25 +38,40 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.news_fragment, container, false);
 
-        if (ApplicationCacheManager.hasNewsData()) {
-            news = ApplicationCacheManager.getNews();
-            removeLoadingLayoutAndShowResource(mView, R.id.newsListView);
-        } else {
-            news = Collections.emptyList();
-            final CacheDataLoadedListener dataLoadedListener = this;
-            AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+        final CacheDataLoadedListener dataLoadedListener = this;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ApplicationServiceProvider.getNewsService().getAllProviderNews(dataLoadedListener);
+            }
+        }).start();
+
+        return mView;
+    }
+
+    @Override
+    public void onDataLoadedIntoCache() {
+        this.news = ApplicationCacheManager.getNews();
+
+        if (isVisible()) {
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ApplicationServiceProvider.getNewsService().getAllProviderNews(dataLoadedListener);
+                    initializeViews();
+                    initializeAdapters();
+                    initializeEvents();
+
+                    removeLoadingLayoutAndShowResource(mView, R.id.newsListView);
+                    newsListAdapter.updateDataAndNotify(news);
                 }
             });
         }
+    }
 
-        initializeViews();
-        initializeAdapters();
-        initializeEvents();
-
-        return mView;
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
     }
 
     private void initializeViews() {
@@ -87,27 +100,6 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
                 }
             }
         });
-    }
-
-    @Override
-    public void onDataLoadedIntoCache() {
-        this.news = ApplicationCacheManager.getNews();
-
-        if (isVisible()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    removeLoadingLayoutAndShowResource(mView, R.id.newsListView);
-                    newsListAdapter.updateDataAndNotify(news);
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
     }
 
     private void openNewsArticle(News news) {

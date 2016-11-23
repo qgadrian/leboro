@@ -19,7 +19,6 @@ import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,14 +81,14 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
 
             if (CollectionUtils.isEmpty(gameDay.getGames())) {
                 final CacheDataLoadedListener dataLoadedListener = this;
-                AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+                new Thread(new Runnable() {
                     @Override
                     public void run() {
                         ApplicationServiceProvider.getStatisticsService()
                                 .refreshGameInfo(gameDay.getId(), gameDayInfo.getKind(), gameDayInfo.getSeason(),
                                         dataLoadedListener);
                     }
-                });
+                }).start();
             } else {
                 refreshView();
             }
