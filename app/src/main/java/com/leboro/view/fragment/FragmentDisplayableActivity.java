@@ -69,6 +69,12 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
+            ft.setCustomAnimations(
+                    android.R.anim.fade_in,
+                    android.R.anim.fade_out,
+                    android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+
             ft.replace(R.id.content_frame, fragment);
 
             if (!isFirstFragment) {
