@@ -1,9 +1,11 @@
 package com.leboro.view.fragment.standings;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.collections4.CollectionUtils;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -15,12 +17,10 @@ import com.leboro.view.adapters.standing.StandingListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 public class StandingFragment extends LoadableFragment implements CacheDataLoadedListener {
 
@@ -45,7 +45,7 @@ public class StandingFragment extends LoadableFragment implements CacheDataLoade
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.standing_fragment, container, false);
         pagerPosition = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
 
@@ -102,14 +102,12 @@ public class StandingFragment extends LoadableFragment implements CacheDataLoade
 
     @Override
     public void onDataLoadedIntoCache() {
-        if (isVisible()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    refreshView(pagerPosition);
-                }
-            });
-        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshView(pagerPosition);
+            }
+        });
     }
 
     @Override

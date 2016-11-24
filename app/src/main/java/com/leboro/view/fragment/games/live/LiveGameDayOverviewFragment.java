@@ -1,7 +1,14 @@
 package com.leboro.view.fragment.games.live;
 
-import java.util.Collections;
-import java.util.List;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -15,18 +22,11 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.listeners.DataLoadedListener;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import java.util.Collections;
+import java.util.List;
 
 public class LiveGameDayOverviewFragment extends LoadableFragment implements SwipeRefreshLayout.OnRefreshListener,
-                                                                             DataLoadedListener<LiveData> {
+        DataLoadedListener<LiveData> {
 
     private View mView;
 
@@ -107,19 +107,17 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
 
     @Override
     public void onDataLoaded(final LiveData liveData) {
-        if (isVisible()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(MainActivity.DEBUG_APP_NAME, "Updated live games data");
-                    liveGameDaySwipeLayout.setRefreshing(false);
-                    removeLoadingLayoutAndShowResource(mView, liveGameDaySwipeLayout);
-                    List<LiveGameOverview> gameDayOverviews = liveData.getOverview().getCompetitions().get(0)
-                            .getOverviews();
-                    liveGameDayOverviewAdapter.updateDataAndNotify(gameDayOverviews);
-                }
-            });
-        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(MainActivity.DEBUG_APP_NAME, "Updated live games data");
+                liveGameDaySwipeLayout.setRefreshing(false);
+                removeLoadingLayoutAndShowResource(mView, liveGameDaySwipeLayout);
+                List<LiveGameOverview> gameDayOverviews = liveData.getOverview().getCompetitions().get(0)
+                        .getOverviews();
+                liveGameDayOverviewAdapter.updateDataAndNotify(gameDayOverviews);
+            }
+        });
     }
 
     @Override

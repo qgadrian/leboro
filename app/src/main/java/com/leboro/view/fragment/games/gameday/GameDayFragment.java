@@ -1,8 +1,13 @@
 package com.leboro.view.fragment.games.gameday;
 
-import java.util.Collections;
-
-import org.apache.commons.collections4.CollectionUtils;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -19,14 +24,9 @@ import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.Collections;
 
 public class GameDayFragment extends LoadableFragment implements CacheDataLoadedListener {
 
@@ -55,7 +55,7 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.game_day_fragment, container, false);
         pagerPosition = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
 
@@ -136,14 +136,12 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
 
     @Override
     public void onDataLoadedIntoCache() {
-        if (isVisible()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    refreshView();
-                }
-            });
-        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshView();
+            }
+        });
     }
 
     @Override

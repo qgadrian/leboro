@@ -1,6 +1,12 @@
 package com.leboro.view.fragment.news;
 
-import org.apache.commons.lang3.StringUtils;
+import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -11,13 +17,7 @@ import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.helper.news.NewsHelper;
 import com.leboro.view.listeners.DataLoadedListener;
 
-import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView;
+import org.apache.commons.lang3.StringUtils;
 
 public class NewsArticleFragment extends LoadableFragment implements DataLoadedListener<News> {
 
@@ -57,21 +57,19 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
                 }
             }).start();
         }
-        
+
         return mView;
     }
 
     @Override
     public void onDataLoaded(final News news) {
-        if (isVisible()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    removeLoadingLayoutAndShowResource(mView, R.id.newsArticleContentLayout);
-                    initializeViews(news);
-                }
-            });
-        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                removeLoadingLayoutAndShowResource(mView, R.id.newsArticleContentLayout);
+                initializeViews(news);
+            }
+        });
     }
 
     private void initializeViews(News news) {

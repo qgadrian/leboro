@@ -1,6 +1,10 @@
 package com.leboro.view.fragment.classification;
 
-import java.util.Collections;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -11,11 +15,7 @@ import com.leboro.view.adapters.classification.ClassificationListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
+import java.util.Collections;
 
 public class ClassificationFragment extends LoadableFragment implements CacheDataLoadedListener {
 
@@ -27,7 +27,7 @@ public class ClassificationFragment extends LoadableFragment implements CacheDat
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.classification_fragment, container, false);
 
         initializeViews();
@@ -61,16 +61,14 @@ public class ClassificationFragment extends LoadableFragment implements CacheDat
 
     @Override
     public void onDataLoadedIntoCache() {
-        if (isVisible()) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    removeLoadingLayout(mView);
-                    classificationListAdapter.updateDataAndNotifify(ApplicationCacheManager.getClassification());
-                    classificationListView.setVisibility(View.VISIBLE);
-                }
-            });
-        }
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                removeLoadingLayout(mView);
+                classificationListAdapter.updateDataAndNotifify(ApplicationCacheManager.getClassification());
+                classificationListView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
