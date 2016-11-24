@@ -1,10 +1,6 @@
 package com.leboro.service.statistics.impl;
 
-import java.util.concurrent.ExecutionException;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import android.util.Log;
 
 import com.leboro.MainActivity;
 import com.leboro.model.api.live.overview.LiveData;
@@ -25,7 +21,12 @@ import com.leboro.view.helper.http.HttpHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 import com.leboro.view.listeners.DataLoadedListener;
 
-import android.util.Log;
+import org.apache.commons.collections4.CollectionUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.util.concurrent.ExecutionException;
+
 import cz.msebera.android.httpclient.client.methods.HttpGet;
 
 public class StatisticsServiceImpl implements StatisticsService {
@@ -69,17 +70,17 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public void refreshGameInfo(final int gameDayId, final int kind, final int season,
-            final CacheDataLoadedListener dataLoadedListener) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
-                Document gameDayInfoData = BaseParser.parseHTMLAndSaveTokenData(gameDaysHTML);
-                GameDay gameDay = GameParser.getGameDay(gameDayInfoData);
-                ApplicationCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
-                dataLoadedListener.onDataLoadedIntoCache();
-            }
-        }).start();
+                                final CacheDataLoadedListener dataLoadedListener) {
+        String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
+        try {
+            Document gameDayInfoData = BaseParser.parseHTMLAndSaveTokenData(gameDaysHTML);
+            GameDay gameDay = GameParser.getGameDay(gameDayInfoData);
+            ApplicationCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
+            dataLoadedListener.onDataLoadedIntoCache();
+        } catch (Exception e) {
+            Log.e(MainActivity.DEBUG_APP_NAME, "Error getting game day info", e);
+            throw e;
+        }
     }
 
     @Override

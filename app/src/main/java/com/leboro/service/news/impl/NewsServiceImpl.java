@@ -1,9 +1,6 @@
 package com.leboro.service.news.impl;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import android.util.Log;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpRequest;
@@ -27,7 +24,10 @@ import com.leboro.util.properties.PropertiesHelper;
 import com.leboro.view.helper.http.HttpHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.util.Log;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import static com.leboro.model.news.News.NewsKind.COBROTHERS_YOUTUBE_VIDEO;
 import static com.leboro.util.Constants.NEWS_MAX_VIDEOS_PER_PLAYLIST;
@@ -39,24 +39,19 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void getAllProviderNews(final CacheDataLoadedListener dataLoadedListener) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (!ApplicationCacheManager.hasNewsData()) {
-                    List<News> febNews = getFEBNews();
-                    List<News> youtubeNews = getYoutubeVideos(COBROTHERS_YOUTUBE_VIDEO);
-                    List<News> zonaDeBasquetNews = getZonaDeBasquetNews();
+        if (!ApplicationCacheManager.hasNewsData()) {
+            List<News> febNews = getFEBNews();
+            List<News> youtubeNews = getYoutubeVideos(COBROTHERS_YOUTUBE_VIDEO);
+            List<News> zonaDeBasquetNews = getZonaDeBasquetNews();
 
-                    List<News> newsToCache = ListUtils.getJoinedLists(febNews, youtubeNews, zonaDeBasquetNews);
+            List<News> newsToCache = ListUtils.getJoinedLists(febNews, youtubeNews, zonaDeBasquetNews);
 
-                    Collections.sort(newsToCache);
+            Collections.sort(newsToCache);
 
-                    ApplicationCacheManager.setNews(newsToCache);
-                }
+            ApplicationCacheManager.setNews(newsToCache);
+        }
 
-                dataLoadedListener.onDataLoadedIntoCache();
-            }
-        }).start();
+        dataLoadedListener.onDataLoadedIntoCache();
     }
 
     @Override
@@ -85,7 +80,8 @@ public class NewsServiceImpl implements NewsService {
                 YouTube youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(),
                         new HttpRequestInitializer() {
                             @Override
-                            public void initialize(HttpRequest hr) throws IOException {}
+                            public void initialize(HttpRequest hr) throws IOException {
+                            }
                         }).setApplicationName(MainActivity.context.getString(R.string.app_name)).build();
 
                 List<PlaylistItem> playlistItemList = Lists.newArrayList();
@@ -111,7 +107,8 @@ public class NewsServiceImpl implements NewsService {
                     playlistItemList.addAll(playlistItemResult.getItems());
 
                     nextToken = playlistItemResult.getNextPageToken();
-                } while (nextToken != null && maxYoutubeVideosPerPlaylist > playlistItemList.size());
+                }
+                while (nextToken != null && maxYoutubeVideosPerPlaylist > playlistItemList.size());
 
                 Log.d(MainActivity.DEBUG_APP_NAME, "Done retrieving videos");
 

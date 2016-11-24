@@ -1,10 +1,6 @@
 package com.leboro.service.standing.impl;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.jsoup.nodes.Document;
+import android.util.Log;
 
 import com.leboro.MainActivity;
 import com.leboro.R;
@@ -19,37 +15,37 @@ import com.leboro.util.parser.standing.StandingParser;
 import com.leboro.util.properties.PropertiesHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.util.Log;
+import org.apache.commons.collections4.CollectionUtils;
+import org.jsoup.nodes.Document;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import cz.msebera.android.httpclient.HttpStatus;
 
 public class StandingServiceImpl implements StandingService {
 
     @Override
     public void getPlayerStandings(final int standingType, final CacheDataLoadedListener dataLoadedListener) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (CollectionUtils.isEmpty(ApplicationCacheManager.getPlayerStandings(standingType))) {
-                    String standingsHTML;
+        if (CollectionUtils.isEmpty(ApplicationCacheManager.getPlayerStandings(standingType))) {
+            String standingsHTML;
 
-                    try {
-                        standingsHTML = requestStandingData(standingType);
-                        parseHTMLAndSaveStandingsToCache(standingsHTML, standingType);
-                    } catch (Exception e) {
-                        Log.e(MainActivity.DEBUG_APP_NAME, "Oh jezz, problems with the api again...");
+            try {
+                standingsHTML = requestStandingData(standingType);
+                parseHTMLAndSaveStandingsToCache(standingsHTML, standingType);
+            } catch (Exception e) {
+                Log.e(MainActivity.DEBUG_APP_NAME, "Oh jezz, problems with the api again...");
 
-                        HTMLHelper.clearStandingViewStateToken();
-                        HTMLHelper.clearStandingEventValidationToken();
+                HTMLHelper.clearStandingViewStateToken();
+                HTMLHelper.clearStandingEventValidationToken();
 
-                        standingsHTML = requestStandingData(standingType);
+                standingsHTML = requestStandingData(standingType);
 
-                        parseHTMLAndSaveStandingsToCache(standingsHTML, standingType);
-                    }
-                }
-
-                dataLoadedListener.onDataLoadedIntoCache();
+                parseHTMLAndSaveStandingsToCache(standingsHTML, standingType);
             }
-        }).start();
+        }
+
+        dataLoadedListener.onDataLoadedIntoCache();
     }
 
     private void parseHTMLAndSaveStandingsToCache(String standingsHTML, int standingType) {

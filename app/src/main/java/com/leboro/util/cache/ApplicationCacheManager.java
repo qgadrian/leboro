@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.leboro.MainActivity;
 import com.leboro.model.api.standing.PlayerStanding;
 import com.leboro.model.classification.Position;
 import com.leboro.model.game.GameDay;
@@ -12,6 +13,8 @@ import com.leboro.model.game.GameDayInfo;
 import com.leboro.model.game.GameInfo;
 import com.leboro.model.news.News;
 import com.leboro.util.exception.InstanceNotFoundException;
+
+import android.util.Log;
 
 public class ApplicationCacheManager {
 
@@ -37,19 +40,13 @@ public class ApplicationCacheManager {
 
     // Avoid overriding game day info by forcing manually clear the data
     public static synchronized void setClassification(List<Position> newPositions) {
-        if (positions == null) {
-            positions = newPositions;
-        } else {
-            throw new IllegalStateException("Already assigned classification info, you have to clear the data first.");
-        }
+        Log.d(MainActivity.DEBUG_APP_NAME, "WARNING: Already assigned classification info.");
+        positions = newPositions;
     }
 
     public static synchronized void setNews(List<News> newNews) {
-        if (news == null) {
-            news = newNews;
-        } else {
-            throw new IllegalStateException("Already assigned news info, you have to clear the data first.");
-        }
+        Log.d(MainActivity.DEBUG_APP_NAME, "WARNING: Already assigned news info, you have to clear the data first.");
+        news = newNews;
     }
 
     public static synchronized void clearClassificationInfo() {
@@ -79,11 +76,9 @@ public class ApplicationCacheManager {
 
     // Avoid overriding game day info by forcing manually clear the data
     public static synchronized void setGameDayInfo(GameDayInfo newGameDayInfo) {
-        if (gameDayInfo == null) {
-            gameDayInfo = newGameDayInfo;
-        } else {
-            throw new IllegalStateException("Already assigned game day info, you have to clear the data first.");
-        }
+        Log.d(MainActivity.DEBUG_APP_NAME,
+                "WARNING: Already assigned game day info, you have to clear the data first.");
+        gameDayInfo = newGameDayInfo;
     }
 
     public static synchronized void clearGameDayInfo() {

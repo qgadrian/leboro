@@ -1,6 +1,12 @@
 package com.leboro.view.fragment.news;
 
-import java.util.List;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.leboro.MainActivity;
@@ -14,13 +20,7 @@ import com.leboro.view.adapters.news.NewsListAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.listeners.CacheDataLoadedListener;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import java.util.List;
 
 import static com.leboro.util.Constants.SECRET_YOUTUBE_API;
 
@@ -34,11 +34,12 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
 
     private List<News> news;
 
+    private final CacheDataLoadedListener dataLoadedListener = this;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.news_fragment, container, false);
 
-        final CacheDataLoadedListener dataLoadedListener = this;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -53,14 +54,11 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
     public void onDataLoadedIntoCache() {
         this.news = ApplicationCacheManager.getNews();
 
-        if (isVisible()) {
+        if (isAdded()) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    initializeViews();
-                    initializeAdapters();
-                    initializeEvents();
-
+                    initializeView();
                     removeLoadingLayoutAndShowResource(mView, R.id.newsListView);
                     newsListAdapter.updateDataAndNotify(news);
                 }
@@ -72,6 +70,12 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
+    }
+
+    private void initializeView() {
+        initializeViews();
+        initializeAdapters();
+        initializeEvents();
     }
 
     private void initializeViews() {

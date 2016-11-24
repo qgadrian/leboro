@@ -1,5 +1,12 @@
 package com.leboro.view.fragment.games.gameday;
 
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.service.ApplicationServiceProvider;
@@ -9,13 +16,6 @@ import com.leboro.view.adapters.games.GamesPagerAdapter;
 import com.leboro.view.fragment.LoadableFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.CacheDataLoadedListener;
-
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class GameDaysFragment extends LoadableFragment implements CacheDataLoadedListener {
 
@@ -43,28 +43,10 @@ public class GameDaysFragment extends LoadableFragment implements CacheDataLoade
         return mView;
     }
 
-    private void initializeListeners() {
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                lastPosition = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
     @Override
     public void onDataLoadedIntoCache() {
-        if (isVisible()) {
+        Log.d(MainActivity.DEBUG_APP_NAME, "Data loaded into cache [" + GameDaysFragment.class.getSimpleName() + "]");
+
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -85,7 +67,25 @@ public class GameDaysFragment extends LoadableFragment implements CacheDataLoade
                     }
                 }
             });
-        }
+    }
+
+    private void initializeListeners() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                lastPosition = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 }
