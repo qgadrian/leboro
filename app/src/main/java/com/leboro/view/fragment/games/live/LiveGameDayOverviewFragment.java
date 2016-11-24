@@ -50,6 +50,48 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
         return mView;
     }
 
+    @Override
+    public void onRefresh() {
+        updateLiveData();
+        liveGameDaySwipeLayout.setRefreshing(true);
+    }
+
+
+    @Override
+    protected void updateActionAndNavigationBar() {
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_live_games));
+        MainActivity.navigationView.setCheckedItem(R.id.nav_live_games);
+    }
+
+    protected Runnable mSyncTask = new Runnable() {
+        @Override
+        public void run() {
+            updateLiveData();
+            mHandler.postDelayed(mSyncTask, SYNC_INTERVAL);
+        }
+    };
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mHandler.removeCallbacks(mSyncTask);
+    }
+
+    @Override
+    public void onDataLoaded(final LiveData liveData) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(MainActivity.DEBUG_APP_NAME, "Updated live games data");
+                liveGameDaySwipeLayout.setRefreshing(false);
+                removeLoadingLayoutAndShowResource(mView, liveGameDaySwipeLayout);
+                List<LiveGameOverview> gameDayOverviews = liveData.getOverview().getCompetitions().get(0)
+                        .getOverviews();
+                liveGameDayOverviewAdapter.updateDataAndNotify(gameDayOverviews);
+            }
+        });
+    }
+
     private void initializeListeners() {
         gamesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,46 +125,5 @@ public class LiveGameDayOverviewFragment extends LoadableFragment implements Swi
 
     private void updateLiveData() {
         ApplicationServiceProvider.getStatisticsService().getLiveData(this);
-    }
-
-    @Override
-    public void onRefresh() {
-        updateLiveData();
-        liveGameDaySwipeLayout.setRefreshing(true);
-    }
-
-    protected Runnable mSyncTask = new Runnable() {
-        @Override
-        public void run() {
-            updateLiveData();
-            mHandler.postDelayed(mSyncTask, SYNC_INTERVAL);
-        }
-    };
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mHandler.removeCallbacks(mSyncTask);
-    }
-
-    @Override
-    public void onDataLoaded(final LiveData liveData) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(MainActivity.DEBUG_APP_NAME, "Updated live games data");
-                liveGameDaySwipeLayout.setRefreshing(false);
-                removeLoadingLayoutAndShowResource(mView, liveGameDaySwipeLayout);
-                List<LiveGameOverview> gameDayOverviews = liveData.getOverview().getCompetitions().get(0)
-                        .getOverviews();
-                liveGameDayOverviewAdapter.updateDataAndNotify(gameDayOverviews);
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_live_games));
     }
 }

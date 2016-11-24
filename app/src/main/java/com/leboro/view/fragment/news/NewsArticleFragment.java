@@ -72,6 +72,12 @@ public class NewsArticleFragment extends LoadableFragment implements DataLoadedL
         });
     }
 
+    @Override
+    protected void updateActionAndNavigationBar() {
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
+        MainActivity.navigationView.setCheckedItem(R.id.nav_news);
+    }
+
     private void initializeViews(News news) {
         updateCollapseViewTitle(news);
         updateNewsImage();

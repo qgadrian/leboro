@@ -69,6 +69,12 @@ public class GameDaysFragment extends LoadableFragment implements CacheDataLoade
             });
     }
 
+
+    @Override
+    protected void updateActionAndNavigationBar() {
+        MainActivity.navigationView.setCheckedItem(R.id.nav_games);
+    }
+
     private void initializeListeners() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -87,5 +93,4 @@ public class GameDaysFragment extends LoadableFragment implements CacheDataLoade
             }
         });
     }
-
 }

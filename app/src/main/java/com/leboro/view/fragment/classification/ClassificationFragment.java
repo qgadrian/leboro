@@ -37,6 +37,24 @@ public class ClassificationFragment extends LoadableFragment implements CacheDat
         return mView;
     }
 
+    @Override
+    protected void updateActionAndNavigationBar() {
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_classification));
+        MainActivity.navigationView.setCheckedItem(R.id.nav_classification);
+    }
+
+    @Override
+    public void onDataLoadedIntoCache() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                removeLoadingLayout(mView);
+                classificationListAdapter.updateDataAndNotifify(ApplicationCacheManager.getClassification());
+                classificationListView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
     private void initializeData() {
         final CacheDataLoadedListener dataLoadedListener = this;
         new Thread(new Runnable() {
@@ -57,23 +75,5 @@ public class ClassificationFragment extends LoadableFragment implements CacheDat
                 new ClassificationListAdapter(mView.getContext(), R.layout.classification_list_view_row,
                         Collections.<Position>emptyList());
         classificationListView.setAdapter(classificationListAdapter);
-    }
-
-    @Override
-    public void onDataLoadedIntoCache() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                removeLoadingLayout(mView);
-                classificationListAdapter.updateDataAndNotifify(ApplicationCacheManager.getClassification());
-                classificationListView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_classification));
     }
 }

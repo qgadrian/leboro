@@ -1,7 +1,5 @@
 package com.leboro.view.fragment.games.live;
 
-import com.leboro.R;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-public class LiveGameVideoFragment extends Fragment {
+import com.leboro.R;
 
-    private View mView;
+public class LiveGameVideoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.live_game_video_fragment, container, false);
+        View mView = inflater.inflate(R.layout.live_game_video_fragment, container, false);
 
         //        String url = "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"; // your URL here
         //        String url = "rtmp://cloud2live.it2.com/meytel-user-4-live01/_definst_&file=toro&provider=rtmp"; // your URL here

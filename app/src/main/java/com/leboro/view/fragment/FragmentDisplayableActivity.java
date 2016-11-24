@@ -1,5 +1,13 @@
 package com.leboro.view.fragment;
 
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+
+import com.leboro.MainActivity;
 import com.leboro.R;
 import com.leboro.view.fragment.classification.ClassificationFragment;
 import com.leboro.view.fragment.games.gameday.GameDaysFragment;
@@ -7,13 +15,6 @@ import com.leboro.view.fragment.games.live.LiveGameDayOverviewFragment;
 import com.leboro.view.fragment.games.live.LiveGameVideoFragment;
 import com.leboro.view.fragment.news.NewsFragment;
 import com.leboro.view.fragment.standings.StandingsFragment;
-
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 
 public abstract class FragmentDisplayableActivity extends AppCompatActivity {
 
@@ -55,6 +56,8 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
                 shareApplication();
                 break;
         }
+
+        MainActivity.navigationView.setCheckedItem(viewId);
 
         if (currentFragmentResourceId == null || !currentFragmentResourceId.equals(viewId)) {
             currentFragmentResourceId = viewId;

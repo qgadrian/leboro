@@ -1,11 +1,19 @@
 package com.leboro.view.fragment;
 
-import com.leboro.R;
-
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.leboro.R;
+
 public abstract class LoadableFragment extends Fragment {
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateActionAndNavigationBar();
+    }
+
+    protected abstract void updateActionAndNavigationBar();
 
     protected void removeLoadingLayout(View contextView) {
         removeLoadingLayout(contextView, null, R.id.loadingFragment);

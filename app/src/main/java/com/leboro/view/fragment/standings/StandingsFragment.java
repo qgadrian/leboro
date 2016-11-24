@@ -84,4 +84,8 @@ public class StandingsFragment extends LoadableFragment implements CacheDataLoad
         });
     }
 
+    @Override
+    protected void updateActionAndNavigationBar() {
+        MainActivity.navigationView.setCheckedItem(R.id.nav_standings);
+    }
 }

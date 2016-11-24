@@ -67,9 +67,9 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    protected void updateActionAndNavigationBar() {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_news));
+        MainActivity.navigationView.setCheckedItem(R.id.nav_news);
     }
 
     private void initializeView() {
@@ -123,4 +123,5 @@ public class NewsFragment extends LoadableFragment implements CacheDataLoadedLis
                         news.getArticleUrl(), 0, true, false);
         startActivity(intent);
     }
+
 }

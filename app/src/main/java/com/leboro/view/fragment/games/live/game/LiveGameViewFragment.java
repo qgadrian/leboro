@@ -1,5 +1,15 @@
 package com.leboro.view.fragment.games.live.game;
 
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.leboro.MainActivity;
@@ -20,16 +30,6 @@ import com.leboro.view.fragment.games.live.game.statistic.player.PlayerStatistic
 import com.leboro.view.fragment.games.live.game.statistic.team.TeamStatisticFragment;
 import com.leboro.view.helper.gameday.GameDayHelper;
 import com.leboro.view.listeners.DataLoadedListener;
-
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class LiveGameViewFragment extends LoadableFragment implements SwipeRefreshLayout.OnRefreshListener,
                                                                       DataLoadedListener<LiveGame> {
@@ -54,6 +54,33 @@ public class LiveGameViewFragment extends LoadableFragment implements SwipeRefre
         updateLiveData();
 
         return mView;
+    }
+
+    @Override
+    public void onDataLoaded(final LiveGame data) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(MainActivity.DEBUG_APP_NAME, "Updated live game data for game [" + gameId + "]");
+                liveGameDaySwipeLayout.setRefreshing(false);
+                LiveGameViewFragment.data = data;
+                for (StatisticPageFragment statisticPageFragment : liveGameViewAdapter.getInstancedFragments()) {
+                    statisticPageFragment.notifySetDataChanged();
+                }
+                refreshView();
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        updateLiveData();
+        liveGameDaySwipeLayout.setRefreshing(true);
+    }
+
+    @Override
+    protected void updateActionAndNavigationBar() {
+        MainActivity.navigationView.setCheckedItem(R.id.nav_live_games);
     }
 
     private void initializeViews() {
@@ -132,27 +159,5 @@ public class LiveGameViewFragment extends LoadableFragment implements SwipeRefre
                 }
             }
         }).start();
-    }
-
-    @Override
-    public void onDataLoaded(final LiveGame data) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(MainActivity.DEBUG_APP_NAME, "Updated live game data for game [" + gameId + "]");
-                liveGameDaySwipeLayout.setRefreshing(false);
-                LiveGameViewFragment.data = data;
-                for (StatisticPageFragment statisticPageFragment : liveGameViewAdapter.getInstancedFragments()) {
-                    statisticPageFragment.notifySetDataChanged();
-                }
-                refreshView();
-            }
-        });
-    }
-
-    @Override
-    public void onRefresh() {
-        updateLiveData();
-        liveGameDaySwipeLayout.setRefreshing(true);
     }
 }

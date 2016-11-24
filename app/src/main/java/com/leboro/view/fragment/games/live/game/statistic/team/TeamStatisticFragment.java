@@ -1,5 +1,12 @@
 package com.leboro.view.fragment.games.live.game.statistic.team;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.leboro.MainActivity;
@@ -8,13 +15,6 @@ import com.leboro.model.game.live.statistic.team.TeamStatistic;
 import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.fragment.games.live.game.statistic.StatisticPageFragment;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class TeamStatisticFragment extends StatisticPageFragment {
 
@@ -44,6 +44,11 @@ public class TeamStatisticFragment extends StatisticPageFragment {
         } else {
             Log.d(MainActivity.DEBUG_APP_NAME, "Trying to update data on null adapter");
         }
+    }
+
+    @Override
+    protected void updateActionAndNavigationBar() {
+        MainActivity.navigationView.setCheckedItem(R.id.nav_live_games);
     }
 
     private void buildTeamsStatisticsView() {

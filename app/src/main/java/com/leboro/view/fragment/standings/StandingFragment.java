@@ -111,8 +111,8 @@ public class StandingFragment extends LoadableFragment implements CacheDataLoade
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    protected void updateActionAndNavigationBar() {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_standings));
+        MainActivity.navigationView.setCheckedItem(R.id.nav_standings);
     }
 }

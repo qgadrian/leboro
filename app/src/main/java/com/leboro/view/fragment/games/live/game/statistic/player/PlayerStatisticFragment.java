@@ -1,16 +1,5 @@
 package com.leboro.view.fragment.games.live.game.statistic.player;
 
-import java.util.List;
-
-import org.apache.commons.collections4.ListUtils;
-
-import com.leboro.MainActivity;
-import com.leboro.R;
-import com.leboro.model.game.live.statistic.player.PlayerStatistic;
-import com.leboro.view.adapters.games.live.game.player.PlayerStatisticAdapter;
-import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
-import com.leboro.view.fragment.games.live.game.statistic.StatisticPageFragment;
-
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.leboro.MainActivity;
+import com.leboro.R;
+import com.leboro.model.game.live.statistic.player.PlayerStatistic;
+import com.leboro.view.adapters.games.live.game.player.PlayerStatisticAdapter;
+import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
+import com.leboro.view.fragment.games.live.game.statistic.StatisticPageFragment;
+
+import org.apache.commons.collections4.ListUtils;
+
+import java.util.List;
 
 public class PlayerStatisticFragment extends StatisticPageFragment {
 
@@ -56,6 +56,11 @@ public class PlayerStatisticFragment extends StatisticPageFragment {
         } else {
             Log.d(MainActivity.DEBUG_APP_NAME, "Trying to update data on null adapter");
         }
+    }
+
+    @Override
+    protected void updateActionAndNavigationBar() {
+        MainActivity.navigationView.setCheckedItem(R.id.nav_live_games);
     }
 
     private static PlayerStatisticAdapter buildPlayerStatisticAdapter() {

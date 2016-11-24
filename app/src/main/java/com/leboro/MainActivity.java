@@ -1,11 +1,5 @@
 package com.leboro;
 
-import java.util.Properties;
-
-import com.leboro.util.Constants;
-import com.leboro.util.properties.PropertiesHelper;
-import com.leboro.view.fragment.FragmentDisplayableActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.leboro.util.Constants;
+import com.leboro.util.properties.PropertiesHelper;
+import com.leboro.view.fragment.FragmentDisplayableActivity;
+
+import java.util.Properties;
+
 public class MainActivity extends FragmentDisplayableActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,6 +27,8 @@ public class MainActivity extends FragmentDisplayableActivity
     public static Context context;
 
     public static String DEBUG_APP_NAME;
+
+    public static NavigationView navigationView;
 
     private void initStaticData() {
         properties = PropertiesHelper.getProperties(getApplicationContext(), Constants
@@ -60,7 +62,7 @@ public class MainActivity extends FragmentDisplayableActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         displayView(R.id.nav_news);
@@ -116,6 +118,10 @@ public class MainActivity extends FragmentDisplayableActivity
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    public Context getContext() {
+        return this.getBaseContext();
     }
 
 }

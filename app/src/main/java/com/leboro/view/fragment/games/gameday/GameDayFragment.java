@@ -66,6 +66,23 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
         return mView;
     }
 
+    @Override
+    public void onDataLoadedIntoCache() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshView();
+            }
+        });
+    }
+
+
+    @Override
+    protected void updateActionAndNavigationBar() {
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_games));
+        MainActivity.navigationView.setCheckedItem(R.id.nav_games);
+    }
+
     private void initializeAdapter() {
         gamesList = (ListView) mView.findViewById(R.id.gameDayListView);
         gameDayListAdapter = new GameDayListAdapter(mView.getContext(), R.layout.game_day_row, Collections
@@ -132,21 +149,5 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
         } catch (InstanceNotFoundException e) {
             Log.e(MainActivity.DEBUG_APP_NAME, "Could not get game info for game day", e);
         }
-    }
-
-    @Override
-    public void onDataLoadedIntoCache() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                refreshView();
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.navigation_drawer_games));
     }
 }
