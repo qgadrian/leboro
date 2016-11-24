@@ -21,6 +21,7 @@
   <string name="navigation_drawer_news">News</string>
   <string name="navigation_drawer_live_games">Live games</string>
   <string name="navigation_drawer_games">Games</string>
+  <string name="navigation_drawer_teams_info">Rosters</string>
   <string name="navigation_live_video_game">Live game video</string>
   <string name="navigation_game_view_title" translatable="false">%2$s - %1$s</string>
   <string name="navigation_menu_social_group">Social</string>
@@ -83,6 +84,9 @@
   <string name="statistic_header_fouls">PF</string>
   <string name="statistic_header_blocks">BLK</string>
   <string name="statistic_header_value">%1$d/%2$d</string>
+
+  <!--Team info-->
+  <string name="team_roster_height">%d centimeters</string>
 
   <plurals name="statistic_highlight_points">
     <item quantity="one">%d point</item>

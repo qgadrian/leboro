@@ -29,4 +29,6 @@
   <dimen name="player_statistic_normal_padding">2dp</dimen>
   <dimen name="player_statistic_team_header_text_size">24sp</dimen>
   <dimen name="team_statistic_image_padding">8dp</dimen>
+  <dimen name="team_info_list_padding">16dp</dimen>
+  <dimen name="team_roster_image_padding">4dp</dimen>
 </resources>

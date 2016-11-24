@@ -79,6 +79,7 @@ dependencies {
     // Commons
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-collections4:4.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
     //    compile 'com.google.guava:guava-collections:r03' // Guava library isnt compatible with the youtube one
     compile 'cz.msebera.android:httpclient:4.4.1.2'
 

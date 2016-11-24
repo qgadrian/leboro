@@ -10,6 +10,8 @@ import com.leboro.service.standing.StandingService;
 import com.leboro.service.standing.impl.StandingServiceImpl;
 import com.leboro.service.statistics.StatisticsService;
 import com.leboro.service.statistics.impl.StatisticsServiceImpl;
+import com.leboro.service.teaminfo.TeamInfoService;
+import com.leboro.service.teaminfo.impl.TeamInfoServiceImpl;
 import com.leboro.service.volley.NetworkImageLoaderService;
 import com.leboro.service.volley.impl.VolleyServiceImpl;
 import com.leboro.util.parser.news.feb.FebNewsParser;
@@ -28,6 +30,8 @@ public class ApplicationServiceProvider {
     private static GameService gameService;
 
     private static StandingService standingService;
+
+    private static TeamInfoService teamInfoService;
 
     // News providers parsers
 
@@ -82,6 +86,16 @@ public class ApplicationServiceProvider {
 
         return standingService;
     }
+
+    public static TeamInfoService getTeamInfoService() {
+        if (teamInfoService == null) {
+            teamInfoService = new TeamInfoServiceImpl();
+        }
+
+        return teamInfoService;
+    }
+
+//    News providers info
 
     public static FebNewsParser getFebNewsParser() {
         if (febNewsParser == null) {

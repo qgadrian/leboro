@@ -1,7 +1,6 @@
 package com.leboro.util.cache;
 
-import java.util.List;
-import java.util.Map;
+import android.util.Log;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -12,9 +11,12 @@ import com.leboro.model.game.GameDay;
 import com.leboro.model.game.GameDayInfo;
 import com.leboro.model.game.GameInfo;
 import com.leboro.model.news.News;
+import com.leboro.model.team.info.TeamInfo;
 import com.leboro.util.exception.InstanceNotFoundException;
 
-import android.util.Log;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 public class ApplicationCacheManager {
 
@@ -25,6 +27,8 @@ public class ApplicationCacheManager {
     private static List<News> news;
 
     private static Map<Integer, List<PlayerStanding>> playerStandingsByStandingType;
+
+    private static List<TeamInfo> teamInfos;
 
     public static boolean hasGameDayCacheData() {
         return gameDayInfo != null;
@@ -49,6 +53,10 @@ public class ApplicationCacheManager {
         news = newNews;
     }
 
+    public static List<News> getNews() {
+        return news;
+    }
+
     public static synchronized void clearClassificationInfo() {
         positions = null;
     }
@@ -60,10 +68,6 @@ public class ApplicationCacheManager {
     // todo: bad practice
     public static List<Position> getClassification() {
         return positions;
-    }
-
-    public static List<News> getNews() {
-        return news;
     }
 
     public static GameDayInfo getGameDayInfo() throws InstanceNotFoundException {
@@ -120,6 +124,42 @@ public class ApplicationCacheManager {
         }
         List<PlayerStanding> playerStandings = playerStandingsByStandingType.get(standingType);
         return playerStandings == null ? Lists.<PlayerStanding>newArrayList() : playerStandings;
+    }
+
+    public static boolean hasTeamsInfoCacheData() {
+        return teamInfos != null;
+    }
+
+    public static synchronized void setTeamInfos(List<TeamInfo> newTeamInfos) {
+        Log.d(MainActivity.DEBUG_APP_NAME, "WARNING: Already assigned team infos.");
+        teamInfos = newTeamInfos;
+    }
+
+    public static synchronized void updateTeamInfo(TeamInfo updatedTeamInfo) {
+        ListIterator<TeamInfo> teamInfoIterator = teamInfos.listIterator();
+
+        while (teamInfoIterator.hasNext()) {
+            TeamInfo teamInfo = teamInfoIterator.next();
+
+            if (teamInfo.getId() == updatedTeamInfo.getId()) {
+                teamInfoIterator.set(updatedTeamInfo);
+            }
+        }
+    }
+
+    public static List<TeamInfo> getTeamInfos() {
+        return teamInfos;
+    }
+
+    public static TeamInfo getTeamInfo(long id) throws InstanceNotFoundException {
+        for(TeamInfo teamInfo : teamInfos) {
+            if (teamInfo.getId() == id) {
+                return teamInfo;
+            }
+        }
+
+        Log.d(MainActivity.DEBUG_APP_NAME, "Team info not found [" + id + "]");
+        throw new InstanceNotFoundException((int) id, "Team info not found");
     }
 
 }

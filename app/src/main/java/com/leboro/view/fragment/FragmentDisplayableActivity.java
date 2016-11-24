@@ -15,6 +15,7 @@ import com.leboro.view.fragment.games.live.LiveGameDayOverviewFragment;
 import com.leboro.view.fragment.games.live.LiveGameVideoFragment;
 import com.leboro.view.fragment.news.NewsFragment;
 import com.leboro.view.fragment.standings.StandingsFragment;
+import com.leboro.view.fragment.teaminfo.TeamsInfoFragment;
 
 public abstract class FragmentDisplayableActivity extends AppCompatActivity {
 
@@ -47,6 +48,10 @@ public abstract class FragmentDisplayableActivity extends AppCompatActivity {
             case R.id.nav_standings:
                 fragment = new StandingsFragment();
                 title = getString(R.string.navigation_drawer_standings);
+                break;
+            case R.id.nav_teams_info:
+                fragment = new TeamsInfoFragment();
+                title = getString(R.string.navigation_drawer_teams_info);
                 break;
             case R.id.live_game_video_layout:
                 fragment = new LiveGameVideoFragment();

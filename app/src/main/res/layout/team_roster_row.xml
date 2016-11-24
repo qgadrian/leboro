@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:minHeight="84dp"
+  android:orientation="horizontal"
+  android:gravity="center"
+  android:paddingTop="@dimen/team_info_list_padding"
+  android:paddingBottom="@dimen/team_info_list_padding"
+  >
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/teamRosterImage"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:padding="@dimen/classification_logo_padding"
+        android:layout_gravity="left"
+        />
+
+  </LinearLayout>
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <TextView
+      android:id="@+id/teamRosterName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:textSize="20sp"
+      android:textColor="@color/textColor"
+      android:text="some team"
+      />
+
+    <TextView
+      android:id="@+id/teamRosterPosition"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:textSize="17sp"
+      android:textColor="@color/textColor"
+      android:text="position"
+      />
+
+    <TextView
+          android:id="@+id/teamInfoRosterCountry"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:text="country"
+          android:textSize="12sp"
+          android:textColor="@color/secondaryTextColor"
+          />
+
+    <TextView
+        android:id="@+id/teamInfoRosterHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="height"
+        android:textSize="12sp"
+        android:textColor="@color/secondaryTextColor"
+        />
+
+  </LinearLayout>
+
+</LinearLayout>

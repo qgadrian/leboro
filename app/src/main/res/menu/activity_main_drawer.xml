@@ -18,6 +18,10 @@
           android:id="@+id/nav_classification"
           android:icon="@drawable/ic_reorder_black_24dp"
           android:title="@string/navigation_drawer_classification" />
+        <item
+          android:id="@+id/nav_teams_info"
+          android:icon="@drawable/ic_people_black_24dp"
+          android:title="@string/navigation_drawer_teams_info" />
       <item
         android:id="@+id/nav_standings"
         android:icon="@drawable/ic_account_balance_black_48dp"

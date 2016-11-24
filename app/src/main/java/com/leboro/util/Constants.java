@@ -17,6 +17,12 @@ public class Constants {
 
     public final static String GAMES_URL_PROP = "application.statistic.games.url";
 
+    public final static String TEAMS_INFO_URL_PROP = "application.team_info.url";
+
+    public final static String TEAM_ROSTER_URL_PROP = "application.team_info.roster.url";
+
+    public final static String TEAM_ROSTER_IMAGE_PREFIX_URL_PROP = "application.team_info.roster_image_prefix.url";
+
     public final static String URL_HEADER_REFERRER_PROP = "application.url.header.referrer";
 
     public final static String URL_HEADER_ACCEPT_PROP = "application.url.header.accept";
@@ -49,6 +55,8 @@ public class Constants {
 
     //Bundle keys
     public static final String BUNDLE_ARG_NEWS = "NewsArg";
+
+    public static final String BUNDLE_ARG_TEAM_INFO = "TeamInfo";
 
     public static final String BUNDLE_ARG_GAME_ID = "GameId";
 
