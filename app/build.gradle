@@ -8,7 +8,7 @@ android {
         applicationId "com.leboro"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 24
+        versionCode 25
         versionName "1.9.0"
 
         multiDexEnabled true
@@ -79,10 +79,11 @@ dependencies {
     // Commons
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-collections4:4.0'
-    compile group: 'commons-io', name: 'commons-io', version: '2.5'
-    //    compile 'com.google.guava:guava-collections:r03' // Guava library isnt compatible with the youtube one
     compile 'cz.msebera.android:httpclient:4.4.1.2'
 
     // progress bar
     compile 'com.pnikosis:materialish-progress:1.7'
+
+    // circle network image view
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }

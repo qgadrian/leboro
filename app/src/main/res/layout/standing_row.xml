@@ -5,7 +5,10 @@
   android:minHeight="84dp"
   android:orientation="vertical"
   android:gravity="center"
-  android:paddingTop="@dimen/games_list_padding_top"
+              android:paddingLeft="@dimen/list_row_horizontal_padding"
+              android:paddingRight="@dimen/list_row_horizontal_padding"
+              android:paddingTop="@dimen/list_row_vertical_padding"
+              android:paddingBottom="@dimen/list_row_vertical_padding"
   >
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,52 +17,46 @@
     android:orientation="horizontal"
     >
 
-    <TextView
-      android:id="@+id/playerStandingPosition"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:gravity="center"
-      android:textStyle="bold"
-      android:textSize="18sp"
-      android:textColor="@color/gameScore"
-      android:paddingLeft="2dp"
-      android:paddingStart="2dp"
-      android:paddingRight="2dp"
-      android:paddingEnd="2dp"
-      />
-
-    <com.android.volley.toolbox.NetworkImageView
+    <com.leboro.view.image.CircularNetworkImageView
       android:id="@+id/playerStandingImage"
-      android:layout_width="84dp"
-      android:layout_height="84dp"
+      android:layout_width="@dimen/standing_player_image_size"
+      android:layout_height="@dimen/standing_player_image_size"
+      android:padding="@dimen/standing_player_image_padding"
       android:layout_gravity="start"
-      android:padding="@dimen/classification_logo_padding"
       />
 
     <RelativeLayout
       android:layout_width="0dp"
       android:layout_height="match_parent"
       android:orientation="vertical"
-      android:layout_weight="2"
+      android:layout_weight="3"
+      android:paddingStart="@dimen/standing_left_padding"
+      android:paddingLeft="@dimen/standing_left_padding"
+      android:paddingRight="@dimen/standing_right_padding"
+      android:paddingEnd="@dimen/standing_right_padding"
       >
       <TextView
         android:id="@+id/playerStandingName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="12sp"
         android:textColor="@color/gameScore"
+        android:paddingBottom="4dp"
         />
 
       <TextView
         android:id="@+id/playerStandingTeamName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="start|center"
         android:textSize="12sp"
         android:textColor="@color/gameScore"
-        />
+        android:layout_below="@+id/playerStandingName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+          />
     </RelativeLayout>
 
     <LinearLayout

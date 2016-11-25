@@ -5,8 +5,10 @@
   android:minHeight="84dp"
   android:orientation="horizontal"
   android:gravity="center"
-  android:paddingTop="@dimen/team_info_list_padding"
-  android:paddingBottom="@dimen/team_info_list_padding"
+  android:paddingLeft="@dimen/list_row_horizontal_padding"
+  android:paddingRight="@dimen/list_row_horizontal_padding"
+  android:paddingTop="@dimen/list_row_vertical_padding"
+  android:paddingBottom="@dimen/list_row_vertical_padding"
   >
 
   <LinearLayout
@@ -15,23 +17,11 @@
       android:orientation="vertical"
       >
 
-    <com.android.volley.toolbox.NetworkImageView
+    <com.leboro.view.image.CircularNetworkImageView
         android:id="@+id/teamRosterImage"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
-        android:layout_gravity="left"
-        />
-
-    <TextView
-        android:id="@+id/teamRosterNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="10sp"
-        android:textColor="@color/textColor"
-        android:text="23"
+        android:layout_width="@dimen/team_roster_image_size"
+        android:layout_height="@dimen/team_roster_image_size"
+        android:layout_gravity="start"
         />
 
   </LinearLayout>
@@ -40,30 +30,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center"
+    android:paddingStart="@dimen/team_roster_info_left_padding"
+    android:paddingLeft="@dimen/team_roster_info_left_padding"
+    android:paddingRight="@dimen/team_roster_info_right_padding"
+    android:paddingEnd="@dimen/team_roster_info_right_padding"
     >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+      <TextView
+          android:id="@+id/teamRosterNumber"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="16sp"
+          android:textColor="@color/secondaryTextColor"
+          android:paddingRight="@dimen/team_roster_number_right_padding"
+          android:paddingEnd="@dimen/team_roster_number_right_padding"
+          android:paddingLeft="@dimen/team_roster_number_left_padding"
+          android:paddingStart="@dimen/team_roster_number_left_padding"
+          />
 
     <TextView
       android:id="@+id/teamRosterName"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:gravity="center"
       android:textStyle="bold"
-      android:textSize="20sp"
+      android:textSize="16sp"
       android:textColor="@color/textColor"
-      android:text="some team"
       />
+    </LinearLayout>
 
     <TextView
       android:id="@+id/teamRosterPosition"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:gravity="center"
-      android:textSize="17sp"
+      android:textSize="14sp"
       android:textColor="@color/textColor"
-      android:text="position"
       />
 
     <TextView
@@ -71,8 +80,6 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:gravity="center"
-          android:text="country"
           android:textSize="12sp"
           android:textColor="@color/secondaryTextColor"
           />
@@ -82,8 +89,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:text="height"
         android:textSize="12sp"
         android:textColor="@color/secondaryTextColor"
         />

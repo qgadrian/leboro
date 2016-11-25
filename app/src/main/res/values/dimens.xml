@@ -30,5 +30,19 @@
   <dimen name="player_statistic_team_header_text_size">24sp</dimen>
   <dimen name="team_statistic_image_padding">8dp</dimen>
   <dimen name="team_info_list_padding">16dp</dimen>
-  <dimen name="team_roster_image_padding">4dp</dimen>
+  <!--Commons-->
+  <dimen name="list_row_vertical_padding">4dp</dimen>
+  <dimen name="list_row_horizontal_padding">16dp</dimen>
+  <!--Roster dimensions-->
+  <dimen name="team_roster_image_padding">2dp</dimen>
+  <dimen name="team_roster_image_size">64dp</dimen>
+  <dimen name="team_roster_info_left_padding">12dp</dimen>
+  <dimen name="team_roster_info_right_padding">0dp</dimen>
+  <dimen name="team_roster_number_right_padding">4dp</dimen>
+  <dimen name="team_roster_number_left_padding">0dp</dimen>
+  <!--Standing-->
+  <dimen name="standing_player_image_padding">2dp</dimen>
+  <dimen name="standing_player_image_size">64dp</dimen>
+  <dimen name="standing_left_padding">12dp</dimen>
+  <dimen name="standing_right_padding">0dp</dimen>
 </resources>

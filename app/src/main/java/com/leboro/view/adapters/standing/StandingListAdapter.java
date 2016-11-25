@@ -1,7 +1,11 @@
 package com.leboro.view.adapters.standing;
 
-import java.text.DecimalFormat;
-import java.util.List;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -9,12 +13,8 @@ import com.leboro.R;
 import com.leboro.model.api.standing.PlayerStanding;
 import com.leboro.service.ApplicationServiceProvider;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import java.text.DecimalFormat;
+import java.util.List;
 
 public class StandingListAdapter extends ArrayAdapter<PlayerStanding> {
 
@@ -62,7 +62,6 @@ public class StandingListAdapter extends ArrayAdapter<PlayerStanding> {
         }
 
         NetworkImageView playerImage = (NetworkImageView) view.findViewById(R.id.playerStandingImage);
-        TextView playerStandingPosition = (TextView) view.findViewById(R.id.playerStandingPosition);
         TextView playerStandingName = (TextView) view.findViewById(R.id.playerStandingName);
         TextView playerStandingTeamName = (TextView) view.findViewById(R.id.playerStandingTeamName);
         TextView playerStandingAverageValue = (TextView) view.findViewById(R.id.playerStandingAverageValue);
@@ -70,7 +69,6 @@ public class StandingListAdapter extends ArrayAdapter<PlayerStanding> {
         PlayerStanding playerStanding = playerStandings.get(position);
 
         playerImage.setImageUrl(playerStanding.getImageUrl(), imageLoader);
-        playerStandingPosition.setText(String.valueOf(position + 1));
         playerStandingName.setText(playerStanding.getPlayerName());
         playerStandingTeamName.setText(playerStanding.getTeamName());
         playerStandingAverageValue
