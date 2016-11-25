@@ -5,16 +5,16 @@
   android:layout_height="wrap_content"
   >
 
-        <com.android.volley.toolbox.NetworkImageView
-          android:id="@+id/teamLogo"
-          android:layout_width="64dp"
-          android:layout_height="64dp"
-          android:padding="@dimen/classification_logo_padding"
-          />
+  <com.android.volley.toolbox.NetworkImageView
+    android:id="@+id/teamLogo"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:padding="@dimen/classification_logo_padding"
+    />
 
   <TextView
-    android:padding="@dimen/play_by_play_line_text_padding"
-    android:textSize="@dimen/play_by_play_line_text_size"
+    android:padding="@dimen/game_view_play_by_play_line_text_padding"
+    android:textSize="@dimen/game_view_play_by_play_line_text_size"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="@color/textColor"

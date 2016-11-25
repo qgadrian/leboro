@@ -25,7 +25,7 @@ public class TeamStatisticFragment extends StatisticPageFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.live_game_teams_statistics, container, false);
+        mView = inflater.inflate(R.layout.live_game_teams_stats, container, false);
 
         buildTeamsStatisticsView();
 

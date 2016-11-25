@@ -5,10 +5,10 @@
   android:minHeight="84dp"
   android:orientation="vertical"
   android:gravity="center"
-              android:paddingLeft="@dimen/list_row_horizontal_padding"
-              android:paddingRight="@dimen/list_row_horizontal_padding"
-              android:paddingTop="@dimen/list_row_vertical_padding"
-              android:paddingBottom="@dimen/list_row_vertical_padding"
+  android:paddingLeft="@dimen/list_row_horizontal_padding"
+  android:paddingRight="@dimen/list_row_horizontal_padding"
+  android:paddingTop="@dimen/list_row_vertical_padding"
+  android:paddingBottom="@dimen/list_row_vertical_padding"
   >
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,7 +56,7 @@
         android:layout_below="@+id/playerStandingName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-          />
+        />
     </RelativeLayout>
 
     <LinearLayout
@@ -77,20 +77,5 @@
     </LinearLayout>
 
   </LinearLayout>
-
-  <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-  <!--android:layout_width="match_parent"-->
-  <!--android:layout_height="wrap_content"-->
-  <!--android:orientation="horizontal"-->
-  <!--android:gravity="center"-->
-  <!--&gt;-->
-
-  <!--<TextView-->
-  <!--android:id="@+id/playerStandingTotals"-->
-  <!--android:layout_width="wrap_content"-->
-  <!--android:layout_height="wrap_content"-->
-  <!--/>-->
-
-  <!--</LinearLayout>-->
 
 </LinearLayout>

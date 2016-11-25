@@ -36,14 +36,12 @@
       android:visibility="gone"
       >
 
-      <android.support.v4.view.PagerTitleStrip
+      <android.support.v4.view.PagerTabStrip
         android:id="@+id/pager_title_strip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/newTitleTextColor"
-        android:padding="@dimen/games_day_tab_title_padding"
+        android:textColor="@color/colorPrimaryDark"
         />
     </android.support.v4.view.ViewPager>
 

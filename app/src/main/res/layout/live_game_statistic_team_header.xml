@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="128dp"
-  android:padding="8dp"
+  android:layout_height="wrap_content"
   android:gravity="center"
   >
 
@@ -10,21 +9,23 @@
       android:id="@+id/teamLogo"
       android:layout_width="96dp"
       android:layout_height="96dp"
-      android:padding="@dimen/player_statistic_image_padding"
+      android:padding="@dimen/player_stats_image_padding"
       android:layout_gravity="center"
-      android:layout_alignParentBottom="true"
       />
 
     <TextView
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:id="@+id/teamTitle"
       android:gravity="center"
+      android:textStyle="bold"
+      android:textColor="@color/textColor"
+      android:textSize="@dimen/player_stats_team_header_text_size"
+      android:text="some team name"
+      android:layout_centerVertical="true"
       android:layout_toRightOf="@+id/teamLogo"
       android:layout_toEndOf="@+id/teamLogo"
-      android:textStyle="bold"
-      android:textSize="@dimen/player_statistic_team_header_text_size"
-      />
+        />
 
 
 </RelativeLayout>

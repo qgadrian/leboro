@@ -1,15 +1,12 @@
 package com.leboro.view.adapters.games.live.game.player;
 
-import org.apache.commons.lang3.StringUtils;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.leboro.R;
 import com.leboro.model.game.live.statistic.player.PlayerStatistic;
-import com.leboro.service.ApplicationServiceProvider;
 import com.leboro.view.adapters.BaseViewHolder;
-
-import android.view.View;
-import android.widget.TextView;
 
 public class PlayerStatisticViewHolder extends BaseViewHolder<PlayerStatistic> {
 
@@ -28,7 +25,7 @@ public class PlayerStatisticViewHolder extends BaseViewHolder<PlayerStatistic> {
         points = (TextView) view.findViewById(R.id.playerStatisticHighlightPoints);
         assists = (TextView) view.findViewById(R.id.playerStatisticHighlightAssists);
         rebounds = (TextView) view.findViewById(R.id.playerStatisticHighlightRebounds);
-        playerLogo = (NetworkImageView) view.findViewById(R.id.playerLogo);
+//        playerLogo = (NetworkImageView) view.findViewById(R.id.playerLogo);
 
         fg = (TextView) view.findViewById(R.id.playerStatisticFieldGoal);
         tp = (TextView) view.findViewById(R.id.playerStatistic3Point);
@@ -67,10 +64,10 @@ public class PlayerStatisticViewHolder extends BaseViewHolder<PlayerStatistic> {
         steals.setText(String.valueOf(element.getSteals()));
         blocks.setText(String.valueOf(element.getBlocks()));
 
-        if (!StringUtils.isBlank(element.getPlayerImageUrl())) {
-            playerLogo.setImageUrl(element.getPlayerImageUrl(), ApplicationServiceProvider.getNetworkImageLoaderService
-                    ().getImageLoader());
-        }
+//        if (!StringUtils.isBlank(element.getPlayerImageUrl())) {
+//            playerLogo.setImageUrl(element.getPlayerImageUrl(), ApplicationServiceProvider.getNetworkImageLoaderService
+//                    ().getImageLoader());
+//        }
     }
 
 }

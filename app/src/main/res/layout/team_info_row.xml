@@ -10,12 +10,12 @@
   >
 
   <com.android.volley.toolbox.NetworkImageView
-      android:id="@+id/teamInfoLogo"
-      android:layout_width="84dp"
-      android:layout_height="84dp"
-      android:padding="@dimen/classification_logo_padding"
-      android:layout_gravity="center"
-      />
+    android:id="@+id/teamInfoLogo"
+    android:layout_width="84dp"
+    android:layout_height="84dp"
+    android:padding="@dimen/classification_logo_padding"
+    android:layout_gravity="center"
+    />
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -46,14 +46,14 @@
       />
 
       <TextView
-          android:id="@+id/teamInfoArenaAddress"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:gravity="center"
-          android:textSize="12sp"
-          android:textColor="@color/secondaryTextColor"
-          />
+        android:id="@+id/teamInfoArenaAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="@color/secondaryTextColor"
+        />
 
   </LinearLayout>
 

@@ -23,27 +23,31 @@
   </style>
 
   <style name="AppTheme.ClassificationHeaderStyle" parent="AppTheme">
-    <item name="android:textColor">#FFFF</item>
+    <item name="android:textColor">@color/lightTextColor</item>
     <item name="android:textStyle">bold</item>
   </style>
 
   <style name="AppTheme.PlayerStatisticTextStyle">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:padding">@dimen/player_statistic_normal_padding</item>
+    <item name="android:padding">@dimen/player_stats_normal_padding</item>
     <item name="android:textAllCaps">true</item>
-    <item name="android:textSize">10sp</item>
+    <item name="android:textSize">@dimen/classification_text_size</item>
     <item name="android:gravity">center</item>
     <item name="android:layout_weight">1</item>
   </style>
 
+  <style name="AppTheme.PlayerStatisticTextStyle.Header" parent="AppTheme.PlayerStatisticTextStyle">
+    <item name="android:textColor">@color/secondaryTextColor</item>
+  </style>
+
   <style name="AppTheme.PlayerStatisticHighlightTextStyle">
-    <item name="android:padding">@dimen/player_statistic_highlights_padding</item>
+    <item name="android:padding">@dimen/player_stats_highlights_padding</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textAllCaps">true</item>
-    <item name="android:textSize">12sp</item>
+    <item name="android:textSize">16sp</item>
   </style>
 
   <style name="AppTheme.CardViewStyle" parent="CardView">
@@ -53,6 +57,11 @@
   <style name="AppTheme.TeamStatisticRowTextStyle">
     <item name="android:layout_marginBottom">4dp</item>
     <item name="android:gravity">center</item>
+    <item name="android:textColor">@color/textColor</item>
+  </style>
+
+  <style name="AppTheme.TeamStatisticRowTextStyle.Header" parent="AppTheme.TeamStatisticRowTextStyle">
+    <item name="android:textColor">@color/secondaryTextColor</item>
   </style>
 
   <style name="AppTheme.NewsArticleCollapse">
@@ -61,11 +70,11 @@
   </style>
 
   <style name="AppTheme.NewsArticleCollapse.Expanded" parent="AppTheme.NewsArticleCollapse">
-    <item name="android:textSize">24sp</item>
+    <item name="android:textSize">@dimen/news_article_title_expanded</item>
   </style>
 
     <style name="AppTheme.NewsArticleCollapse.Collapsed" parent="AppTheme.NewsArticleCollapse">
-    <item name="android:textSize">14sp</item>
+    <item name="android:textSize">@dimen/news_article_title_collapsed</item>
   </style>
 
 </resources>

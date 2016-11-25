@@ -15,6 +15,7 @@ import com.leboro.model.game.live.statistic.player.PlayerStatistic;
 import com.leboro.view.adapters.games.live.game.player.PlayerStatisticAdapter;
 import com.leboro.view.fragment.games.live.game.LiveGameViewFragment;
 import com.leboro.view.fragment.games.live.game.statistic.StatisticPageFragment;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -37,11 +38,20 @@ public class PlayerStatisticFragment extends StatisticPageFragment {
 
     private void initializeView() {
         playerStatisticListView = (RecyclerView) mView.findViewById(R.id.playerStatisticList);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         playerStatisticListView.setLayoutManager(mLayoutManager);
         playerStatisticListView.setItemAnimator(new DefaultItemAnimator());
         playerStatisticListView.setAdapter(buildPlayerStatisticAdapter());
 
+//        DividerItemDecoration dividerList = new DividerItemDecoration(playerStatisticListView.getContext(), mLayoutManager.getLayoutDirection());
+//        dividerList.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable
+//                .global_list_divider));
+//        dividerList.setDrawable(mView.getResources().getDrawable(R.drawable.global_list_divider));
+//        playerStatisticListView.addItemDecoration(dividerList);
+
+        playerStatisticListView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext()).drawable(R.drawable
+                .global_list_divider).size(3).build());
     }
 
     @Override
