@@ -1,30 +1,29 @@
 package com.leboro.util.parser;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import android.content.SharedPreferences;
 
 import com.leboro.MainActivity;
 import com.leboro.util.Constants;
 import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
 
-import android.content.SharedPreferences;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 public class BaseParser {
 
-    // TODO: This method should be protected
     public static Document parseHTMLData(String stringToParse) {
         return Jsoup.parse(stringToParse);
-    }
-
-    public static Document parseHTMLAndSaveTokenData(String htmlAsString) {
-        return parseHTMLAndSaveToken(htmlAsString, Constants.VIEW_STATE_TOKEN_SHARED_PROP, Constants
-                .EVENT_VALIDATION_TOKEN_SHARED_PROP);
     }
 
     public static Document parseHTMLAndSaveStandingTokenData(String htmlAsString) {
         return parseHTMLAndSaveToken(htmlAsString, Constants.STANDING_VIEW_STATE_TOKEN_SHARED_PROP, Constants
                 .STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP);
+    }
+
+    public static Document parseHTMLAndSaveGameDayTokenData(String htmlAsString) {
+        return parseHTMLAndSaveToken(htmlAsString, Constants.GAME_DAY_VIEW_STATE_TOKEN_SHARED_PROP, Constants
+                .GAME_DAY_EVENT_VALIDATION_TOKEN_SHARED_PROP);
     }
 
     private static Document parseHTMLAndSaveToken(String htmlAsString, String viewStateTokenPropertyName, String

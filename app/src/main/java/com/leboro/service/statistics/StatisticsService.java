@@ -12,7 +12,7 @@ public interface StatisticsService {
 
     void getDefaultGameDayInfo(CacheDataLoadedListener dataLoadedListener);
 
-    void refreshGameInfo(int gameDayId, int kind, int season, CacheDataLoadedListener dataLoadedListener);
+    void getGameDayGames(int gameDayId, int kind, int season, CacheDataLoadedListener dataLoadedListener);
 
     void getLiveData(DataLoadedListener<LiveData> dataDataLoadedListener);
 

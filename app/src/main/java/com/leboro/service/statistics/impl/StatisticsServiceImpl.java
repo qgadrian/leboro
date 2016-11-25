@@ -25,6 +25,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import cz.msebera.android.httpclient.client.methods.HttpGet;
@@ -60,7 +61,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     public void getDefaultGameDayInfo(final CacheDataLoadedListener dataLoadedListener) {
         if (!ApplicationCacheManager.hasGameDayCacheData()) {
             String gameDaysHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties(Constants.GAMES_URL_PROP);
-            Document gameDayInfoData = BaseParser.parseHTMLAndSaveTokenData(gameDaysHTML);
+            Document gameDayInfoData = BaseParser.parseHTMLAndSaveGameDayTokenData(gameDaysHTML);
             GameDayInfo gameDayInfo = GameParser.getGameInfoFromData(gameDayInfoData);
             ApplicationCacheManager.setGameDayInfo(gameDayInfo);
         }
@@ -69,16 +70,20 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public void refreshGameInfo(final int gameDayId, final int kind, final int season,
+    public void getGameDayGames(final int gameDayId, final int kind, final int season,
                                 final CacheDataLoadedListener dataLoadedListener) {
         String gameDaysHTML = requestGameDayData(gameDayId, kind, season);
         try {
-            Document gameDayInfoData = BaseParser.parseHTMLAndSaveTokenData(gameDaysHTML);
+            Document gameDayInfoData = BaseParser.parseHTMLAndSaveGameDayTokenData(gameDaysHTML);
             GameDay gameDay = GameParser.getGameDay(gameDayInfoData);
             ApplicationCacheManager.updateGameDay(gameDay.getId(), gameDay.getGames());
             dataLoadedListener.onDataLoadedIntoCache();
         } catch (Exception e) {
             Log.e(MainActivity.DEBUG_APP_NAME, "Error getting game day info", e);
+            String argsMessage = String.format(Locale.getDefault(),
+                    "gameDayId [%d] - kind [%s] - season [%s]\n%s",
+                    gameDayId, kind, season, gameDaysHTML);
+            Log.e(MainActivity.DEBUG_APP_NAME, argsMessage);
             throw e;
         }
     }
@@ -99,8 +104,8 @@ public class StatisticsServiceImpl implements StatisticsService {
 
         GameDayHttpPostAsyncTask gameDayHttpPostAsyncTask = new GameDayHttpPostAsyncTask();
         try {
-            String serverEventValidationToken = HTMLHelper.getEventValidationToken();
-            String serverViewState = HTMLHelper.getViewStateToken();
+            String serverEventValidationToken = HTMLHelper.getGameDayEventValidationToken();
+            String serverViewState = HTMLHelper.getGameDayViewStateToken();
 
             GameDayHttpPostAsyncTask.ResultTaskArgument resultTaskArgument = new GameDayHttpPostAsyncTask.ResultTaskArgument
                     (gameDayId, kind, season, referrerHeader, acceptHeader, url, serverViewState,

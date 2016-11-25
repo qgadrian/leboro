@@ -25,7 +25,7 @@ public class TeamInfoServiceImpl implements TeamInfoService {
         if (!ApplicationCacheManager.hasTeamsInfoCacheData()) {
             String teamsInfoHTML = HttpHelper.getHtmlFromSimpleHttpRequestUsingProperties
                     (Constants.TEAMS_INFO_URL_PROP);
-            Document teamsInfoData = BaseParser.parseHTMLAndSaveTokenData(teamsInfoHTML);
+            Document teamsInfoData = BaseParser.parseHTMLData(teamsInfoHTML);
             List<TeamInfo> teamInfos = TeamInfoParser.getTeamsInfoFromData(teamsInfoData);
             ApplicationCacheManager.setTeamInfos(teamInfos);
         }
@@ -43,7 +43,7 @@ public class TeamInfoServiceImpl implements TeamInfoService {
                     .getId();
 
             String teamRosterInfoHTML = HttpHelper.getHtmlFromSimpleHttpRequest(url);
-            Document teamRosterInfoData = BaseParser.parseHTMLAndSaveTokenData(teamRosterInfoHTML);
+            Document teamRosterInfoData = BaseParser.parseHTMLData(teamRosterInfoHTML);
             List<TeamRoster> teamRoster = TeamInfoParser.getTeamsInfoWithRosterFromData(teamRosterInfoData);
             teamInfo.setTeamRoster(teamRoster);
             ApplicationCacheManager.updateTeamInfo(teamInfo);

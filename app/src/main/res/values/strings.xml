@@ -87,6 +87,7 @@
 
   <!--Team info-->
   <string name="team_roster_height">%d centimeters</string>
+  <string name="team_roster_position_coach">Coach</string>
 
   <plurals name="statistic_highlight_points">
     <item quantity="one">%d point</item>

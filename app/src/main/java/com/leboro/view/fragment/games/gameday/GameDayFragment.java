@@ -102,7 +102,7 @@ public class GameDayFragment extends LoadableFragment implements CacheDataLoaded
                     @Override
                     public void run() {
                         ApplicationServiceProvider.getStatisticsService()
-                                .refreshGameInfo(gameDay.getId(), gameDayInfo.getKind(), gameDayInfo.getSeason(),
+                                .getGameDayGames(gameDay.getId(), gameDayInfo.getKind(), gameDayInfo.getSeason(),
                                         dataLoadedListener);
                     }
                 }).start();

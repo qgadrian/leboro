@@ -16,6 +16,8 @@ public class TeamRoster {
 
     private String name;
 
+    private Integer number;
+
     private String imageUrl;
 
     private String position;
@@ -26,7 +28,8 @@ public class TeamRoster {
 
     private Integer height;
 
-    public TeamRoster(RosterKind rosterKind, String name, String imageUrl, String position, Date
+    public TeamRoster(RosterKind rosterKind, String name, Integer number, String imageUrl, String
+            position, Date
             birthDate, String country, Integer height) {
         this.rosterKind = rosterKind;
         this.name = name;
@@ -35,6 +38,7 @@ public class TeamRoster {
         this.birthDate = birthDate;
         this.country = country;
         this.height = height;
+        this.number = number;
     }
 
     public TeamRoster(RosterKind rosterKind, String name, String imageUrl) {
@@ -99,6 +103,10 @@ public class TeamRoster {
         this.height = height;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,13 +116,14 @@ public class TeamRoster {
         TeamRoster that = (TeamRoster) o;
 
         return new EqualsBuilder()
-                .append(height, that.height)
                 .append(rosterKind, that.rosterKind)
                 .append(name, that.name)
+                .append(number, that.number)
                 .append(imageUrl, that.imageUrl)
                 .append(position, that.position)
                 .append(birthDate, that.birthDate)
                 .append(country, that.country)
+                .append(height, that.height)
                 .isEquals();
     }
 
@@ -123,6 +132,7 @@ public class TeamRoster {
         return new HashCodeBuilder(17, 37)
                 .append(rosterKind)
                 .append(name)
+                .append(number)
                 .append(imageUrl)
                 .append(position)
                 .append(birthDate)

@@ -12,14 +12,26 @@
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:orientation="vertical"
       >
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/teamRosterImage"
         android:layout_width="84dp"
         android:layout_height="84dp"
-        android:padding="@dimen/classification_logo_padding"
         android:layout_gravity="left"
+        />
+
+    <TextView
+        android:id="@+id/teamRosterNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="10sp"
+        android:textColor="@color/textColor"
+        android:text="23"
         />
 
   </LinearLayout>

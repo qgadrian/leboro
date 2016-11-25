@@ -34,6 +34,7 @@ public class TeamRosterListAdapter extends BaseArrayAdapter<TeamRoster> {
 
 
         TextView teamRosterName = (TextView) view.findViewById(R.id.teamRosterName);
+        TextView teamRosterNumber = (TextView) view.findViewById(R.id.teamRosterNumber);
         TextView teamPosition = (TextView) view.findViewById(R.id.teamRosterPosition);
         TextView teamRosterCountry = (TextView) view.findViewById(R.id.teamInfoRosterCountry);
         TextView teamRosterHeight = (TextView) view.findViewById(R.id.teamInfoRosterHeight);
@@ -44,13 +45,22 @@ public class TeamRosterListAdapter extends BaseArrayAdapter<TeamRoster> {
         teamInfoLogo.setImageUrl(teamRoster.getImageUrl(), imageLoader);
 
         teamRosterName.setText(teamRoster.getName());
-        teamPosition.setText(teamRoster.getPosition());
         teamRosterCountry.setText(teamRoster.getCountry());
+
+        if (teamRoster.getRosterKind().equals(TeamRoster.RosterKind.COACH)) {
+            teamPosition.setText(R.string.team_roster_position_coach);
+            teamRosterNumber.setVisibility(View.GONE);
+        } else {
+            teamRosterNumber.setVisibility(View.VISIBLE);
+            teamPosition.setText(teamRoster.getPosition());
+            teamRosterNumber.setText(String.valueOf(teamRoster.getNumber()));
+        }
 
         if (teamRoster.getHeight() != null) {
             String heightString = getContext().getString(R.string.team_roster_height, teamRoster
                     .getHeight());
             teamRosterHeight.setText(heightString);
+            teamRosterHeight.setVisibility(View.VISIBLE);
         } else {
             teamRosterHeight.setVisibility(View.GONE);
         }

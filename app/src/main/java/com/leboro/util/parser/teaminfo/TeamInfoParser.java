@@ -83,9 +83,11 @@ public class TeamInfoParser extends BaseParser {
                     String country = playerElement.select("ul > li.nacionalidad > span").text();
                     int height = Integer.valueOf(playerElement.select("ul > li.altura > span")
                             .text());
+                    int number = Integer.valueOf(playerElement.getElementsByClass("dorsal").first
+                            ().text());
 
-                    TeamRoster playerRoster = new TeamRoster(PLAYER, playerName, playerImageUrl,
-                            position, null, country, height);
+                    TeamRoster playerRoster = new TeamRoster(PLAYER, playerName, number,
+                            playerImageUrl, position, null, country, height);
                     teamRoster.add(playerRoster);
                 }
             }

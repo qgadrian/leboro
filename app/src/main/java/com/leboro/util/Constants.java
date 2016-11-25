@@ -61,13 +61,13 @@ public class Constants {
     public static final String BUNDLE_ARG_GAME_ID = "GameId";
 
     //Shared props
-    public final static String EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
-
-    public static final String VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
-
     public final static String STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
 
     public static final String STANDING_VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
+
+    public final static String GAME_DAY_EVENT_VALIDATION_TOKEN_SHARED_PROP = "_EVENTVALIDATION";
+
+    public static final String GAME_DAY_VIEW_STATE_TOKEN_SHARED_PROP = "_VIEWSTATE";
 
     // News services providers
 

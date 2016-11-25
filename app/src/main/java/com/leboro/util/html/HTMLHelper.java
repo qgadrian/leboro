@@ -1,10 +1,10 @@
 package com.leboro.util.html;
 
+import android.util.Log;
+
 import com.leboro.MainActivity;
 import com.leboro.util.Constants;
 import com.leboro.util.sharedpreferences.SharedPreferencesHelper;
-
-import android.util.Log;
 
 public class HTMLHelper {
 
@@ -117,29 +117,14 @@ public class HTMLHelper {
         }
     }
 
-    public static boolean updateViewStateToken(String viewStateToken) {
-        return SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity.context).edit()
-                .putString(Constants.VIEW_STATE_TOKEN_SHARED_PROP, viewStateToken).commit();
-    }
-
-    public static String getViewStateToken() {
-        return SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
-                .context).getString(Constants.VIEW_STATE_TOKEN_SHARED_PROP, "");
-    }
-
-    public static String getEventValidationToken() {
-        return SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
-                .context).getString(Constants.EVENT_VALIDATION_TOKEN_SHARED_PROP, "");
-    }
-
     public static void clearStandingViewStateToken() {
         SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
-                .context).edit().remove(Constants.STANDING_VIEW_STATE_TOKEN_SHARED_PROP).commit();
+                .context).edit().remove(Constants.STANDING_VIEW_STATE_TOKEN_SHARED_PROP).apply();
     }
 
     public static void clearStandingEventValidationToken() {
         SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
-                .context).edit().remove(Constants.STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP).commit();
+                .context).edit().remove(Constants.STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP).apply();
     }
 
     public static String getStandingViewStateToken() {
@@ -150,6 +135,16 @@ public class HTMLHelper {
     public static String getStandingEventValidationToken() {
         return SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
                 .context).getString(Constants.STANDING_EVENT_VALIDATION_TOKEN_SHARED_PROP, null);
+    }
+
+    public static String getGameDayViewStateToken() {
+        return SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
+                .context).getString(Constants.GAME_DAY_VIEW_STATE_TOKEN_SHARED_PROP, null);
+    }
+
+    public static String getGameDayEventValidationToken() {
+        return SharedPreferencesHelper.getDefaultSharedPreferences(MainActivity
+                .context).getString(Constants.GAME_DAY_EVENT_VALIDATION_TOKEN_SHARED_PROP, null);
     }
 
 }
